@@ -1,0 +1,217 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts System Metrics API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: System Metrics
+  description: Fetch system metrics
+paths:
+  /services/{env_id}/metrics/system:
+    get:
+      tags:
+      - System Metrics
+      summary: Get all metadata
+      description: Get a list of all available system metrics
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of all system metrics' metadata
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  metrics:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SystemMetrics'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/metrics/system/{metric_name}:
+    get:
+      tags:
+      - System Metrics
+      summary: Get a specific metric's metadata
+      description: Fetch info about a specific metric
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: metric_name
+        description: Metric name to fetch
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requested metric's metadata
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SystemMetrics'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/metrics/system/{metric_name}/graph:
+    get:
+      tags:
+      - System Metrics
+      summary: Fetch metric graph/data
+      description: Fetch data for a specific system metric within a target timeframe, application / server / deployment set.
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: metric_name
+        description: Metric name to fetch
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: End time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: points
+        description: Number of data points to return within the interval. **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: integer
+      - in: query
+        name: resolution
+        description: Select graph resolution (use M1/M5 for 1 point per 1/5 minutes; use H1/H8 for 1 point per 1/8 hours). **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: string
+          enum:
+          - M1
+          - M5
+          - H1
+          - H8
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of points
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  points:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time:
+                          type: string
+                          description: Point acquisition time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+                          example: '2018-02-28T22:47:09.038Z'
+                        value:
+                          type: number
+                          description: value
+                          example: 3.526287896
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  responses:
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
+  schemas:
+    SystemMetadataUnit:
+      type: object
+      properties:
+        type:
+          type: string
+          description: unit type
+          example: BYTES
+          enum:
+          - NONE
+          - CUSTOM
+          - TIMES
+          - NANOSECONDS
+          - MICROSECONDS
+          - MILLISECONDS
+          - SECONDS
+          - MINUTES
+          - HOURS
+          - DAYS
+          - BYTES
+          - KIBIBYTE
+          - MEBIBYTE
+          - GIBIBYTE
+        suffix:
+          type: string
+          description: singular suffix/descriptor for custom units
+        plural_suffix:
+          type: string
+          description: plural suffix/descriptor for custom units
+    SystemMetrics:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Metric name
+          example: memory-metaspace-used
+        display_name:
+          type: string
+          description: Displayed names
+          example: Used Metaspace Size
+        unit:
+          $ref: '#/components/schemas/SystemMetadataUnit'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

@@ -1,0 +1,556 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts Entry Points API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: Entry Points
+paths:
+  /services/{env_id}/settings/entrypoints:
+    get:
+      tags:
+      - Entry Points
+      summary: List all prioritized and deprioritized entry  points
+      description: List all packages and classes that should be handled as prioritized or deprioritized entry points
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of prioritized and deprioritized entry point classes and packages
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  deprioritized:
+                    type: object
+                    properties:
+                      classes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ClassName'
+                      packages:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/PackageName'
+                  prioritized:
+                    type: object
+                    properties:
+                      classes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ClassName'
+                      packages:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/PackageName'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/entrypoints/deprioritized:
+    get:
+      tags:
+      - Entry Points
+      summary: List all deprioritized entry points
+      description: List all classes and packages that should be set as lowest priority entry points (i.e. will be set as entry points only if no other entry points were found in the event call stack)
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of deprioritized classes and packages
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  classes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ClassName'
+                  packages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PackageName'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+      - Entry Points
+      summary: Add a bulk of deprioritized entry points
+      description: Add a bulk of deprioritized entry points
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                classes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ClassName'
+                packages:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PackageName'
+        description: deprioritized entry points
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/entrypoints/prioritized:
+    get:
+      tags:
+      - Entry Points
+      summary: List all prioritized entry points
+      description: List all packages and classes that will be set as entry points in highest priority
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of classes and packages that should be handled as preffered entry points
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  classes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ClassName'
+                  packages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PackageName'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+      - Entry Points
+      summary: Add a bulk of prioritized entry points
+      description: Add a bulk of classes and packages that should bet set as entry points in highest priority
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                classes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ClassName'
+                packages:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PackageName'
+        description: list of prioritized entry points
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/entrypoints/deprioritized/classes:
+    get:
+      tags:
+      - Entry Points
+      summary: List all classes associated with deprioritized entry points
+      description: List all classes that should be set as lowest priority entry points (i.e. will be set as entry points only if no other entry points were found in the event call stack)
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of deprioritized classes
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  classes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ClassName'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/entrypoints/deprioritized/classes/{class_name}:
+    put:
+      tags:
+      - Entry Points
+      summary: Add a class to the exclusion list
+      description: Add a class to the exclusion list. The body class name must match the resource identifier
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: class_name
+        required: true
+        description: Fully qualified Java class name
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Class'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+      - Entry Points
+      summary: Remove a class from exclusion
+      description: Remove a class from the exclusion list
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: class_name
+        required: true
+        description: Fully qualified Java class name
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/settings/entrypoints/deprioritized/packages:
+    get:
+      tags:
+      - Entry Points
+      summary: List all packages associated with deprioritized entry points
+      description: List all packages that should be set as lowest priority entry points (i.e. will be set as entry points only if no other entry points were found in the event call stack)
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of deprioritized packages
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  packages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PackageName'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/entrypoints/deprioritized/packages/{package_name}:
+    put:
+      tags:
+      - Entry Points
+      summary: Add a package to the exclusion list
+      description: Add a package to the exclusion list. The body package name must match the resource identifier
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: package_name
+        required: true
+        description: Fully qualified Java package name
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Package'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+      - Entry Points
+      summary: Remove a package from the exclusion list
+      description: Remove a package from the exclusion list
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: package_name
+        required: true
+        description: Fully qualified Java package name
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/settings/entrypoints/prioritized/classes:
+    get:
+      tags:
+      - Entry Points
+      summary: List all prioritized entry point classes
+      description: List all prioritized entry point classes
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of prioritized entry point classes
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  classes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ClassName'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/entrypoints/prioritized/classes/{class_name}:
+    put:
+      tags:
+      - Entry Points
+      summary: Add a class to the prioritized entry points list
+      description: Add a class to the prioritized entry points list. The body class name must match the resource identifier
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: class_name
+        required: true
+        description: Fully qualified Java class name
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Class'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+      - Entry Points
+      summary: Remove a class from the prioritized entry points list
+      description: Remove a class from the prioritized entry points list
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: class_name
+        required: true
+        description: Fully qualified Java class name
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/settings/entrypoints/prioritized/packages:
+    get:
+      tags:
+      - Entry Points
+      summary: List all prioritized entry point packages
+      description: List all prioritized entry point packages
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of included packages
+          content:
+            '*/*':
+              schema:
+                properties:
+                  packages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PackageName'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/entrypoints/prioritized/packages/{package_name}:
+    put:
+      tags:
+      - Entry Points
+      summary: Add a package to the prioritized entry points list
+      description: Add a package to the prioritized entry points list. The body package name must match the resource identifier
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: package_name
+        required: true
+        description: Fully qualified Java package name
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Package2'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+      - Entry Points
+      summary: Remove a package from the prioritized entry points list
+      description: Remove a package from the prioritized entry points list
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: package_name
+        required: true
+        description: Fully qualified Java package name
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  schemas:
+    PackageName:
+      type: string
+      example: com.company.package.name
+    ClassName:
+      type: string
+      example: com.company.ClassName
+  requestBodies:
+    Class:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                $ref: '#/components/schemas/ClassName'
+    Package2:
+      content:
+        application/json:
+          schema:
+            properties:
+              name:
+                $ref: '#/components/schemas/PackageName'
+    Package:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                $ref: '#/components/schemas/PackageName'
+  responses:
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    UnauthorizedError:
+      description: Unauthorized
+    BadRequestError:
+      description: Bad Request
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

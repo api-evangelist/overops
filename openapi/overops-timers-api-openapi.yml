@@ -1,0 +1,207 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts Timers API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: Timers
+  description: Fetch and manipulate OverOps Timers - bottleneck detection and performance diagnosis
+paths:
+  /services/{env_id}/timers:
+    get:
+      tags:
+      - Timers
+      summary: List timers
+      description: List all existing timers
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of timers
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  timers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Timer'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+      - Timers
+      summary: Create new timer
+      description: Create new timer
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Timer'
+        description: Single timer
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /services/{env_id}/timers/{timer_id}:
+    get:
+      tags:
+      - Timers
+      summary: Get timer properties
+      description: Get timer properties
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: timer_id
+        description: Timer to use
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Timer properties
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Timer'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+      - Timers
+      summary: Edit timer data
+      description: Edit timer data
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: timer_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Timer'
+        description: Single timer properties
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    delete:
+      tags:
+      - Timers
+      summary: Delete timer
+      description: Delete timer
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: timer_id
+        description: Timer to use
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+components:
+  responses:
+    ForbiddenError:
+      description: Forbidden
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    Conflict:
+      description: Conflict
+    UnauthorizedError:
+      description: Unauthorized
+    BadRequestError:
+      description: Bad Request
+  schemas:
+    Timer:
+      description: Timer properties
+      type: object
+      properties:
+        id:
+          type: string
+          description: This is an auto generated ID. When creating/editing a timer, the value recevied in this field will be ignored.
+          example: '34'
+        class_name:
+          type: string
+          example: DBManager
+        method_name:
+          type: string
+          example: SaveWithRetries
+        threshold:
+          type: integer
+          description: Threshold in ms
+          example: 8000
+        servers:
+          type: array
+          items:
+            type: string
+            example: na-dotCMS-2
+        applications:
+          type: array
+          items:
+            type: string
+            example: MyApp
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

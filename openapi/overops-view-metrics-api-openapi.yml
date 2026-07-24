@@ -1,0 +1,396 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts View Metrics API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: View Metrics
+  description: Fetch volumetric time series data about observed code events within OverOps monitored applications filtered by server cluster, application and deployments.
+paths:
+  /services/{env_id}/views/{view_id}/metrics/view/graph:
+    get:
+      tags:
+      - View Metrics
+      summary: Fetch event metrics split by view
+      description: Fetch event metrics split by view
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: End time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: points
+        description: Number of data points to return within the interval. **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: integer
+      - in: query
+        name: resolution
+        description: Select graph resolution (use M1/M5 for 1 point per 1/5 minutes; use H1/H8 for 1 point per 1/8 hours). **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: string
+          enum:
+          - M1
+          - M5
+          - H1
+          - H8
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: stats
+        description: Include statistics per event in the response
+        schema:
+          type: string
+          enum:
+          - none
+          - hits
+          - invocations
+          - all
+      responses:
+        '200':
+          description: Event metrics
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  graphs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: event
+                        id:
+                          type: string
+                          example: '42'
+                        points:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              time:
+                                type: string
+                                example: '2018-02-28T22:47:09.038Z'
+                              stats:
+                                $ref: '#/components/schemas/EventStats'
+                              contributors:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: string
+                                      example: '42'
+                                    stats:
+                                      $ref: '#/components/schemas/EventStats'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/metrics/entrypoint/graph:
+    get:
+      tags:
+      - View Metrics
+      summary: Fetch event metrics split by entry point
+      description: Fetch event metrics split by entry point
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: End time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: points
+        description: Number of data points to return within the interval. **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: integer
+      - in: query
+        name: resolution
+        description: Select graph resolution (use M1/M5 for 1 point per 1/5 minutes; use H1/H8 for 1 point per 1/8 hours). **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: string
+          enum:
+          - M1
+          - M5
+          - H1
+          - H8
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: stats
+        description: Include statistics per event in the response
+        schema:
+          type: string
+          enum:
+          - none
+          - hits
+          - invocations
+          - all
+      responses:
+        '200':
+          description: Event metrics split by entry point
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  graphs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: com/company/Main#main#([Ljava/lang/String;)V
+                        class_name:
+                          type: string
+                          example: com.company.Main
+                        method_name:
+                          type: string
+                          example: main
+                        method_desc:
+                          type: string
+                          example: ([Ljava/lang/String;)V
+                        points:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              time:
+                                type: string
+                                example: '2018-02-28T22:47:09.038Z'
+                              stats:
+                                $ref: '#/components/schemas/EntryPointStats'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/metrics/event/graph:
+    get:
+      tags:
+      - View Metrics
+      summary: Fetch event metrics split by event
+      description: Fetch event metrics split by event
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: End time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: points
+        description: Number of data points to return within the interval. **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: integer
+      - in: query
+        name: resolution
+        description: Select graph resolution (use M1/M5 for 1 point per 1/5 minutes; use H1/H8 for 1 point per 1/8 hours). **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: string
+          enum:
+          - M1
+          - M5
+          - H1
+          - H8
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: stats
+        description: Include statistics per event in the response
+        schema:
+          type: string
+          enum:
+          - none
+          - hits
+          - invocations
+          - all
+      responses:
+        '200':
+          description: event metrics split by event
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  graphs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: event
+                        id:
+                          type: string
+                          example: '42'
+                        points:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              time:
+                                type: string
+                                example: '2018-02-28T22:47:09.038Z'
+                              stats:
+                                $ref: '#/components/schemas/EventStats'
+                              contributors:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: string
+                                      example: '42'
+                                    stats:
+                                      $ref: '#/components/schemas/EventStats'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  schemas:
+    EventStats:
+      type: object
+      properties:
+        hits:
+          type: integer
+          example: 42
+        invocations:
+          type: integer
+          example: 51929
+    EntryPointStats:
+      type: object
+      properties:
+        invocations:
+          type: integer
+          example: 42
+        avg_time:
+          type: number
+          description: Average entry point running time (in ms)
+          example: 925.7
+        total_time:
+          type: number
+          description: Entry point running time (in ms)
+          example: 9345
+        avg_time_std_deviation:
+          type: number
+          description: Standard deviation of entry point running time (in ms)
+          example: 130
+  responses:
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

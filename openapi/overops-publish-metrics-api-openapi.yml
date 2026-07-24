@@ -1,0 +1,156 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts Publish Metrics API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: Publish Metrics
+  description: Fetch and manipulate dynamic data exported to StatsD, which enables using a variety of third-party tools, providing control over application data from OverOps.
+paths:
+  /services/{env_id}/settings/publish-metrics:
+    get:
+      tags:
+      - Publish Metrics
+      summary: Fetch Publish Metrics settings
+      description: Use this call to fetch data about publish metrics settings, output format and the actual metrics which are currently beeing published
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Current settings for publish metrics
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublishMetricsSettings'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    post:
+      tags:
+      - Publish Metrics
+      summary: Set Publish Metrics
+      description: Use this call to set and customize publish metrics. Use one of the presets, or customize you tokens by setting output_format to 'custom'.
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishMetricsSettings'
+        description: Publish metrics settings
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/settings/publish-metrics/available_formats:
+    get:
+      tags:
+      - Publish Metrics
+      summary: Fetch Available formats
+      description: Use this call to fetch available formats / presets, their metrics and their tokens
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of Available formats and metrics
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PublishMetricFormats'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  schemas:
+    PublishMetricFormats:
+      type: array
+      items:
+        type: object
+        properties:
+          output_format:
+            type: string
+            description: For customized metrics (which are different than the format defaults), use "custom" format
+            example: splunk
+          default_metrics:
+            $ref: '#/components/schemas/Metrics'
+    Metrics:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Metric name
+          pattern:
+            type: string
+            description: Metric token
+      example:
+      - name: Views
+        pattern: overops_views,${viewname},${serviceid},${application},${server},${deployment}
+      - name: Events
+        pattern: overops_events,${serviceid},${application},${server},${deployment},${class},${method},${eventlink},${eventid},${labels},${eventtype},${eventname},${introducedby},${entrypointclass},${entrypointmethod},${firstseen},${infra},${jiraissuekey}
+      - name: Entry points
+        pattern: overops_entrypoints,${serviceid},${application},${server},${deployment},${entrypointclass},${entrypointmetrics}
+      - name: Custom Metrics
+        pattern: overops_metrics,${serviceid},${application},${server},${deployment},${metric}
+      - name: System
+        pattern: overops_system,${serviceid},${application},${server},${systemmetrics}
+      - name: Diagnostics
+        pattern: overops_jvms,${serviceid},${application},${server},${applicationpid}
+    PublishMetricsSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        hostname:
+          type: string
+          description: The hostname and (optional) port of your StatsD server.
+          example: 127.0.0.1:8125
+        output_format:
+          type: string
+          example: Splunk
+        metrics:
+          $ref: '#/components/schemas/Metrics'
+  responses:
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    UnauthorizedError:
+      description: Unauthorized
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

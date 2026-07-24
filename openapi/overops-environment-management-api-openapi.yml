@@ -1,0 +1,236 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts Environment Management API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: Environment Management
+  description: Fetch monitoring status and control OverOps Agents and Collectors
+paths:
+  /services/{env_id}/overops-status:
+    get:
+      tags:
+      - Environment Management
+      summary: List agents and collectors
+      description: Fetch OverOps live processes report
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: connected
+        description: Retrieve only processes with a connected OverOps collector/agent
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of OverOps components status
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  agents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Agent'
+                  collectors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Collector'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/overops-status/agents:
+    get:
+      tags:
+      - Environment Management
+      summary: List agents
+      description: Fetch agents live processes report
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: connected
+        description: Retrieve only processes with currently attached agents
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of agents
+          content:
+            '*/*':
+              schema:
+                properties:
+                  agents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Agent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+      - Environment Management
+      summary: Batch update for group of agents
+      description: Batch update for group of agents. NOTE - The filter should contain **at least** one server, application or agent.
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: server
+        description: Server(s) added to the filter. The update will apply to all existing and future agents in the selected server/s.
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter. The update will apply to all existing and future agents in the selected application/s. NOTE - The filter should contain **at least** one server, application or agent.
+        schema:
+          type: string
+      - in: query
+        name: agent
+        description: Agent IDs added to the filter. The update will apply only to selected agent IDs. NOTE - The filter should contain **at least** one server, application or agent.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                monitoring_enabled:
+                  type: boolean
+                  example: true
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/overops-status/collectors:
+    get:
+      tags:
+      - Environment Management
+      summary: List collectors
+      description: Fetch collectors live processes report
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: connected
+        description: Retrieve only processes of a connected OverOps collector
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of Collectors
+          content:
+            '*/*':
+              schema:
+                properties:
+                  collectors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Collector'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+components:
+  schemas:
+    Collector:
+      description: Collector properties
+      type: object
+      properties:
+        id:
+          type: string
+          description: Collector unique identifier
+          example: 12121
+        pid:
+          type: string
+          description: PID
+          example: 20187
+        name:
+          type: string
+        version:
+          type: string
+          description: Collector version
+          example: 4.18.1
+        start_time:
+          type: string
+          description: Start time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+          example: '2018-02-28T22:47:09.038Z'
+    Agent:
+      description: Agent properties
+      type: object
+      properties:
+        server:
+          type: string
+          description: name of the server that hosts the agent
+          example: ip-10-164-178-61
+        application:
+          type: string
+          description: application name
+          example: prod-api
+        deployment:
+          type: string
+          description: deployment name
+          example: v4.0.2041
+        id:
+          type: string
+          description: Agent unique identifier
+          example: 12345
+        version:
+          type: string
+          description: Agent version
+          example: 4.18.1
+        type:
+          type: string
+          description: Agent type (Java / .NET)
+          example: Java
+        collector_id:
+          type: string
+          description: unique identifier of the collector that the agent is connected to
+          example: 12121
+        start_time:
+          type: string
+          description: Start time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+          example: '2018-02-28T22:47:09.038Z'
+        status:
+          type: string
+          description: OverOps monitoring status
+          example: monitoring
+        monitoring_enabled:
+          type: boolean
+          description: marks if the monitoring of this particular agent enabled/disabled
+          example: true
+  responses:
+    UnauthorizedError:
+      description: Unauthorized
+    OK:
+      description: OK
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

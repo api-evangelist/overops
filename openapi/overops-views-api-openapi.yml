@@ -1,0 +1,1110 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts Views API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: Views
+  description: Fetch and manipulate grouping of events (i.e. Views) according to attribute sets (e.g. "uncaught exceptions", "errors from package com.acme")
+paths:
+  /services/{env_id}/views:
+    get:
+      tags:
+      - Views
+      summary: List views
+      description: List views
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of views including basic info about each view.
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  views:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ViewBasic'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+      - Views
+      summary: Create view
+      description: Create view
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/ViewFull'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /services/{env_id}/views/{view_id}:
+    get:
+      tags:
+      - Views
+      summary: Get view properties
+      description: Get full list of view properties
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Full list of view properties
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  views:
+                    type: array
+                    items:
+                      type: object
+                      description: Single view full properties
+                      properties:
+                        id:
+                          type: string
+                          example: P12
+                        name:
+                          type: string
+                          example: DB Errors
+                        description:
+                          type: string
+                          example: This is a DB Errors View
+                        shared:
+                          type: boolean
+                          example: false
+                        admin:
+                          type: boolean
+                          description: TBD - NOT YET IMPLEMENTED
+                          example: true
+                        default:
+                          type: boolean
+                          description: TBD - NOT YET IMPLEMENTED
+                          example: false
+                        filters:
+                          $ref: '#/components/schemas/Filter'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    post:
+      tags:
+      - Views
+      summary: Edit view data
+      description: Edit view data
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/ViewFull'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    delete:
+      tags:
+      - Views
+      summary: Delete view
+      description: Delete view
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+  /services/{env_id}/views/{view_id}/events:
+    get:
+      tags:
+      - Views
+      summary: Fetch events details
+      description: Fetch events data for a target timeframe, application / server / deployment set.
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: stats
+        description: Include event volumes (e.g. number of event instances and calls into the method containing the event) in the response
+        schema:
+          type: string
+          enum:
+          - none
+          - hits
+          - invocations
+          - all
+      responses:
+        '200':
+          description: Event data
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/events/stats:
+    get:
+      tags:
+      - Views
+      summary: Fetch stats for all events in the specified view
+      description: Fetch stats for a target timeframe, application / server / deployment set.
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: stats
+        description: return only selected stats. 'all' is default.
+        schema:
+          type: string
+          enum:
+          - hits
+          - invocations
+          - all
+      responses:
+        '200':
+          description: Event stats
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  events-stats:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: '42'
+                        stats:
+                          $ref: '#/components/schemas/EventStats'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/entrypoints:
+    get:
+      tags:
+      - Views
+      summary: Fetch entry points details
+      description: Fetch entry points data in a selected timeframe
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Entry points data
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  entrypoints:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EntryPoint'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/metrics/view/graph:
+    get:
+      tags:
+      - Views
+      summary: Fetch event metrics split by view
+      description: Fetch event metrics split by view
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: End time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: points
+        description: Number of data points to return within the interval. **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: integer
+      - in: query
+        name: resolution
+        description: Select graph resolution (use M1/M5 for 1 point per 1/5 minutes; use H1/H8 for 1 point per 1/8 hours). **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: string
+          enum:
+          - M1
+          - M5
+          - H1
+          - H8
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: stats
+        description: Include statistics per event in the response
+        schema:
+          type: string
+          enum:
+          - none
+          - hits
+          - invocations
+          - all
+      responses:
+        '200':
+          description: Event metrics
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  graphs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: event
+                        id:
+                          type: string
+                          example: '42'
+                        points:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              time:
+                                type: string
+                                example: '2018-02-28T22:47:09.038Z'
+                              stats:
+                                $ref: '#/components/schemas/EventStats'
+                              contributors:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: string
+                                      example: '42'
+                                    stats:
+                                      $ref: '#/components/schemas/EventStats'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/metrics/entrypoint/graph:
+    get:
+      tags:
+      - Views
+      summary: Fetch event metrics split by entry point
+      description: Fetch event metrics split by entry point
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: End time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: points
+        description: Number of data points to return within the interval. **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: integer
+      - in: query
+        name: resolution
+        description: Select graph resolution (use M1/M5 for 1 point per 1/5 minutes; use H1/H8 for 1 point per 1/8 hours). **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: string
+          enum:
+          - M1
+          - M5
+          - H1
+          - H8
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: stats
+        description: Include statistics per event in the response
+        schema:
+          type: string
+          enum:
+          - none
+          - hits
+          - invocations
+          - all
+      responses:
+        '200':
+          description: Event metrics split by entry point
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  graphs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: com/company/Main#main#([Ljava/lang/String;)V
+                        class_name:
+                          type: string
+                          example: com.company.Main
+                        method_name:
+                          type: string
+                          example: main
+                        method_desc:
+                          type: string
+                          example: ([Ljava/lang/String;)V
+                        points:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              time:
+                                type: string
+                                example: '2018-02-28T22:47:09.038Z'
+                              stats:
+                                $ref: '#/components/schemas/EntryPointStats'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/metrics/event/graph:
+    get:
+      tags:
+      - Views
+      summary: Fetch event metrics split by event
+      description: Fetch event metrics split by event
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: End time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: points
+        description: Number of data points to return within the interval. **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: integer
+      - in: query
+        name: resolution
+        description: Select graph resolution (use M1/M5 for 1 point per 1/5 minutes; use H1/H8 for 1 point per 1/8 hours). **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence.
+        schema:
+          type: string
+          enum:
+          - M1
+          - M5
+          - H1
+          - H8
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: stats
+        description: Include statistics per event in the response
+        schema:
+          type: string
+          enum:
+          - none
+          - hits
+          - invocations
+          - all
+      responses:
+        '200':
+          description: event metrics split by event
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  graphs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: event
+                        id:
+                          type: string
+                          example: '42'
+                        points:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              time:
+                                type: string
+                                example: '2018-02-28T22:47:09.038Z'
+                              stats:
+                                $ref: '#/components/schemas/EventStats'
+                              contributors:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: string
+                                      example: '42'
+                                    stats:
+                                      $ref: '#/components/schemas/EventStats'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/history:
+    get:
+      tags:
+      - Views
+      summary: Fetch View History
+      description: This call allows to get data about the creation and the last update to the view and provides information about the update initiator and timestamp.
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: View History
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ViewHistory'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/categories/{category_id}/views:
+    post:
+      tags:
+      - Views
+      summary: Add view to selected category
+      description: Add view to selected category
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: category_id
+        description: View category to use
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              example: P12
+        description: View ID (string)
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  schemas:
+    ViewHistory:
+      type: object
+      properties:
+        created_on:
+          type: string
+          description: View creation time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+          example: '2018-02-28T22:47:09.038+02:00'
+        creation_method:
+          type: string
+          enum:
+          - manual
+          - api
+          description: View creation method
+          example: manual
+        created_by:
+          type: string
+          description: View creator
+          example: John Doe
+        updated_on:
+          type: string
+          description: View update time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+          example: '2018-05-01T10:00:00.020+03:00'
+        update_method:
+          type: string
+          enum:
+          - manual
+          - api
+          description: View update method
+          example: manual
+        updated_by:
+          type: string
+          description: updated by
+          example: John Doe
+    Filter:
+      description: Filter properties
+      type: object
+      properties:
+        first_seen:
+          type: object
+          description: Defines the first time an event occured using a absolute time frame or a relative ime frame. If absolute time frame is defined, the relative will be ignored.
+          properties:
+            absolute:
+              type: object
+              properties:
+                from:
+                  type: string
+                  description: Start time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+                  example: '2018-02-28T22:47:09.038+02:00'
+                to:
+                  type: string
+                  description: End time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+                  example: '2018-02-28T22:47:09.038+02:00'
+            relative:
+              type: string
+              enum:
+              - last_hour
+              - last_3h
+              - last_6h
+              - last_12h
+              - last_24h
+              - last_48h
+              - last_7d
+              - last_14d
+              - last_30d
+              example: last_6h
+        labels:
+          type: array
+          description: List of labels
+          items:
+            type: string
+            example: Jira
+        event_type:
+          type: array
+          description: List of event types
+          items:
+            type: string
+            enum:
+            - Uncaught Exceptions
+            - Caught Exceptions
+            - Swallowed Exceptions
+            - Logged Warnings
+            - Logged Errors
+            - HTTP Errors
+            - Timers
+            example: Swallowed Exceptions
+        event_name:
+          type: array
+          description: List of event names
+          items:
+            type: string
+            example: IndexOutOfBoundsException
+        event_location:
+          type: array
+          description: (Not implemented yet) List of event locations
+          items:
+            type: string
+            example: DotConnect
+        event_package:
+          type: array
+          description: List of event packages
+          items:
+            type: string
+            example: com.dotmarketing.servlets
+        entry_point:
+          type: array
+          description: (Not implemented yet) List of entry points
+          items:
+            type: string
+        servers:
+          type: array
+          description: List of server names
+          items:
+            type: string
+            example: na-dotCMS-2
+        apps:
+          type: array
+          description: List of application names
+          items:
+            type: string
+            example: API
+        deployments:
+          type: array
+          description: List of deployment names
+          items:
+            type: string
+            example: 2018-04-11-2
+        introduced_by:
+          type: array
+          description: Filters events by deployment they originated in
+          items:
+            type: string
+            example: Unnamed Deployment
+        search:
+          type: string
+          description: Free text search
+    ViewBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          example: P12
+        name:
+          type: string
+          example: DB Errors
+        shared:
+          type: boolean
+          example: false
+        admin:
+          type: boolean
+          description: Indicates that this view can be created and accessed by environment admins only.
+          example: true
+    EntryPointStats:
+      type: object
+      properties:
+        invocations:
+          type: integer
+          example: 42
+        avg_time:
+          type: number
+          description: Average entry point running time (in ms)
+          example: 925.7
+        total_time:
+          type: number
+          description: Entry point running time (in ms)
+          example: 9345
+        avg_time_std_deviation:
+          type: number
+          description: Standard deviation of entry point running time (in ms)
+          example: 130
+    EntryPoint:
+      type: object
+      properties:
+        name:
+          type: string
+          example: com/company/Main#main#([Ljava/lang/String;)V
+        class_name:
+          type: string
+          example: com/company/Main
+        method_name:
+          type: string
+          example: main
+        method_desc:
+          type: string
+          example: ([Ljava/lang/String;)V
+        stats:
+          $ref: '#/components/schemas/EntryPointStats'
+    CodeLocation:
+      description: A code location, for error location, etc
+      type: object
+      properties:
+        prettified_name:
+          type: string
+          example: Main.main
+        class_name:
+          type: string
+          example: com.company.Main
+        method_name:
+          type: string
+          example: main
+        method_desc:
+          type: string
+          example: ([Ljava/lang/String;)V
+    ViewFull:
+      type: object
+      description: Single view full properties
+      properties:
+        name:
+          type: string
+          example: DB Errors
+        description:
+          type: string
+          example: This is a DB Errors View
+        shared:
+          type: boolean
+          example: false
+        admin:
+          type: boolean
+          description: Indicates that this view is accessible to environment admins only.
+          example: true
+        default:
+          type: boolean
+          description: TBD - NOT YET IMPLEMENTED
+          example: false
+        filters:
+          $ref: '#/components/schemas/Filter'
+    EventStats:
+      type: object
+      properties:
+        hits:
+          type: integer
+          example: 42
+        invocations:
+          type: integer
+          example: 51929
+    Event:
+      description: An exception, logged error and more
+      type: object
+      properties:
+        id:
+          type: string
+          example: '1'
+        summary:
+          type: string
+          example: NullPointerException in Main.main
+        type:
+          type: string
+          example: Uncaught Exception
+        name:
+          type: string
+          example: NullPointerException
+        message:
+          type: string
+          example: Error checking is-customer for null.
+        first_seen:
+          type: string
+          example: '2018-02-28T22:47:09.038Z'
+        introduced_by:
+          type: string
+          example: 1.201.1
+        labels:
+          type: array
+          items:
+            type: string
+            example: Critical
+        similar_event_ids:
+          type: array
+          items:
+            type: string
+            example: K2
+        jira_issue_url:
+          type: string
+          example: https://example.atlassian.net/browse/EX-103
+        error_location:
+          $ref: '#/components/schemas/CodeLocation'
+        entry_point:
+          $ref: '#/components/schemas/CodeLocation'
+        error_origin:
+          $ref: '#/components/schemas/CodeLocation'
+        stats:
+          $ref: '#/components/schemas/EventStats'
+        stack_frames:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeLocation'
+  responses:
+    ForbiddenError:
+      description: Forbidden
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    Conflict:
+      description: Conflict
+    UnauthorizedError:
+      description: Unauthorized
+    BadRequestError:
+      description: Bad Request
+  requestBodies:
+    ViewFull:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ViewFull'
+      description: Single view properties
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

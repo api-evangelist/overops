@@ -1,0 +1,182 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts Team Management API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: Team Management
+  description: APIs related to team management of a service
+paths:
+  /services/{env_id}/team:
+    get:
+      tags:
+      - Team Management
+      summary: List environment team members
+      description: List team members with access to this environment
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: email
+        description: Team member email
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of team members
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TeamMembersFull'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+      - Team Management
+      summary: Add new members
+      description: Add new members
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/TeamMembersBasic'
+      responses:
+        '200':
+          description: List of added members
+          content:
+            '*/*':
+              schema:
+                properties:
+                  new_members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                          example: jane.doe@company.com
+                        status:
+                          type: string
+                          example: invitation sent
+                          enum:
+                          - invitation sent
+                          - already exists
+                        link:
+                          type: string
+                          description: Invitation link for newly invited members
+                          example: https://app.overops.com/app/cst?token=abcda12345678
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+      - Team Management
+      summary: Delete members from an environment
+      description: Delete members from an environment. This call requires admin role
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/TeamMembersBasic'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/team/change-role:
+    post:
+      tags:
+      - Team Management
+      summary: Edit roles
+      description: Edit roles for selected group of users
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/TeamMembersBasic'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+components:
+  schemas:
+    TeamMembersBasic:
+      description: List of environment team members
+      type: array
+      items:
+        type: object
+        properties:
+          email:
+            type: string
+            example: jane.doe@company.com
+          role:
+            type: string
+            description: owner / admin / member / viewer
+            example: admin
+    TeamMembersFull:
+      description: List of environment team members
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            example: Jane Doe
+          email:
+            type: string
+            example: jane.doe@company.com
+          role:
+            type: string
+            description: owner / admin / member / viewer
+            example: admin
+          state:
+            type: string
+            description: active / pending invitation
+            example: pending invitation
+          link:
+            type: string
+            description: Invitation link for newly invited members (pending invitation status)
+            example: https://app.overops.com/app/cst?token=abcda12345678
+  responses:
+    OK:
+      description: OK
+    UnauthorizedError:
+      description: Unauthorized
+  requestBodies:
+    TeamMembersBasic:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TeamMembersBasic'
+      description: list of team members
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

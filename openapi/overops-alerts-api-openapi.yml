@@ -1,0 +1,717 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: Alerts
+  description: Fetch and manipulate alerting rules for detecting and disseminating anomalies such as introduction of new events and regressions to different communication channels (e.g. Email, Jira, Slack, Uder defined Functions).
+paths:
+  /services/{env_id}/views/{view_id}/anomaly:
+    post:
+      tags:
+      - Alerts
+      summary: Alert on anomalies
+      description: Alert on anomalies
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                desc:
+                  type: string
+                  example: Description
+                timeframe:
+                  type: object
+                  properties:
+                    from:
+                      type: string
+                      example: '2018-02-28T22:47:09.038Z'
+                    to:
+                      type: string
+                      example: '2018-03-01T22:47:09.038Z'
+                    name:
+                      type: string
+                      example: Last day
+                anomaly:
+                  type: object
+                  properties:
+                    periods:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            example: '1'
+                          from:
+                            type: string
+                            example: '2018-03-01T23:10:00.000Z'
+                          to:
+                            type: string
+                            example: '2018-03-01T24:10:00.000Z'
+                    contributors:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                            example: 1
+                          value:
+                            type: number
+                            example: 42
+        description: the anomaly object
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/settings/alerts:
+    get:
+      tags:
+      - Alerts
+      summary: Fetch Default Alert Settings
+      description: Use this call to fetch default alert settings for selected environment
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of alert defaults
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlertDefaults'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    post:
+      tags:
+      - Alerts
+      summary: Update Default Alert Settings
+      description: 'Use this call to update default alert settings for selected environment which will be used as initial settings for every new alert opened in this environment. '
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlertDefaults'
+        description: Default alert settings
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/alerts/servicenow/tables:
+    post:
+      tags:
+      - Alerts
+      summary: Fetch ServiceNow Tables
+      description: Use this call to Load ServiceNow tables associated with specific credentials
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: http://servicenow.company.com/hooks
+                user_id:
+                  type: string
+                  example: admin
+                password:
+                  type: string
+                  example: pa$$1
+        description: ServiceNow Credentials
+      responses:
+        '200':
+          description: List of ServiceNow tables
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  tables:
+                    type: array
+                    items:
+                      type: object
+                      description: Service Now Tables
+                      properties:
+                        label:
+                          type: string
+                          example: Report Layer
+                        name:
+                          type: string
+                          example: sys_report_layer
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/alerts:
+    get:
+      tags:
+      - Alerts
+      summary: Fetch Alert settings for a View
+      description: Fetch Alert settings for a View (Slack, Email, UDF, etc)
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View ID to use (e.g. P283)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Alert data
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Alert'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    post:
+      tags:
+      - Alerts
+      summary: Edit Alert settings of a View
+      description: Edit Alert settings of a View
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View ID to use (e.g. P283)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Alert'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    delete:
+      tags:
+      - Alerts
+      summary: Remove Alert settings
+      description: Disables all Alert settings for a View
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View ID to use (e.g. P283)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+  /services/{env_id}/alerts/test:
+    post:
+      tags:
+      - Alerts
+      summary: Test Alert settings
+      description: This endpoint allows to test alerts settings before applying them to a particular view
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Alert'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/custom-alert:
+    post:
+      tags:
+      - Alerts
+      summary: Send custom alert
+      description: Send custom alert
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View ID to use (e.g. P283)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomAlert'
+        description: CustomAlert
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+  /services/{env_id}/alerts:
+    get:
+      tags:
+      - Alerts
+      summary: Fetch Active Alerts for an Environment
+      description: Use this call to fetch all active alerts on current environment. admins can use the query parameter to fetch alerts which were set by other member/admin
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: email
+        description: Team member email. When this parameter is used, the alerts will be fetched for the selected user.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of alerts in current environment, aggregated in views (alerts which were set by calling/selected user and global alerts)
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  alerts:
+                    type: array
+                    description: list of alerts
+                    items:
+                      $ref: '#/components/schemas/ViewAlertsSummary'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  schemas:
+    AlertDefaults:
+      description: Default alert settings for an environment
+      type: object
+      properties:
+        email:
+          type: object
+          properties:
+            alert_me:
+              type: boolean
+              example: true
+            alert_all_team_members:
+              type: boolean
+              example: false
+            alert_additional_emails:
+              type: boolean
+              example: false
+            additional_emails_to_alert:
+              type: array
+              items:
+                type: string
+                example: user1@company.com
+        slack:
+          type: object
+          properties:
+            inhook_url:
+              type: string
+              example: https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j
+        pager_duty:
+          type: object
+          properties:
+            service_integration_key:
+              type: string
+              example: sflk234lkdjflsj12o8312
+        service_now:
+          type: object
+          properties:
+            url:
+              type: string
+              example: http://servicenow.company.com/hooks
+            user_id:
+              type: string
+              example: admin
+            password:
+              type: string
+              example: pa$$1
+            table:
+              description: the name (internal name) of a servicenow table to be used
+              type: string
+              example: sys_report_layer
+        hip_chat:
+          type: object
+          properties:
+            token:
+              type: string
+              example: dfgdk2342kljsldfjslk2342fsdfkjslkj
+            room:
+              type: string
+              example: Takipi
+        webhook:
+          type: object
+          properties:
+            webhook_url:
+              type: string
+              example: http://hooks.company.com/overops1/P1/hook
+    CustomAlert:
+      description: Custom Alert
+      type: object
+      properties:
+        title:
+          type: string
+          example: Logged Warning in Some.File
+        body:
+          type: string
+          example: A new logged warning has been detected in Staging2! (alert added by 4 members)
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              pre_link_text:
+                type: string
+              link_text:
+                type: string
+              post_link_text:
+                type: string
+              link:
+                type: string
+    UDFBasic:
+      type: object
+      properties:
+        library_id:
+          type: string
+          example: L8
+        function_id:
+          type: string
+          example: Tier Routing
+        summary:
+          type: string
+          example: Anomaly(last 1d vs. prev 7d, Δ > 100%)"
+        args:
+          type: string
+          example: '# Category name where tiers views will be created.
+
+            category_name=tiers
+
+
+            # Link to the full tiers list: https://git.io/fpPT0
+
+            # Enhance it with a delimited list: A=B;C=D;E=F, where the first item is a package (e.g com.mongo), and the second is a tier (e.g MongoDB).
+
+            namespaces=com.sparktale.bugtale.server.common.distribute.redis=Redis;org.redisson=Redisson;com.sparktale.bugtale.server.common.distribute.guava=Guava-Cache;com.sparktale.bugtale.util.cache=Cache;com.sparktale.bugtale.server.app.dashboard.cache=Cache;com.sparktale.bugtale.server.common.stats=SQL-Stats;com.sparktale.bugtale.server.common.pds=SQL-Pds;com.sparktale.bugtale.qsql=SQL-Queue;com.sparktale.bugtale.server.services.queue.qsql=SQL-Queue;com.sparktale.bugtale.shared.backend.rdbms=SQL-Common;com.sparktale.bugtale.server.common.queue=Local-Queue;com.sparktale.bugtale.server.common.alerts=Alerts-Engine;com.sparktale.bugtale.decoding=Snapshot-Analysis;com.sparktale.bugtale.server.common.hits=Snapshot-Analysis;com.sparktale.bugtale.server.common.tailor=Snapshot-Analysis;com.sparktale.bugtale.server.analysis=Code-Analysis;com.sparktale.bugtale.server.worker.analysis=Code-Analysis;com.sparktale.bugtale.server.common.source=Code-Analysis;com.sparktale.bugtale.analyzer=Code-Analysis;com.sparktale.bugtale.decompiler=Decompiler;com.takipi.integrations.grafana=OverOps-Influx-Backend;com.sparktale.common.util=Utils;com.sparktale.bugtale.shared.backend.util=Utils'
+    Alert:
+      description: All alert settings of a view
+      type: object
+      properties:
+        global:
+          type: boolean
+          description: Marks the alert as a global alert, i.e. will affect all users that share this view. Only admins will be able to edit these alerts.
+          example: false
+        alert_on_new:
+          type: boolean
+          example: true
+        alert_on_anomaly:
+          type: boolean
+          example: true
+        periodic_udf_settings:
+          properties:
+            library_id:
+              type: string
+              example: L6
+            function_id:
+              type: string
+              example: Relative Threshold
+            args:
+              type: string
+              example: '# Defines a target threshold that if the volume of events within the views exceeds will constitute an anomaly.
+
+                threshold = 100
+
+
+                # A percentage value between 1 and 100 against which the volume of events / throughput is compared.
+
+                rate = 5
+
+
+                # Compare the number of times application threads (e.g. Servlet, Actor, Future,..) containing the events matching the target views have executed  against the number of events occurring. For example, if a Servlet containing the events within the view was invoked a 1000 times and 20 events matching the view’s filter took place, a RATE value above 2 will invoke an alert.
+
+                relative_to = Thread_Calls
+
+
+                # Compare the number of times the application method containing the events was invoked against the number of events which occurred.
+
+                # relative_to = Method_Calls
+
+
+                # Time period to look at, in minutes.
+
+                timespan = 60'
+            summary:
+              type: string
+              example: Threshold(100,5.00% of Thread_Calls)
+            period_minutes:
+              type: number
+              example: 60
+        slack_settings:
+          properties:
+            enabled:
+              type: boolean
+              example: true
+            inhook_url:
+              type: string
+              example: https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j
+          type: object
+        hip_chat_settings:
+          properties:
+            enabled:
+              type: boolean
+              example: false
+            token:
+              type: string
+              example: dfgdk2342kljsldfjslk2342fsdfkjslkj
+            room:
+              type: string
+              example: Takipi
+          type: object
+        pager_duty_settings:
+          properties:
+            enabled:
+              type: boolean
+              example: false
+            service_integration_key:
+              type: string
+              example: sflk234lkdjflsj12o8312
+          type: object
+        webhook_settings:
+          properties:
+            enabled:
+              type: boolean
+              example: false
+            webhook_url:
+              type: string
+              example: http://hooks.company.com/overops1/P1/hook
+          type: object
+        service_now_settings:
+          properties:
+            enabled:
+              type: boolean
+              example: false
+            url:
+              type: string
+              example: http://servicenow.company.com/hooks
+            user_id:
+              type: string
+              example: admin
+            password:
+              type: string
+              example: pa$$1
+            table:
+              description: the name (internal name) of a servicenow table to be used
+              type: string
+              example: sys_report_layer
+          type: object
+        email_settings:
+          properties:
+            is_active:
+              type: boolean
+              example: true
+            alert_me:
+              type: boolean
+              example: true
+            alert_all_team_members:
+              type: boolean
+              example: false
+            alert_admins:
+              type: boolean
+              example: true
+            alert_additional_emails:
+              type: boolean
+              example: false
+            additional_emails_to_alert:
+              type: array
+              items:
+                type: string
+                example: user1@company.com
+          type: object
+        udf_settings:
+          properties:
+            enabled:
+              type: boolean
+              example: false
+            library_id:
+              type: string
+              example: L24
+            function_id:
+              type: string
+              example: apply-label
+            args:
+              type: string
+              example: label=sample_label_name
+          type: object
+    ViewAlertsSummary:
+      description: basic alerts info for a single view
+      type: object
+      properties:
+        view_id:
+          type: string
+          description: View ID
+          example: P12
+        view:
+          type: string
+          description: View Name
+          example: API
+        categories:
+          type: array
+          description: Categories Names
+          items:
+            type: string
+          example: Applications
+        alerts:
+          type: object
+          properties:
+            global:
+              type: boolean
+              description: Indicates alerts which are global, i.e. will affect all users that share this view.
+              example: false
+            alert_on_new:
+              type: boolean
+              description: Indicates alerts which are sent on new events
+              example: true
+            alert_on_every_entrypoint:
+              type: boolean
+              description: Indicates alerts which are sent for every new event regardless of it's entry point
+            anomaly_alert:
+              type: object
+              properties:
+                alert_on_anomaly:
+                  type: boolean
+                  example: true
+                anomaly_function:
+                  $ref: '#/components/schemas/UDFBasic'
+                period:
+                  type: integer
+                  description: The interval (in minutes) between periodic/anomaly udf invocations
+                  example: 3
+            channels:
+              type: array
+              items:
+                type: string
+                enum:
+                - EMAIL
+                - SLACK
+                - HIPCHAT
+                - PAGERDUTY
+                - JIRA
+                - WEBHOOK
+                - SERVICENOW
+                - UDF
+                example: SLACK
+            channel_function:
+              $ref: '#/components/schemas/UDFBasic'
+  responses:
+    ForbiddenError:
+      description: Forbidden
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    UnauthorizedError:
+      description: Unauthorized
+  requestBodies:
+    Alert:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Alert'
+      description: Alerts settings
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

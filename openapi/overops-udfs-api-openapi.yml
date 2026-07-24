@@ -1,0 +1,256 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts UDFs API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: UDFs
+  description: Fetch and manipulate User Defined Functinos - OverOps extensions using Lambdas.
+paths:
+  /global-settings/udfs:
+    get:
+      tags:
+      - UDFs
+      summary: List available UDF libraries
+      description: List available UDF (User Defined Functions) libraries
+      responses:
+        '200':
+          description: UDF libraries list
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UDFLibrary'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+      - UDFs
+      summary: Add a new UDF library
+      description: Add a new UDF library
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                udf:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /global-settings/udfs/{library_id}:
+    get:
+      tags:
+      - UDFs
+      summary: Get UDF library properties
+      description: Get UDF (User Defined Function) library properties
+      parameters:
+      - in: path
+        name: library_id
+        description: UDF library ID to be used
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: UDF library properties
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UDFLibrary'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+      - UDFs
+      summary: Remove UDF library (TBD - Not yet implemented)
+      description: Remove UDF library (TBD - Not yet implemented)
+      parameters:
+      - in: path
+        name: library_id
+        description: UDF library ID to be used
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/udfs:
+    get:
+      tags:
+      - UDFs
+      summary: List available UDF libraries for the environment
+      description: List all available UDFs (User Defined Functions) for selected environment
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: UDF libraries list
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UDFLibrary'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+      - UDFs
+      summary: Add a new UDF library
+      description: Add a new UDF library
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: object
+              properties:
+                udf:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: UDF library was successfully added
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/udfs/{library_id}:
+    get:
+      tags:
+      - UDFs
+      summary: Get UDF library properties
+      description: Get UDF (User Defined Function) library properties
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: library_id
+        description: UDF library ID to be used
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: UDF properties
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UDFLibrary'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+      - UDFs
+      summary: Remove UDF library from the environment
+      description: Remove UDF library from specified environment
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: library_id
+        description: UDF library ID to be used
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  schemas:
+    UDF:
+      type: object
+      properties:
+        function_type:
+          type: string
+          example: ANOMALY
+        short_description:
+          type: string
+          example: Relative Threshold
+        long_description:
+          type: string
+          example: This function compares the volume of events against an absolute threshold
+        param_type:
+          type: string
+          example: TEXT
+        default_params:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: X
+              default_value:
+                type: string
+                example: 100
+    UDFLibrary:
+      description: UDF Properties
+      type: object
+      properties:
+        id:
+          type: string
+          example: L34
+        version:
+          type: string
+          example: 1
+        backward_compatible:
+          type: string
+          example: true
+        functions:
+          type: array
+          items:
+            $ref: '#/components/schemas/UDF'
+  responses:
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    UnauthorizedError:
+      description: Unauthorized
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

@@ -1,0 +1,613 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts Data Redaction API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: Data Redaction
+  description: Fetch and manipulate data redaction of PII with target environments.
+paths:
+  /services/{env_id}/settings/data-redaction:
+    get:
+      tags:
+      - Data Redaction
+      summary: List all data redactions
+      description: List all data redactions
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of data redaction
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  enabled:
+                    type: boolean
+                    example: true
+                  packages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: com.example
+                  patterns:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pattern'
+                  identifiers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: password
+                  classes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: IPv4
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+      - Data Redaction
+      summary: Enable / disable data redaction
+      description: Enable / disable data redaction for a selected environment. This call is allowed for admins only. **IMPORTANT:** *This call affects all filters*
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  example: true
+        description: Data redaction filtering status (true = enabled, false = disabled)
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/data-redaction/patterns:
+    get:
+      tags:
+      - Data Redaction
+      summary: List all regex patterns
+      description: List all regex patterns
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of regex patterns
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  patterns:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pattern'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/data-redaction/patterns/{pattern}:
+    get:
+      tags:
+      - Data Redaction
+      summary: Retrieve a pattern
+      description: Retrieve a pattern
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: pattern
+        description: A RegEx pattern name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A pattern
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Pattern'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      tags:
+      - Data Redaction
+      summary: Create a pattern
+      description: Add a RegEx pattern to be redacted. The pattern name must match the resource identifier
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: pattern
+        description: A RegEx pattern name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pattern'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+      - Data Redaction
+      summary: Delete a pattern
+      description: Removes a pattern from the redaction list
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: pattern
+        description: A RegEx pattern name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/settings/data-redaction/identifiers:
+    get:
+      tags:
+      - Data Redaction
+      summary: List all identifiers
+      description: List all identifiers
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of identifiers
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  identifiers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: password
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/data-redaction/identifiers/{identifier}:
+    get:
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        description: A code identifier
+        required: true
+        schema:
+          type: string
+      tags:
+      - Data Redaction
+      summary: Retrieve an identifier
+      description: Retrieve an identifier
+      responses:
+        '200':
+          description: If the redaction exists
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: password
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      tags:
+      - Data Redaction
+      summary: Add an identifier
+      description: Add an identifier. The body identifier name must match the resource identifier
+      operationId: addIdentifier
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        description: A code identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: password
+        description: Identifier object
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        description: A code identifier
+        required: true
+        schema:
+          type: string
+      tags:
+      - Data Redaction
+      summary: Delete identifier
+      description: Delete identifier
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/settings/data-redaction/classes:
+    get:
+      tags:
+      - Data Redaction
+      summary: List all classes
+      description: List all classes
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of classes
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  classes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: IPv4
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/data-redaction/classes/{class_name}:
+    get:
+      tags:
+      - Data Redaction
+      summary: Retrieve a class
+      description: Retrieve a class from the data redaction list
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: class_name
+        description: Class name to redact.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If the redaction exists
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: IPv4
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      tags:
+      - Data Redaction
+      summary: Add a class for data redaction
+      description: Add a class to the redaction list. The body class name must match the resource identifier
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: class_name
+        description: Class name to redact.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: IPv4
+        description: A JSON representing a class to add for redaction
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+      - Data Redaction
+      summary: Delete a class
+      description: Delete a class
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: class_name
+        description: Class name to redact.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/settings/data-redaction/packages:
+    get:
+      tags:
+      - Data Redaction
+      summary: List all packages
+      description: List all packages
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of packages
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  packages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: com.example
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/settings/data-redaction/packages/{package_name}:
+    get:
+      tags:
+      - Data Redaction
+      summary: Retrieve a package
+      description: Retrieve a package
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: package_name
+        description: Fully qualified Java package name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If the redaction exists
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: com.example
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      tags:
+      - Data Redaction
+      summary: Create a package
+      description: Create a package. The body package name must match the resource identifier
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: package_name
+        description: Fully qualified Java package name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: com.example
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    delete:
+      tags:
+      - Data Redaction
+      summary: Delete package
+      description: Delete package
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: package_name
+        description: Fully qualified Java package name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  responses:
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    UnauthorizedError:
+      description: Unauthorized
+    BadRequestError:
+      description: Bad Request
+  schemas:
+    Pattern:
+      description: A data redaction pattern used to define PII RegEx
+      type: object
+      properties:
+        name:
+          type: string
+          example: Visa
+        category:
+          type: string
+          example: Credit Card
+        regex:
+          type: string
+          example: \b4\d{3}([\-\ ]?)(?:\d{4}\1){2}\d(?:\d{3})?\b
+        is_active:
+          type: boolean
+          example: true
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY

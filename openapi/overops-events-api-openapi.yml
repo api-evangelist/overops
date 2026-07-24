@@ -1,0 +1,597 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Services Alerts Events API
+  contact:
+    email: hello@overops.com
+  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+servers:
+- url: https://api.overops.com/api/v1
+security:
+- basicAuth: []
+- ApiKeyAuth: []
+tags:
+- name: Events
+  description: Fetch and manipulate OverOps Automated Root Cause Events and Snapshots
+paths:
+  /services/{env_id}/events/force-snapshots:
+    post:
+      tags:
+      - Events
+      summary: Batch Force events snapshots
+      description: Force next snapshot for multiple events
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      event_id:
+                        type: string
+                        example: 42
+        description: list of events to force snapshot on next time when each of them occurs
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/events/{event_id}:
+    get:
+      tags:
+      - Events
+      summary: Fetch event data
+      description: Fetch event data
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: event_id
+        description: Event to use
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Event data
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Event'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/events/{event_id}/snapshot:
+    get:
+      tags:
+      - Events
+      summary: Fetch event snapshot
+      description: Fetch event snapshot. Fetches the last relevant snapshot for the specific filters provided. All filters are optional.
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: event_id
+        description: Event to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: similar_event_id
+        description: Event(s) added to the filter
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Link to snapshot
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  link:
+                    type: string
+                    example: https://app.overops.com/tale.html?event=Ux42fkaa--
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/events/{event_id}/snapshots:
+    delete:
+      tags:
+      - Events
+      summary: Delete all event snapshots
+      description: Removes all existing snapshots for an event. All snapshots will be permanently deleted. Event statistics will be kept.
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: event_id
+        description: Event to use
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/events/{event_id}/force-snapshot:
+    post:
+      tags:
+      - Events
+      summary: Force Event Snapshot
+      description: Force snapshot for the next time the event occurs
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: event_id
+        description: Event to use
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /services/{env_id}/events/{event_id}/actions:
+    get:
+      tags:
+      - Events
+      summary: Fetch event actions
+      description: Fetch event actions
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: event_id
+        description: Event to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: type
+        description: Filter by specific type
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Event actions
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventAction'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/events:
+    get:
+      tags:
+      - Events
+      summary: Fetch events details
+      description: Fetch events data for a target timeframe, application / server / deployment set.
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: stats
+        description: Include event volumes (e.g. number of event instances and calls into the method containing the event) in the response
+        schema:
+          type: string
+          enum:
+          - none
+          - hits
+          - invocations
+          - all
+      responses:
+        '200':
+          description: Event data
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/events/stats:
+    get:
+      tags:
+      - Events
+      summary: Fetch stats for all events in the specified view
+      description: Fetch stats for a target timeframe, application / server / deployment set.
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: stats
+        description: return only selected stats. 'all' is default.
+        schema:
+          type: string
+          enum:
+          - hits
+          - invocations
+          - all
+      responses:
+        '200':
+          description: Event stats
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  events-stats:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: '42'
+                        stats:
+                          $ref: '#/components/schemas/EventStats'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /services/{env_id}/views/{view_id}/entrypoints:
+    get:
+      tags:
+      - Events
+      summary: Fetch entry points details
+      description: Fetch entry points data in a selected timeframe
+      parameters:
+      - in: path
+        name: env_id
+        description: Environment ID to use (e.g. S1234)
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: view_id
+        description: View to use
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: from
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: to
+        description: Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: server
+        description: Server(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: app
+        description: Application(s) added to the filter
+        schema:
+          type: string
+      - in: query
+        name: deployment
+        description: Deployment(s) added to the filter
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Entry points data
+          content:
+            '*/*':
+              schema:
+                type: object
+                properties:
+                  entrypoints:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EntryPoint'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  schemas:
+    EntryPointStats:
+      type: object
+      properties:
+        invocations:
+          type: integer
+          example: 42
+        avg_time:
+          type: number
+          description: Average entry point running time (in ms)
+          example: 925.7
+        total_time:
+          type: number
+          description: Entry point running time (in ms)
+          example: 9345
+        avg_time_std_deviation:
+          type: number
+          description: Standard deviation of entry point running time (in ms)
+          example: 130
+    EventAction:
+      properties:
+        type:
+          type: string
+          example: Label
+        action:
+          type: string
+          example: Add Label
+        data:
+          type: string
+          example: Critical
+        timestamp:
+          type: string
+          description: Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+          example: '2018-02-28T22:47:09.038Z'
+        initiator:
+          type: string
+          example: joe@example.com
+        initiator_type:
+          type: string
+          example: User
+    EntryPoint:
+      type: object
+      properties:
+        name:
+          type: string
+          example: com/company/Main#main#([Ljava/lang/String;)V
+        class_name:
+          type: string
+          example: com/company/Main
+        method_name:
+          type: string
+          example: main
+        method_desc:
+          type: string
+          example: ([Ljava/lang/String;)V
+        stats:
+          $ref: '#/components/schemas/EntryPointStats'
+    CodeLocation:
+      description: A code location, for error location, etc
+      type: object
+      properties:
+        prettified_name:
+          type: string
+          example: Main.main
+        class_name:
+          type: string
+          example: com.company.Main
+        method_name:
+          type: string
+          example: main
+        method_desc:
+          type: string
+          example: ([Ljava/lang/String;)V
+    EventStats:
+      type: object
+      properties:
+        hits:
+          type: integer
+          example: 42
+        invocations:
+          type: integer
+          example: 51929
+    Event:
+      description: An exception, logged error and more
+      type: object
+      properties:
+        id:
+          type: string
+          example: '1'
+        summary:
+          type: string
+          example: NullPointerException in Main.main
+        type:
+          type: string
+          example: Uncaught Exception
+        name:
+          type: string
+          example: NullPointerException
+        message:
+          type: string
+          example: Error checking is-customer for null.
+        first_seen:
+          type: string
+          example: '2018-02-28T22:47:09.038Z'
+        introduced_by:
+          type: string
+          example: 1.201.1
+        labels:
+          type: array
+          items:
+            type: string
+            example: Critical
+        similar_event_ids:
+          type: array
+          items:
+            type: string
+            example: K2
+        jira_issue_url:
+          type: string
+          example: https://example.atlassian.net/browse/EX-103
+        error_location:
+          $ref: '#/components/schemas/CodeLocation'
+        entry_point:
+          $ref: '#/components/schemas/CodeLocation'
+        error_origin:
+          $ref: '#/components/schemas/CodeLocation'
+        stats:
+          $ref: '#/components/schemas/EventStats'
+        stack_frames:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeLocation'
+  responses:
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    UnauthorizedError:
+      description: Unauthorized
+    BadRequestError:
+      description: Bad Request
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
