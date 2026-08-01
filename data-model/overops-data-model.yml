@@ -1,0 +1,62 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/overops-openapi-original.json
+notes: >-
+  Entity-relationship graph derived from the OpenAPI components.schemas ($ref links)
+  and the resource path hierarchy (everything is scoped under an Environment /
+  service at /services/{env_id}/...).
+root_entity: Environment
+entities:
+- name: Environment
+  id_prefix: S
+  id_example: S1234
+  aka: [Service]
+  relationships:
+  - {via: views, target: View, kind: has_many}
+  - {via: events, target: Event, kind: has_many}
+  - {via: labels, target: Label, kind: has_many}
+  - {via: timers, target: Timer, kind: has_many}
+  - {via: servers, target: Server, kind: has_many}
+  - {via: applications, target: Application, kind: has_many}
+  - {via: deployments, target: Deployment, kind: has_many}
+  - {via: categories, target: Category, kind: has_many}
+  - {via: udfs, target: UDFLibrary, kind: has_many}
+  - {via: team, target: TeamMembers, kind: has_many}
+- name: View
+  relationships:
+  - {via: filters, target: Filter, kind: has_one}
+  - {via: events, target: Event, kind: has_many}
+  - {via: entrypoints, target: EntryPoint, kind: has_many}
+  - {via: alerts, target: Alert, kind: has_many}
+- name: Category
+  relationships:
+  - {via: views, target: View, kind: has_many}
+- name: Event
+  relationships:
+  - {via: error_location, target: CodeLocation, kind: has_one}
+  - {via: entry_point, target: CodeLocation, kind: has_one}
+  - {via: error_origin, target: CodeLocation, kind: has_one}
+  - {via: stack_frames, target: CodeLocation, kind: has_many}
+  - {via: stats, target: EventStats, kind: has_one}
+  - {via: labels, target: Label, kind: has_many}
+- name: EntryPoint
+  relationships:
+  - {via: stats, target: EntryPointStats, kind: has_one}
+- name: UDFLibrary
+  relationships:
+  - {via: functions, target: UDF, kind: has_many}
+- name: PublishMetricsSettings
+  relationships:
+  - {via: metrics, target: Metrics, kind: has_one}
+- name: SystemMetrics
+  relationships:
+  - {via: unit, target: SystemMetadataUnit, kind: has_one}
+- {name: Label}
+- {name: Server}
+- {name: Application}
+- {name: Deployment}
+- {name: Timer}
+- {name: Agent}
+- {name: Collector}
+- {name: Alert}
+- {name: TeamMembers}

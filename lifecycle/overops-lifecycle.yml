@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: searched
+source: https://doc.overops.com/docs/whats-new
+notes: >-
+  OverOps versions the product on a train (current 4.84 per the docs "What's New"
+  page) and the REST API on the /api/v1 URI path. A dated "What's New" page plus a
+  "Previous Versions" archive act as the release history. No public status page or
+  formal deprecation/SLA policy was found (the company was acquired by Harness).
+versioning:
+  scheme: uri-path
+  current_api: v1
+  current_product: '4.84'
+  docs: https://doc.overops.com/reference
+whats_new: https://doc.overops.com/docs/whats-new
+previous_versions: https://doc.overops.com/docs/previous-versions
+deprecation:
+  policy_url: null
+  sunset_header: false
+sla:
+  url: null
+status_page: null
+deprecated_operations: []

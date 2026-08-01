@@ -1,0 +1,51 @@
+generated: '2026-07-20'
+method: searched
+source: https://search.maven.org/search?q=g:com.takipi
+notes: >-
+  OverOps (formerly Takipi) publishes its first-party Java/Scala client libraries
+  to Maven Central under the com.takipi groupId. The client is referenced directly
+  from the OpenAPI info.description at https://github.com/takipi/api-client.
+packages:
+- language: java
+  registry: maven
+  name: com.takipi:api-client
+  url: https://search.maven.org/artifact/com.takipi/api-client
+  repo: https://github.com/takipi/api-client
+  version: 2.34.2
+  install: |
+    <dependency>
+      <groupId>com.takipi</groupId>
+      <artifactId>api-client</artifactId>
+      <version>2.34.2</version>
+    </dependency>
+  official: true
+  description: Java/Scala client library for the OverOps REST API.
+- language: java
+  registry: maven
+  name: com.takipi:api-client-util
+  url: https://search.maven.org/artifact/com.takipi/api-client-util
+  version: 2.34.2
+  install: |
+    <dependency>
+      <groupId>com.takipi</groupId>
+      <artifactId>api-client-util</artifactId>
+      <version>2.34.2</version>
+    </dependency>
+  official: true
+  description: Utility helpers layered on top of the OverOps api-client.
+- language: java
+  registry: maven
+  name: com.takipi:takipi-sdk
+  url: https://search.maven.org/artifact/com.takipi/takipi-sdk
+  repo: https://github.com/overops/takipi-sdk
+  version: 0.3.0
+  official: true
+  description: Takipi/OverOps SDK for programmatic instrumentation.
+- language: java
+  registry: maven
+  name: com.takipi:overops-functions
+  url: https://search.maven.org/artifact/com.takipi/overops-functions
+  repo: https://github.com/overops/overops-functions
+  version: 2.0.0
+  official: true
+  description: Public OverOps User Defined Functions (UDFs) runtime.

@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: searched
+source: https://doc.overops.com/docs/whats-new
+notes: >-
+  OverOps maintains a dated "What's New" release-notes page plus a "Previous
+  Versions" archive. The product train is at 4.84. Exact per-release detail is
+  behind the ReadMe docs render; the recent window is captured at the version level.
+scheme: product-train
+current_version: '4.84'
+docs: https://doc.overops.com/docs/whats-new
+previous_versions: https://doc.overops.com/docs/previous-versions
+entries:
+- version: '4.84'
+  highlights:
+  - Latest documented OverOps product release ("What's New in 4.84").
+  breaking: false

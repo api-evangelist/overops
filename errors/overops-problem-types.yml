@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/overops-openapi-original.json
+format: http-status
+notes: >-
+  Derived from the 4xx responses declared across the OverOps OpenAPI. The API
+  signals errors with standard HTTP status codes and does not use
+  application/problem+json, so this is a status-code catalog, not RFC 9457.
+problems:
+- status: 400
+  title: Bad Request
+  meaning: The request was malformed or a required parameter/body was invalid.
+  occurrences: 23
+- status: 401
+  title: Unauthorized
+  meaning: >-
+    Missing or invalid credentials. Supply a valid X-API-KEY header or HTTP Basic
+    credentials. Applies to nearly every operation.
+  occurrences: 136
+- status: 403
+  title: Forbidden
+  meaning: Authenticated, but the key/user lacks permission for this environment or action.
+  occurrences: 13
+- status: 404
+  title: Not Found
+  meaning: The referenced environment, event, view, timer, label or other resource does not exist.
+  occurrences: 59
+- status: 409
+  title: Conflict
+  meaning: The request conflicts with current state (e.g. creating a resource that already exists).
+  occurrences: 4

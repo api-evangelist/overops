@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/overops-openapi-original.json
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: spec declares openapi 3.0.0 with 87 paths / 137 operations
+- id: api-key-auth
+  conforms: true
+  evidence: components.securitySchemes.ApiKeyAuth (apiKey in header X-API-KEY)
+- id: http-basic-auth
+  conforms: true
+  evidence: components.securitySchemes.basicAuth (http basic)
+- id: oauth2
+  conforms: false
+  evidence: no oauth2 security scheme declared
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: error responses use HTTP status codes, not application/problem+json
+- id: json-api
+  conforms: false
+- id: rest-crud
+  conforms: true
+  evidence: resource-oriented paths under /services/{env_id}/... with GET/POST/PUT/DELETE
+- id: pagination
+  conforms: false
+  evidence: no cursor/offset/page parameters; result windows scoped by from/to time params
+- id: idempotency
+  conforms: false
+  evidence: no Idempotency-Key header/parameter documented

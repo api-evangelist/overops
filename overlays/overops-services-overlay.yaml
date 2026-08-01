@@ -1,0 +1,27 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for OverOps Services API
+  version: 1.0.0
+extends: openapi/overops-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: overops
+    x-apievangelist-parent-company: harness
+    x-apievangelist-status: acquired
+    x-apievangelist-api-base: https://api.overops.com/api/v1
+    x-apievangelist-notes: >-
+      OverOps (formerly Takipi) continuous-reliability API. Company acquired by
+      Harness; overops.com redirects to harness.io, but the ReadMe-hosted API
+      reference at doc.overops.com/reference and api.overops.com remain live.
+- target: $.info
+  update:
+    x-apievangelist-auth: >-
+      Authenticate with the X-API-KEY header (generate under Settings ->
+      Account Settings) or HTTP Basic (username:password). X-API-KEY recommended.
+- target: $.info
+  update:
+    x-apievangelist-error-model: >-
+      Errors are signalled by HTTP status (401 unauthenticated, 403 forbidden,
+      404 not found, 400 bad request, 409 conflict); responses are not
+      application/problem+json.

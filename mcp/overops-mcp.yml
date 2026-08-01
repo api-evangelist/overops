@@ -1,0 +1,42 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/overops-openapi-original.json
+notes: >-
+  No official OverOps MCP server was found (no registry entry, no @modelcontextprotocol
+  package, none advertised in the docs). This is a candidate tool surface derived from
+  a representative subset of the 137 OpenAPI operations, one tool per operation.
+server:
+  name: overops
+  transport: http
+tools:
+- name: list_environments
+  description: List all OverOps environments (services) the API key can access.
+  source_operation: openapi/overops-openapi-original.json#GET /services
+- name: get_environment
+  description: Get information about a single environment by ID.
+  source_operation: openapi/overops-openapi-original.json#GET /services/{env_id}
+- name: list_views
+  description: List saved views (filters) in an environment.
+  source_operation: openapi/overops-openapi-original.json#GET /services/{env_id}/views
+- name: list_view_events
+  description: Fetch the events (errors/exceptions) captured within a view.
+  source_operation: openapi/overops-openapi-original.json#GET /services/{env_id}/views/{view_id}/events
+- name: get_event
+  description: Fetch data for a single event.
+  source_operation: openapi/overops-openapi-original.json#GET /services/{env_id}/events/{event_id}
+- name: get_event_snapshot
+  description: Fetch the code snapshot (stack, variables) for an event.
+  source_operation: openapi/overops-openapi-original.json#GET /services/{env_id}/events/{event_id}/snapshot
+- name: resolve_event
+  description: Mark an event as resolved.
+  source_operation: openapi/overops-openapi-original.json#POST /services/{env_id}/events/{event_id}/resolve
+- name: list_labels
+  description: List labels defined in an environment.
+  source_operation: openapi/overops-openapi-original.json#GET /services/{env_id}/labels
+- name: list_deployments
+  description: List deployments reporting into an environment.
+  source_operation: openapi/overops-openapi-original.json#GET /services/{env_id}/deployments
+- name: list_alerts
+  description: Fetch active alert settings for an environment.
+  source_operation: openapi/overops-openapi-original.json#GET /services/{env_id}/alerts

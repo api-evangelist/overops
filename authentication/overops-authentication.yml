@@ -1,0 +1,26 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/overops-openapi-original.json
+docs: https://doc.overops.com/reference
+notes: >-
+  Confirmed against the OpenAPI info.description: authenticate with the X-API-KEY
+  header (generate under Settings -> Account Settings; recommended) or HTTP Basic
+  using a username:password combo.
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/overops-openapi-original.json
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-KEY
+  sources:
+  - openapi/overops-openapi-original.json

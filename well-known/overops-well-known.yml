@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: searched
+source: probed /.well-known/ across OverOps hosts on 2026-07-20
+notes: >-
+  No /.well-known/ discovery documents are published on any OverOps host. The
+  apex overops.com now 301-redirects to harness.io (OverOps was acquired by
+  Harness); the surviving developer surface is the ReadMe-hosted docs at
+  doc.overops.com and the API at api.overops.com. Absence recorded as valid data.
+hosts:
+- host: https://doc.overops.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://api.overops.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://app.overops.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}

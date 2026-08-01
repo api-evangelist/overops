@@ -1,8 +1,29 @@
 aid: overops
 name: Overops
-description: Overops is a company surfaced as a portfolio company of lightspeed-venture-partners and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  OverOps (formerly Takipi) is a continuous reliability platform that helps teams
+  who ship software ensure rapid code changes do not degrade the customer
+  experience. It runs in the cloud or on-premises, instruments Java and .NET
+  applications with a micro-agent, and automatically identifies, prevents, and
+  resolves critical software issues across CI/CD, testing, and production. OverOps
+  captures true root-cause code snapshots (stack, source, and variable state) at the
+  moment of failure and exposes everything through a REST API that lets admins and
+  users automate every action available in the OverOps UI. OverOps was acquired by
+  Harness; overops.com now redirects to harness.io, while the developer API,
+  documentation, and application hosts remain live.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://files.readme.io/dd13086-small-Logo_white.png
 url: https://raw.githubusercontent.com/api-evangelist/overops/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,14 +31,245 @@ x-backed-by:
 - lightspeed-venture-partners
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-parent-company: harness
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Observability
+- Reliability
+- Error Monitoring
+- Application Performance
+- Java
+- DevOps
+- Code Quality
+apis:
+- aid: overops:overops-alerts-api
+  name: Overops Alerts API
+  description: >-
+    Fetch and manipulate alerting rules for detecting and disseminating anomalies such as introduction
+    of new events and regressions to different communication channels (e.g. Email, Jira, Slack, Uder defined
+    Functions).
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-alerts-api-openapi.yml
+- aid: overops:overops-categories-api
+  name: Overops Categories API
+  description: >-
+    Fetch and manipulate grouping of views into logical categories (e.g "CI/CD", "Favorites")
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-categories-api-openapi.yml
+- aid: overops:overops-code-redaction-api
+  name: Overops Code Redaction API
+  description: >-
+    Fetch and manipulate code filters to include / exclude 3rd party and utility classes  from OverOps
+    analysis and data capture.
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Code Redaction
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-code-redaction-api-openapi.yml
+- aid: overops:overops-data-redaction-api
+  name: Overops Data Redaction API
+  description: Fetch and manipulate data redaction of PII with target environments.
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Data Redaction
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-data-redaction-api-openapi.yml
+- aid: overops:overops-entry-points-api
+  name: Overops Entry Points API
+  description: The Entry Points API from Overops — 11 operation(s) for entry points.
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Entry Points
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-entry-points-api-openapi.yml
+- aid: overops:overops-environment-management-api
+  name: Overops Environment Management API
+  description: Fetch monitoring status and control OverOps Agents and Collectors
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Environment Management
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-environment-management-api-openapi.yml
+- aid: overops:overops-events-api
+  name: Overops Events API
+  description: Fetch and manipulate OverOps Automated Root Cause Events and Snapshots
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-events-api-openapi.yml
+- aid: overops:overops-general-api
+  name: Overops General API
+  description: Fetch general information about provisioned OverOps enviroments
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - General
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-general-api-openapi.yml
+- aid: overops:overops-labels-api
+  name: Overops Labels API
+  description: Fetch and manipulate events labels
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-labels-api-openapi.yml
+- aid: overops:overops-publish-metrics-api
+  name: Overops Publish Metrics API
+  description: >-
+    Fetch and manipulate dynamic data exported to StatsD, which enables using a variety of third-party
+    tools, providing control over application data from OverOps.
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Publish Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-publish-metrics-api-openapi.yml
+- aid: overops:overops-system-metrics-api
+  name: Overops System Metrics API
+  description: Fetch system metrics
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - System Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-system-metrics-api-openapi.yml
+- aid: overops:overops-team-management-api
+  name: Overops Team Management API
+  description: APIs related to team management of a service
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Team Management
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-team-management-api-openapi.yml
+- aid: overops:overops-timers-api
+  name: Overops Timers API
+  description: Fetch and manipulate OverOps Timers - bottleneck detection and performance diagnosis
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Timers
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-timers-api-openapi.yml
+- aid: overops:overops-udfs-api
+  name: Overops UDFs API
+  description: Fetch and manipulate User Defined Functinos - OverOps extensions using Lambdas.
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - UDFs
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-udfs-api-openapi.yml
+- aid: overops:overops-view-metrics-api
+  name: Overops View Metrics API
+  description: >-
+    Fetch volumetric time series data about observed code events within OverOps monitored applications
+    filtered by server cluster, application and deployments.
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - View Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-view-metrics-api-openapi.yml
+- aid: overops:overops-views-api
+  name: Overops Views API
+  description: >-
+    Fetch and manipulate grouping of events (i.e. Views) according to attribute sets (e.g. "uncaught exceptions",
+    "errors from package com.acme")
+  humanURL: https://doc.overops.com/reference
+  baseURL: https://api.overops.com/api/v1
+  tags:
+  - Views
+  properties:
+  - type: OpenAPI
+    url: openapi/overops-views-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1
+common:
+- type: AgenticAccess
+  url: agentic-access/overops-agentic-access.yml
+- type: DomainSecurity
+  url: security/overops-domain-security.yml
+- type: Authentication
+  url: authentication/overops-authentication.yml
+- type: Packages
+  url: packages/overops-packages.yml
+- type: SDKs
+  url: packages/overops-packages.yml
+- type: WellKnown
+  url: well-known/overops-well-known.yml
+- type: MCPServer
+  url: mcp/overops-mcp.yml
+- type: LLMsTxt
+  url: llms/overops-llms.txt
+- type: Conformance
+  url: conformance/overops-conformance.yml
+- type: ErrorCatalog
+  url: errors/overops-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/overops-lifecycle.yml
+- type: Conventions
+  url: conventions/overops-conventions.yml
+- type: ChangeLog
+  url: changelog/overops-changelog.yml
+- type: DataModel
+  url: data-model/overops-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DeveloperPortal
+  url: https://doc.overops.com
+- type: Documentation
+  url: https://doc.overops.com/docs
+- type: APIReference
+  url: https://doc.overops.com/reference
+- type: ChangeLog
+  name: What's New
+  url: https://doc.overops.com/docs/whats-new
+- type: Support
+  url: https://support.overops.com/hc/en-us
+- type: GitHubOrganization
+  url: https://github.com/overops
+- type: Login
+  url: https://app.overops.com

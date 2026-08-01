@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/overops-openapi-original.json
+skills:
+- file: overops-triage-production-errors.md
+  name: Triage production errors with OverOps
+  api: openapi/overops-openapi-original.json
+  operations:
+  - GET /services
+  - GET /services/{env_id}/views
+  - GET /services/{env_id}/views/{view_id}/events
+  - GET /services/{env_id}/events/{event_id}
+  - GET /services/{env_id}/events/{event_id}/snapshot
+  - POST /services/{env_id}/events/{event_id}/resolve
+- file: overops-configure-view-alerting.md
+  name: Configure OverOps view alerting
+  api: openapi/overops-openapi-original.json
+  operations:
+  - GET /services
+  - POST /services/{env_id}/views
+  - POST /services/{env_id}/views/{view_id}/alerts
+  - POST /services/{env_id}/alerts/test

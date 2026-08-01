@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/overops-openapi-original.json
+notes: >-
+  Cross-cutting request/response semantics for the OverOps REST API, derived from
+  the OpenAPI and confirmed against the info.description auth guidance. Cross-links
+  authentication/, errors/, and lifecycle/.
+authentication:
+  styles: [api-key-header, http-basic]
+  api_key_header: X-API-KEY
+  recommended: api-key-header
+  ref: authentication/overops-authentication.yml
+base_url: https://api.overops.com/api/v1
+versioning:
+  style: uri-path
+  current: v1
+  ref: lifecycle/overops-lifecycle.yml
+idempotency:
+  supported: false
+  notes: No Idempotency-Key header or parameter is documented. PUT operations are idempotent by HTTP semantics only.
+pagination:
+  supported: false
+  notes: >-
+    No cursor/offset/page parameters. Event and metric result sets are scoped by
+    time-window query parameters (from, to) and by view/deployment/server/app filters.
+filtering:
+  time_window: [from, to]
+  common_params: [server, app, deployment, view_id, resolution, points]
+error_envelope:
+  format: http-status
+  problem_json: false
+  ref: errors/overops-problem-types.yml
+scoping:
+  root_resource: environment (service)
+  path_prefix: /services/{env_id}
+rate_limiting:
+  documented: false
