@@ -228,6 +228,8 @@ x-enrichment:
   artifacts_added: 18
   pass: local-v1
 common:
+- type: Overlay
+  url: overlays/overops-services-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/overops-agentic-access.yml
 - type: DomainSecurity
