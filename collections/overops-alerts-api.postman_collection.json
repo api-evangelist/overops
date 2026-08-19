@@ -1,0 +1,2517 @@
+{
+  "item": [
+    {
+      "id": "1fb390c4-661c-4846-a21f-5ea4766e1f49",
+      "name": "Alerts",
+      "description": {
+        "content": "Fetch and manipulate alerting rules for detecting and disseminating anomalies such as introduction of new events and regressions to different communication channels (e.g. Email, Jira, Slack, Uder defined Functions).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c5574dd8-18f6-47cb-a311-303d8e701670",
+          "name": "Alert on anomalies",
+          "request": {
+            "name": "Alert on anomalies",
+            "description": {
+              "content": "Alert on anomalies",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "views",
+                ":view_id",
+                "anomaly"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment ID to use (e.g. S1234)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "view_id",
+                  "description": "(Required) View to use"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"desc\": \"<string>\",\n  \"timeframe\": {\n    \"from\": \"<string>\",\n    \"to\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"anomaly\": {\n    \"periods\": [\n      {\n        \"id\": \"<string>\",\n        \"from\": \"<string>\",\n        \"to\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"from\": \"<string>\",\n        \"to\": \"<string>\"\n      }\n    ],\n    \"contributors\": [\n      {\n        \"id\": \"<number>\",\n        \"value\": \"<number>\"\n      },\n      {\n        \"id\": \"<number>\",\n        \"value\": \"<number>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62a0b2ec-d8b9-4a73-9101-79073ed32b07",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "anomaly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"desc\": \"Description\",\n  \"timeframe\": {\n    \"from\": \"2018-02-28T22:47:09.038Z\",\n    \"to\": \"2018-03-01T22:47:09.038Z\",\n    \"name\": \"Last day\"\n  },\n  \"anomaly\": {\n    \"periods\": [\n      {\n        \"id\": \"1\",\n        \"from\": \"2018-03-01T23:10:00.000Z\",\n        \"to\": \"2018-03-01T24:10:00.000Z\"\n      },\n      {\n        \"id\": \"1\",\n        \"from\": \"2018-03-01T23:10:00.000Z\",\n        \"to\": \"2018-03-01T24:10:00.000Z\"\n      }\n    ],\n    \"contributors\": [\n      {\n        \"id\": 1,\n        \"value\": 42\n      },\n      {\n        \"id\": 1,\n        \"value\": 42\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "26bad790-08de-4395-a7fc-8316dc465dd4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "anomaly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"desc\": \"Description\",\n  \"timeframe\": {\n    \"from\": \"2018-02-28T22:47:09.038Z\",\n    \"to\": \"2018-03-01T22:47:09.038Z\",\n    \"name\": \"Last day\"\n  },\n  \"anomaly\": {\n    \"periods\": [\n      {\n        \"id\": \"1\",\n        \"from\": \"2018-03-01T23:10:00.000Z\",\n        \"to\": \"2018-03-01T24:10:00.000Z\"\n      },\n      {\n        \"id\": \"1\",\n        \"from\": \"2018-03-01T23:10:00.000Z\",\n        \"to\": \"2018-03-01T24:10:00.000Z\"\n      }\n    ],\n    \"contributors\": [\n      {\n        \"id\": 1,\n        \"value\": 42\n      },\n      {\n        \"id\": 1,\n        \"value\": 42\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8879e838-ac2d-4741-a3f8-1c23a5999191",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "anomaly"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"desc\": \"Description\",\n  \"timeframe\": {\n    \"from\": \"2018-02-28T22:47:09.038Z\",\n    \"to\": \"2018-03-01T22:47:09.038Z\",\n    \"name\": \"Last day\"\n  },\n  \"anomaly\": {\n    \"periods\": [\n      {\n        \"id\": \"1\",\n        \"from\": \"2018-03-01T23:10:00.000Z\",\n        \"to\": \"2018-03-01T24:10:00.000Z\"\n      },\n      {\n        \"id\": \"1\",\n        \"from\": \"2018-03-01T23:10:00.000Z\",\n        \"to\": \"2018-03-01T24:10:00.000Z\"\n      }\n    ],\n    \"contributors\": [\n      {\n        \"id\": 1,\n        \"value\": 42\n      },\n      {\n        \"id\": 1,\n        \"value\": 42\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3cf322b-98df-4233-b40f-8193eb4fe885",
+          "name": "Fetch Default Alert Settings",
+          "request": {
+            "name": "Fetch Default Alert Settings",
+            "description": {
+              "content": "Use this call to fetch default alert settings for selected environment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "settings",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment to use"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea8d8e81-c4fb-4ee8-8193-c1b0ae574a62",
+              "name": "List of alert defaults",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"email\": {\n    \"alert_me\": true,\n    \"alert_all_team_members\": false,\n    \"alert_additional_emails\": false,\n    \"additional_emails_to_alert\": [\n      \"user1@company.com\",\n      \"user1@company.com\"\n    ]\n  },\n  \"slack\": {\n    \"inhook_url\": \"https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j\"\n  },\n  \"pager_duty\": {\n    \"service_integration_key\": \"sflk234lkdjflsj12o8312\"\n  },\n  \"service_now\": {\n    \"url\": \"http://servicenow.company.com/hooks\",\n    \"user_id\": \"admin\",\n    \"password\": \"pa$$1\",\n    \"table\": \"sys_report_layer\"\n  },\n  \"hip_chat\": {\n    \"token\": \"dfgdk2342kljsldfjslk2342fsdfkjslkj\",\n    \"room\": \"Takipi\"\n  },\n  \"webhook\": {\n    \"webhook_url\": \"http://hooks.company.com/overops1/P1/hook\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "061479c1-9a4b-47f9-9fe9-87d8af6e15f4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "03bf3150-844a-4721-a31d-ef033fd9bbd8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f7b1966-abc9-4746-aa9e-010f4bd02a93",
+          "name": "Update Default Alert Settings",
+          "request": {
+            "name": "Update Default Alert Settings",
+            "description": {
+              "content": "Use this call to update default alert settings for selected environment which will be used as initial settings for every new alert opened in this environment. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "settings",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment to use"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": {\n    \"alert_me\": \"<boolean>\",\n    \"alert_all_team_members\": \"<boolean>\",\n    \"alert_additional_emails\": \"<boolean>\",\n    \"additional_emails_to_alert\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"slack\": {\n    \"inhook_url\": \"<string>\"\n  },\n  \"pager_duty\": {\n    \"service_integration_key\": \"<string>\"\n  },\n  \"service_now\": {\n    \"url\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"password\": \"<string>\",\n    \"table\": \"<string>\"\n  },\n  \"hip_chat\": {\n    \"token\": \"<string>\",\n    \"room\": \"<string>\"\n  },\n  \"webhook\": {\n    \"webhook_url\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "83536000-4e27-448d-8129-b738e834ee51",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": {\n    \"alert_me\": true,\n    \"alert_all_team_members\": false,\n    \"alert_additional_emails\": false,\n    \"additional_emails_to_alert\": [\n      \"user1@company.com\",\n      \"user1@company.com\"\n    ]\n  },\n  \"slack\": {\n    \"inhook_url\": \"https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j\"\n  },\n  \"pager_duty\": {\n    \"service_integration_key\": \"sflk234lkdjflsj12o8312\"\n  },\n  \"service_now\": {\n    \"url\": \"http://servicenow.company.com/hooks\",\n    \"user_id\": \"admin\",\n    \"password\": \"pa$$1\",\n    \"table\": \"sys_report_layer\"\n  },\n  \"hip_chat\": {\n    \"token\": \"dfgdk2342kljsldfjslk2342fsdfkjslkj\",\n    \"room\": \"Takipi\"\n  },\n  \"webhook\": {\n    \"webhook_url\": \"http://hooks.company.com/overops1/P1/hook\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d0a92c7c-8984-47df-9dc5-9ff72855a2c0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": {\n    \"alert_me\": true,\n    \"alert_all_team_members\": false,\n    \"alert_additional_emails\": false,\n    \"additional_emails_to_alert\": [\n      \"user1@company.com\",\n      \"user1@company.com\"\n    ]\n  },\n  \"slack\": {\n    \"inhook_url\": \"https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j\"\n  },\n  \"pager_duty\": {\n    \"service_integration_key\": \"sflk234lkdjflsj12o8312\"\n  },\n  \"service_now\": {\n    \"url\": \"http://servicenow.company.com/hooks\",\n    \"user_id\": \"admin\",\n    \"password\": \"pa$$1\",\n    \"table\": \"sys_report_layer\"\n  },\n  \"hip_chat\": {\n    \"token\": \"dfgdk2342kljsldfjslk2342fsdfkjslkj\",\n    \"room\": \"Takipi\"\n  },\n  \"webhook\": {\n    \"webhook_url\": \"http://hooks.company.com/overops1/P1/hook\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c3b96ef3-e4d0-4241-b0bd-315de3fd7012",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": {\n    \"alert_me\": true,\n    \"alert_all_team_members\": false,\n    \"alert_additional_emails\": false,\n    \"additional_emails_to_alert\": [\n      \"user1@company.com\",\n      \"user1@company.com\"\n    ]\n  },\n  \"slack\": {\n    \"inhook_url\": \"https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j\"\n  },\n  \"pager_duty\": {\n    \"service_integration_key\": \"sflk234lkdjflsj12o8312\"\n  },\n  \"service_now\": {\n    \"url\": \"http://servicenow.company.com/hooks\",\n    \"user_id\": \"admin\",\n    \"password\": \"pa$$1\",\n    \"table\": \"sys_report_layer\"\n  },\n  \"hip_chat\": {\n    \"token\": \"dfgdk2342kljsldfjslk2342fsdfkjslkj\",\n    \"room\": \"Takipi\"\n  },\n  \"webhook\": {\n    \"webhook_url\": \"http://hooks.company.com/overops1/P1/hook\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "550a1c8b-a667-404a-852e-27143d802b22",
+          "name": "Fetch ServiceNow Tables",
+          "request": {
+            "name": "Fetch ServiceNow Tables",
+            "description": {
+              "content": "Use this call to Load ServiceNow tables associated with specific credentials",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "alerts",
+                "servicenow",
+                "tables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment to use"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c4de3f4-c593-4215-82ea-72745e365190",
+              "name": "List of ServiceNow tables",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "alerts",
+                    "servicenow",
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"http://servicenow.company.com/hooks\",\n  \"user_id\": \"admin\",\n  \"password\": \"pa$$1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"tables\": [\n    {\n      \"label\": \"Report Layer\",\n      \"name\": \"sys_report_layer\"\n    },\n    {\n      \"label\": \"Report Layer\",\n      \"name\": \"sys_report_layer\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "096eefb1-886f-45af-9d37-6fbf006c0119",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "alerts",
+                    "servicenow",
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"http://servicenow.company.com/hooks\",\n  \"user_id\": \"admin\",\n  \"password\": \"pa$$1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff9dfb35-2a6e-42fe-ae05-7ea978447e8b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "alerts",
+                    "servicenow",
+                    "tables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"http://servicenow.company.com/hooks\",\n  \"user_id\": \"admin\",\n  \"password\": \"pa$$1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd0240e8-ad5e-4ac7-a1f7-d8931409cf60",
+          "name": "Fetch Alert settings for a View",
+          "request": {
+            "name": "Fetch Alert settings for a View",
+            "description": {
+              "content": "Fetch Alert settings for a View (Slack, Email, UDF, etc)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "views",
+                ":view_id",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment ID to use (e.g. S1234)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "view_id",
+                  "description": "(Required) View ID to use (e.g. P283)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "399b4d1e-1828-4765-bab8-6901083465db",
+              "name": "Alert data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"global\": false,\n  \"alert_on_new\": true,\n  \"alert_on_anomaly\": true,\n  \"periodic_udf_settings\": {\n    \"library_id\": \"L6\",\n    \"function_id\": \"Relative Threshold\",\n    \"args\": \"# Defines a target threshold that if the volume of events within the views exceeds will constitute an anomaly.\\nthreshold = 100\\n\\n# A percentage value between 1 and 100 against which the volume of events / throughput is compared.\\nrate = 5\\n\\n# Compare the number of times application threads (e.g. Servlet, Actor, Future,..) containing the events matching the target views have executed  against the number of events occurring. For example, if a Servlet containing the events within the view was invoked a 1000 times and 20 events matching the view’s filter took place, a RATE value above 2 will invoke an alert.\\nrelative_to = Thread_Calls\\n\\n# Compare the number of times the application method containing the events was invoked against the number of events which occurred.\\n# relative_to = Method_Calls\\n\\n# Time period to look at, in minutes.\\ntimespan = 60\",\n    \"summary\": \"Threshold(100,5.00% of Thread_Calls)\",\n    \"period_minutes\": 60\n  },\n  \"slack_settings\": {\n    \"enabled\": true,\n    \"inhook_url\": \"https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j\"\n  },\n  \"hip_chat_settings\": {\n    \"enabled\": false,\n    \"token\": \"dfgdk2342kljsldfjslk2342fsdfkjslkj\",\n    \"room\": \"Takipi\"\n  },\n  \"pager_duty_settings\": {\n    \"enabled\": false,\n    \"service_integration_key\": \"sflk234lkdjflsj12o8312\"\n  },\n  \"webhook_settings\": {\n    \"enabled\": false,\n    \"webhook_url\": \"http://hooks.company.com/overops1/P1/hook\"\n  },\n  \"service_now_settings\": {\n    \"enabled\": false,\n    \"url\": \"http://servicenow.company.com/hooks\",\n    \"user_id\": \"admin\",\n    \"password\": \"pa$$1\",\n    \"table\": \"sys_report_layer\"\n  },\n  \"email_settings\": {\n    \"is_active\": true,\n    \"alert_me\": true,\n    \"alert_all_team_members\": false,\n    \"alert_admins\": true,\n    \"alert_additional_emails\": false,\n    \"additional_emails_to_alert\": [\n      \"user1@company.com\",\n      \"user1@company.com\"\n    ]\n  },\n  \"udf_settings\": {\n    \"enabled\": false,\n    \"library_id\": \"L24\",\n    \"function_id\": \"apply-label\",\n    \"args\": \"label=sample_label_name\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4190f645-8e8d-437d-a118-0913a82537a8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "68171209-e3a2-4595-bc5f-000dbf26c927",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a81132a-b846-42ed-a90a-df9c6211bf72",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fcbfc33-de91-4940-a4cc-f0900125a336",
+          "name": "Edit Alert settings of a View",
+          "request": {
+            "name": "Edit Alert settings of a View",
+            "description": {
+              "content": "Edit Alert settings of a View",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "views",
+                ":view_id",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment ID to use (e.g. S1234)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "view_id",
+                  "description": "(Required) View ID to use (e.g. P283)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"global\": \"<boolean>\",\n  \"alert_on_new\": \"<boolean>\",\n  \"alert_on_anomaly\": \"<boolean>\",\n  \"periodic_udf_settings\": {\n    \"library_id\": \"<string>\",\n    \"function_id\": \"<string>\",\n    \"args\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"period_minutes\": \"<number>\"\n  },\n  \"slack_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"inhook_url\": \"<string>\"\n  },\n  \"hip_chat_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"token\": \"<string>\",\n    \"room\": \"<string>\"\n  },\n  \"pager_duty_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"service_integration_key\": \"<string>\"\n  },\n  \"webhook_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"webhook_url\": \"<string>\"\n  },\n  \"service_now_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"url\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"password\": \"<string>\",\n    \"table\": \"<string>\"\n  },\n  \"email_settings\": {\n    \"is_active\": \"<boolean>\",\n    \"alert_me\": \"<boolean>\",\n    \"alert_all_team_members\": \"<boolean>\",\n    \"alert_admins\": \"<boolean>\",\n    \"alert_additional_emails\": \"<boolean>\",\n    \"additional_emails_to_alert\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"udf_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"library_id\": \"<string>\",\n    \"function_id\": \"<string>\",\n    \"args\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f5936ed-8eff-4c57-b060-41091368338c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "07c5a151-3145-4a39-90c8-cfdffd88fbad",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5b5101cb-6b99-480a-aa63-5d48c66db404",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "130176ab-43ca-440b-aa01-dd38ada248c6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c449560d-2158-47e3-a971-52e7a402d7a2",
+          "name": "Remove Alert settings",
+          "request": {
+            "name": "Remove Alert settings",
+            "description": {
+              "content": "Disables all Alert settings for a View",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "views",
+                ":view_id",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment ID to use (e.g. S1234)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "view_id",
+                  "description": "(Required) View ID to use (e.g. P283)"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "046258f7-dd5f-4f82-8f56-fd70d4a8616d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "073f7361-f19e-4c80-aef1-cb119134b59e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dcc71fca-7292-4cbb-8f71-8f4c5633ba88",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57769412-be7b-4727-9614-7baea26f514e",
+          "name": "Test Alert settings",
+          "request": {
+            "name": "Test Alert settings",
+            "description": {
+              "content": "This endpoint allows to test alerts settings before applying them to a particular view",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "alerts",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment ID to use (e.g. S1234)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"global\": \"<boolean>\",\n  \"alert_on_new\": \"<boolean>\",\n  \"alert_on_anomaly\": \"<boolean>\",\n  \"periodic_udf_settings\": {\n    \"library_id\": \"<string>\",\n    \"function_id\": \"<string>\",\n    \"args\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"period_minutes\": \"<number>\"\n  },\n  \"slack_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"inhook_url\": \"<string>\"\n  },\n  \"hip_chat_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"token\": \"<string>\",\n    \"room\": \"<string>\"\n  },\n  \"pager_duty_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"service_integration_key\": \"<string>\"\n  },\n  \"webhook_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"webhook_url\": \"<string>\"\n  },\n  \"service_now_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"url\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"password\": \"<string>\",\n    \"table\": \"<string>\"\n  },\n  \"email_settings\": {\n    \"is_active\": \"<boolean>\",\n    \"alert_me\": \"<boolean>\",\n    \"alert_all_team_members\": \"<boolean>\",\n    \"alert_admins\": \"<boolean>\",\n    \"alert_additional_emails\": \"<boolean>\",\n    \"additional_emails_to_alert\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"udf_settings\": {\n    \"enabled\": \"<boolean>\",\n    \"library_id\": \"<string>\",\n    \"function_id\": \"<string>\",\n    \"args\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a107c62-7fe7-445e-80ef-91e2dda6de28",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "alerts",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dfd38b17-7331-4d36-b882-62ee17bf78b4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "alerts",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1730398f-0f88-4885-adc1-2840a6c06850",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "alerts",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae3186e4-5449-4262-98d9-2934c0dbde2d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "alerts",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f212e8c-5888-427c-9d8f-a7d5bb5352e0",
+          "name": "Send custom alert",
+          "request": {
+            "name": "Send custom alert",
+            "description": {
+              "content": "Send custom alert",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "views",
+                ":view_id",
+                "custom-alert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment ID to use (e.g. S1234)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "view_id",
+                  "description": "(Required) View ID to use (e.g. P283)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"links\": [\n    {\n      \"pre_link_text\": \"<string>\",\n      \"link_text\": \"<string>\",\n      \"post_link_text\": \"<string>\",\n      \"link\": \"<string>\"\n    },\n    {\n      \"pre_link_text\": \"<string>\",\n      \"link_text\": \"<string>\",\n      \"post_link_text\": \"<string>\",\n      \"link\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b47b059d-068d-4d34-8d17-dfa9ff9b2f9f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "custom-alert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Logged Warning in Some.File\",\n  \"body\": \"A new logged warning has been detected in Staging2! (alert added by 4 members)\",\n  \"links\": [\n    {\n      \"pre_link_text\": \"<string>\",\n      \"link_text\": \"<string>\",\n      \"post_link_text\": \"<string>\",\n      \"link\": \"<string>\"\n    },\n    {\n      \"pre_link_text\": \"<string>\",\n      \"link_text\": \"<string>\",\n      \"post_link_text\": \"<string>\",\n      \"link\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "827b20dd-ae53-43d4-8acf-702b5ee505b2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "custom-alert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Logged Warning in Some.File\",\n  \"body\": \"A new logged warning has been detected in Staging2! (alert added by 4 members)\",\n  \"links\": [\n    {\n      \"pre_link_text\": \"<string>\",\n      \"link_text\": \"<string>\",\n      \"post_link_text\": \"<string>\",\n      \"link\": \"<string>\"\n    },\n    {\n      \"pre_link_text\": \"<string>\",\n      \"link_text\": \"<string>\",\n      \"post_link_text\": \"<string>\",\n      \"link\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fd8dd75a-45bd-4dcb-a6de-4c0a189e70d2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "views",
+                    ":view_id",
+                    "custom-alert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "view_id",
+                      "description": "(Required) View ID to use (e.g. P283)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Logged Warning in Some.File\",\n  \"body\": \"A new logged warning has been detected in Staging2! (alert added by 4 members)\",\n  \"links\": [\n    {\n      \"pre_link_text\": \"<string>\",\n      \"link_text\": \"<string>\",\n      \"post_link_text\": \"<string>\",\n      \"link\": \"<string>\"\n    },\n    {\n      \"pre_link_text\": \"<string>\",\n      \"link_text\": \"<string>\",\n      \"post_link_text\": \"<string>\",\n      \"link\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8a026f9-3f0f-4672-ac39-d5c63cb5a122",
+          "name": "Fetch Active Alerts for an Environment",
+          "request": {
+            "name": "Fetch Active Alerts for an Environment",
+            "description": {
+              "content": "Use this call to fetch all active alerts on current environment. admins can use the query parameter to fetch alerts which were set by other member/admin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "Team member email. When this parameter is used, the alerts will be fetched for the selected user."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment to use"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81019cf5-bb0f-45c9-87ce-7e5624b8dbf7",
+              "name": "List of alerts in current environment, aggregated in views (alerts which were set by calling/selected user and global alerts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"alerts\": [\n    {\n      \"view_id\": \"P12\",\n      \"view\": \"API\",\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"alerts\": {\n        \"global\": false,\n        \"alert_on_new\": true,\n        \"alert_on_every_entrypoint\": true,\n        \"anomaly_alert\": {\n          \"alert_on_anomaly\": true,\n          \"anomaly_function\": {\n            \"library_id\": \"L8\",\n            \"function_id\": \"Tier Routing\",\n            \"summary\": \"Anomaly(last 1d vs. prev 7d, Δ > 100%)\\\"\",\n            \"args\": \"# Category name where tiers views will be created.\\ncategory_name=tiers\\n\\n# Link to the full tiers list: https://git.io/fpPT0\\n# Enhance it with a delimited list: A=B;C=D;E=F, where the first item is a package (e.g com.mongo), and the second is a tier (e.g MongoDB).\\nnamespaces=com.sparktale.bugtale.server.common.distribute.redis=Redis;org.redisson=Redisson;com.sparktale.bugtale.server.common.distribute.guava=Guava-Cache;com.sparktale.bugtale.util.cache=Cache;com.sparktale.bugtale.server.app.dashboard.cache=Cache;com.sparktale.bugtale.server.common.stats=SQL-Stats;com.sparktale.bugtale.server.common.pds=SQL-Pds;com.sparktale.bugtale.qsql=SQL-Queue;com.sparktale.bugtale.server.services.queue.qsql=SQL-Queue;com.sparktale.bugtale.shared.backend.rdbms=SQL-Common;com.sparktale.bugtale.server.common.queue=Local-Queue;com.sparktale.bugtale.server.common.alerts=Alerts-Engine;com.sparktale.bugtale.decoding=Snapshot-Analysis;com.sparktale.bugtale.server.common.hits=Snapshot-Analysis;com.sparktale.bugtale.server.common.tailor=Snapshot-Analysis;com.sparktale.bugtale.server.analysis=Code-Analysis;com.sparktale.bugtale.server.worker.analysis=Code-Analysis;com.sparktale.bugtale.server.common.source=Code-Analysis;com.sparktale.bugtale.analyzer=Code-Analysis;com.sparktale.bugtale.decompiler=Decompiler;com.takipi.integrations.grafana=OverOps-Influx-Backend;com.sparktale.common.util=Utils;com.sparktale.bugtale.shared.backend.util=Utils\"\n          },\n          \"period\": 3\n        },\n        \"channels\": [\n          \"SLACK\",\n          \"SLACK\"\n        ],\n        \"channel_function\": {\n          \"library_id\": \"L8\",\n          \"function_id\": \"Tier Routing\",\n          \"summary\": \"Anomaly(last 1d vs. prev 7d, Δ > 100%)\\\"\",\n          \"args\": \"# Category name where tiers views will be created.\\ncategory_name=tiers\\n\\n# Link to the full tiers list: https://git.io/fpPT0\\n# Enhance it with a delimited list: A=B;C=D;E=F, where the first item is a package (e.g com.mongo), and the second is a tier (e.g MongoDB).\\nnamespaces=com.sparktale.bugtale.server.common.distribute.redis=Redis;org.redisson=Redisson;com.sparktale.bugtale.server.common.distribute.guava=Guava-Cache;com.sparktale.bugtale.util.cache=Cache;com.sparktale.bugtale.server.app.dashboard.cache=Cache;com.sparktale.bugtale.server.common.stats=SQL-Stats;com.sparktale.bugtale.server.common.pds=SQL-Pds;com.sparktale.bugtale.qsql=SQL-Queue;com.sparktale.bugtale.server.services.queue.qsql=SQL-Queue;com.sparktale.bugtale.shared.backend.rdbms=SQL-Common;com.sparktale.bugtale.server.common.queue=Local-Queue;com.sparktale.bugtale.server.common.alerts=Alerts-Engine;com.sparktale.bugtale.decoding=Snapshot-Analysis;com.sparktale.bugtale.server.common.hits=Snapshot-Analysis;com.sparktale.bugtale.server.common.tailor=Snapshot-Analysis;com.sparktale.bugtale.server.analysis=Code-Analysis;com.sparktale.bugtale.server.worker.analysis=Code-Analysis;com.sparktale.bugtale.server.common.source=Code-Analysis;com.sparktale.bugtale.analyzer=Code-Analysis;com.sparktale.bugtale.decompiler=Decompiler;com.takipi.integrations.grafana=OverOps-Influx-Backend;com.sparktale.common.util=Utils;com.sparktale.bugtale.shared.backend.util=Utils\"\n        }\n      }\n    },\n    {\n      \"view_id\": \"P12\",\n      \"view\": \"API\",\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"alerts\": {\n        \"global\": false,\n        \"alert_on_new\": true,\n        \"alert_on_every_entrypoint\": true,\n        \"anomaly_alert\": {\n          \"alert_on_anomaly\": true,\n          \"anomaly_function\": {\n            \"library_id\": \"L8\",\n            \"function_id\": \"Tier Routing\",\n            \"summary\": \"Anomaly(last 1d vs. prev 7d, Δ > 100%)\\\"\",\n            \"args\": \"# Category name where tiers views will be created.\\ncategory_name=tiers\\n\\n# Link to the full tiers list: https://git.io/fpPT0\\n# Enhance it with a delimited list: A=B;C=D;E=F, where the first item is a package (e.g com.mongo), and the second is a tier (e.g MongoDB).\\nnamespaces=com.sparktale.bugtale.server.common.distribute.redis=Redis;org.redisson=Redisson;com.sparktale.bugtale.server.common.distribute.guava=Guava-Cache;com.sparktale.bugtale.util.cache=Cache;com.sparktale.bugtale.server.app.dashboard.cache=Cache;com.sparktale.bugtale.server.common.stats=SQL-Stats;com.sparktale.bugtale.server.common.pds=SQL-Pds;com.sparktale.bugtale.qsql=SQL-Queue;com.sparktale.bugtale.server.services.queue.qsql=SQL-Queue;com.sparktale.bugtale.shared.backend.rdbms=SQL-Common;com.sparktale.bugtale.server.common.queue=Local-Queue;com.sparktale.bugtale.server.common.alerts=Alerts-Engine;com.sparktale.bugtale.decoding=Snapshot-Analysis;com.sparktale.bugtale.server.common.hits=Snapshot-Analysis;com.sparktale.bugtale.server.common.tailor=Snapshot-Analysis;com.sparktale.bugtale.server.analysis=Code-Analysis;com.sparktale.bugtale.server.worker.analysis=Code-Analysis;com.sparktale.bugtale.server.common.source=Code-Analysis;com.sparktale.bugtale.analyzer=Code-Analysis;com.sparktale.bugtale.decompiler=Decompiler;com.takipi.integrations.grafana=OverOps-Influx-Backend;com.sparktale.common.util=Utils;com.sparktale.bugtale.shared.backend.util=Utils\"\n          },\n          \"period\": 3\n        },\n        \"channels\": [\n          \"SLACK\",\n          \"SLACK\"\n        ],\n        \"channel_function\": {\n          \"library_id\": \"L8\",\n          \"function_id\": \"Tier Routing\",\n          \"summary\": \"Anomaly(last 1d vs. prev 7d, Δ > 100%)\\\"\",\n          \"args\": \"# Category name where tiers views will be created.\\ncategory_name=tiers\\n\\n# Link to the full tiers list: https://git.io/fpPT0\\n# Enhance it with a delimited list: A=B;C=D;E=F, where the first item is a package (e.g com.mongo), and the second is a tier (e.g MongoDB).\\nnamespaces=com.sparktale.bugtale.server.common.distribute.redis=Redis;org.redisson=Redisson;com.sparktale.bugtale.server.common.distribute.guava=Guava-Cache;com.sparktale.bugtale.util.cache=Cache;com.sparktale.bugtale.server.app.dashboard.cache=Cache;com.sparktale.bugtale.server.common.stats=SQL-Stats;com.sparktale.bugtale.server.common.pds=SQL-Pds;com.sparktale.bugtale.qsql=SQL-Queue;com.sparktale.bugtale.server.services.queue.qsql=SQL-Queue;com.sparktale.bugtale.shared.backend.rdbms=SQL-Common;com.sparktale.bugtale.server.common.queue=Local-Queue;com.sparktale.bugtale.server.common.alerts=Alerts-Engine;com.sparktale.bugtale.decoding=Snapshot-Analysis;com.sparktale.bugtale.server.common.hits=Snapshot-Analysis;com.sparktale.bugtale.server.common.tailor=Snapshot-Analysis;com.sparktale.bugtale.server.analysis=Code-Analysis;com.sparktale.bugtale.server.worker.analysis=Code-Analysis;com.sparktale.bugtale.server.common.source=Code-Analysis;com.sparktale.bugtale.analyzer=Code-Analysis;com.sparktale.bugtale.decompiler=Decompiler;com.takipi.integrations.grafana=OverOps-Influx-Backend;com.sparktale.common.util=Utils;com.sparktale.bugtale.shared.backend.util=Utils\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "226fbcea-63d6-41e4-9f6c-c0fec61f60f0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "47e25d55-47d8-432c-899b-2a1d264b5b87",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.overops.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5a7b4b38-3e0d-49c0-acd1-05032549ee80",
+    "name": "Services Alerts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n\n\nContact Support:\n Email: hello@overops.com",
+      "type": "text/plain"
+    }
+  }
+}

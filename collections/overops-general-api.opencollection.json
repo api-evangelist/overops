@@ -1,0 +1,321 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts General API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "General",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Environment key name"
+              }
+            ]
+          },
+          "docs": "List all environments accessible to the calling user"
+        },
+        {
+          "info": {
+            "name": "Generate a new environment key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.overops.com/api/v1/services",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Defines a new environment"
+        },
+        {
+          "info": {
+            "name": "Get information about an environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "Get information about an environment"
+        },
+        {
+          "info": {
+            "name": "Rename an environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Rename an environment. This call is allowed for admins only"
+        },
+        {
+          "info": {
+            "name": "Get environment settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "Get environment settings"
+        },
+        {
+          "info": {
+            "name": "List servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/servers",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Show only active servers"
+              }
+            ]
+          },
+          "docs": "List all (or just active) servers that were used to monitor applications. These can be either the IP/Hostname of a host or a cluster identifier. [How to name your Server](https://doc.overops.com/docs/naming-your-application-server-deployment)"
+        },
+        {
+          "info": {
+            "name": "List applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/applications",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Show only active applications"
+              }
+            ]
+          },
+          "docs": "List all (or just active) applications that were used to monitor applications. These can be either an application name, an integration suite name or a specific instance. [How to name your Application](https://doc.overops.com/docs/naming-your-application-server-deployment)"
+        },
+        {
+          "info": {
+            "name": "List deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/deployments",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Show only active deployments"
+              }
+            ]
+          },
+          "docs": "List all (or just active) deployments that were monitoring in the environment. These can be either the Jenkins build number, Git commit, Maven version, etc. [How to tag your deployment](https://doc.overops.com/docs/naming-your-application-server-deployment)"
+        },
+        {
+          "info": {
+            "name": "Get storage settings of an environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/storage-settings",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ]
+          },
+          "docs": "In Hybrid OverOps installation, data collected from your JVMs is locally redacted for PII and encrypted using your private encryption key before it is stored in a server that resides behind your firewall. Use this API call to fetch the current settings of your storage server. Visit OverOps [On-Premises Data Installation](https://doc.overops.com/docs/hybrid-installation) for full information"
+        },
+        {
+          "info": {
+            "name": "Set storage settings for a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/storage-settings",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "In Hybrid OverOps installation, data collected from your JVMs is locally redacted for PII and encrypted using your private encryption key before it is stored in a server that resides behind your firewall. This API call allows you to configure your storage server as part of your Hybrid OverOps setup. Visit OverOps [On-Premises Data Installation](https://doc.overops.com/docs/hybrid-installation) for full information"
+        },
+        {
+          "info": {
+            "name": "Get advanced settings for an environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/advanced-settings",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ]
+          },
+          "docs": "Get advanced settings for an environment"
+        },
+        {
+          "info": {
+            "name": "Set advanced settings for an environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/advanced-settings",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set advanced settings for an environment"
+        },
+        {
+          "info": {
+            "name": "Fetch reliability settings JSON",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/reliability-settings",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ]
+          },
+          "docs": "Fetch reliability settings JSON which defines all the thresholds and preferences for OverOps reliability tools - Grafana dashboards, Jenkins plugin, etc."
+        },
+        {
+          "info": {
+            "name": "Upload reliability settings JSON",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/reliability-settings",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload reliability settings JSON which defines all the thresholds and preferences for OverOps reliability tools - Grafana dashboards, Jenkins plugin, etc."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

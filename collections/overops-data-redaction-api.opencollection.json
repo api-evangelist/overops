@@ -1,0 +1,459 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts Data Redaction API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Redaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all data redactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all data redactions"
+        },
+        {
+          "info": {
+            "name": "Enable / disable data redaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable / disable data redaction for a selected environment. This call is allowed for admins only. **IMPORTANT:** *This call affects all filters*"
+        },
+        {
+          "info": {
+            "name": "List all regex patterns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/patterns",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all regex patterns"
+        },
+        {
+          "info": {
+            "name": "Retrieve a pattern",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/patterns/:pattern",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "pattern",
+                "value": "",
+                "type": "path",
+                "description": "A RegEx pattern name"
+              }
+            ]
+          },
+          "docs": "Retrieve a pattern"
+        },
+        {
+          "info": {
+            "name": "Create a pattern",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/patterns/:pattern",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "pattern",
+                "value": "",
+                "type": "path",
+                "description": "A RegEx pattern name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a RegEx pattern to be redacted. The pattern name must match the resource identifier"
+        },
+        {
+          "info": {
+            "name": "Delete a pattern",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/patterns/:pattern",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "pattern",
+                "value": "",
+                "type": "path",
+                "description": "A RegEx pattern name"
+              }
+            ]
+          },
+          "docs": "Removes a pattern from the redaction list"
+        },
+        {
+          "info": {
+            "name": "List all identifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/identifiers",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all identifiers"
+        },
+        {
+          "info": {
+            "name": "Retrieve an identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/identifiers/:identifier",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "A code identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve an identifier"
+        },
+        {
+          "info": {
+            "name": "Add an identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/identifiers/:identifier",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "A code identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add an identifier. The body identifier name must match the resource identifier"
+        },
+        {
+          "info": {
+            "name": "Delete identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/identifiers/:identifier",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path",
+                "description": "A code identifier"
+              }
+            ]
+          },
+          "docs": "Delete identifier"
+        },
+        {
+          "info": {
+            "name": "List all classes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/classes",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all classes"
+        },
+        {
+          "info": {
+            "name": "Retrieve a class",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/classes/:class_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "class_name",
+                "value": "",
+                "type": "path",
+                "description": "Class name to redact."
+              }
+            ]
+          },
+          "docs": "Retrieve a class from the data redaction list"
+        },
+        {
+          "info": {
+            "name": "Add a class for data redaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/classes/:class_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "class_name",
+                "value": "",
+                "type": "path",
+                "description": "Class name to redact."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a class to the redaction list. The body class name must match the resource identifier"
+        },
+        {
+          "info": {
+            "name": "Delete a class",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/classes/:class_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "class_name",
+                "value": "",
+                "type": "path",
+                "description": "Class name to redact."
+              }
+            ]
+          },
+          "docs": "Delete a class"
+        },
+        {
+          "info": {
+            "name": "List all packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/packages",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all packages"
+        },
+        {
+          "info": {
+            "name": "Retrieve a package",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/packages/:package_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "Fully qualified Java package name"
+              }
+            ]
+          },
+          "docs": "Retrieve a package"
+        },
+        {
+          "info": {
+            "name": "Create a package",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/packages/:package_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "Fully qualified Java package name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a package. The body package name must match the resource identifier"
+        },
+        {
+          "info": {
+            "name": "Delete package",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/data-redaction/packages/:package_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "Fully qualified Java package name"
+              }
+            ]
+          },
+          "docs": "Delete package"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

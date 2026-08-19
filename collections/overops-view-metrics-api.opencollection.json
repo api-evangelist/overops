@@ -1,0 +1,244 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts View Metrics API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "View Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch event metrics split by view",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/views/:view_id/metrics/view/graph",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View to use"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "points",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return within the interval. **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence."
+              },
+              {
+                "name": "resolution",
+                "value": "",
+                "type": "query",
+                "description": "Select graph resolution (use M1/M5 for 1 point per 1/5 minutes; use H1/H8 for 1 point per 1/8 hours). **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence."
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query",
+                "description": "Server(s) added to the filter"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "Application(s) added to the filter"
+              },
+              {
+                "name": "deployment",
+                "value": "",
+                "type": "query",
+                "description": "Deployment(s) added to the filter"
+              },
+              {
+                "name": "stats",
+                "value": "",
+                "type": "query",
+                "description": "Include statistics per event in the response"
+              }
+            ]
+          },
+          "docs": "Fetch event metrics split by view"
+        },
+        {
+          "info": {
+            "name": "Fetch event metrics split by entry point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/views/:view_id/metrics/entrypoint/graph",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View to use"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "points",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return within the interval. **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence."
+              },
+              {
+                "name": "resolution",
+                "value": "",
+                "type": "query",
+                "description": "Select graph resolution (use M1/M5 for 1 point per 1/5 minutes; use H1/H8 for 1 point per 1/8 hours). **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence."
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query",
+                "description": "Server(s) added to the filter"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "Application(s) added to the filter"
+              },
+              {
+                "name": "deployment",
+                "value": "",
+                "type": "query",
+                "description": "Deployment(s) added to the filter"
+              },
+              {
+                "name": "stats",
+                "value": "",
+                "type": "query",
+                "description": "Include statistics per event in the response"
+              }
+            ]
+          },
+          "docs": "Fetch event metrics split by entry point"
+        },
+        {
+          "info": {
+            "name": "Fetch event metrics split by event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/views/:view_id/metrics/event/graph",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View to use"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "points",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return within the interval. **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence."
+              },
+              {
+                "name": "resolution",
+                "value": "",
+                "type": "query",
+                "description": "Select graph resolution (use M1/M5 for 1 point per 1/5 minutes; use H1/H8 for 1 point per 1/8 hours). **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence."
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query",
+                "description": "Server(s) added to the filter"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "Application(s) added to the filter"
+              },
+              {
+                "name": "deployment",
+                "value": "",
+                "type": "query",
+                "description": "Deployment(s) added to the filter"
+              },
+              {
+                "name": "stats",
+                "value": "",
+                "type": "query",
+                "description": "Include statistics per event in the response"
+              }
+            ]
+          },
+          "docs": "Fetch event metrics split by event"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

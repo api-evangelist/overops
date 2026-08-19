@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts Categories API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/categories",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Category name"
+              },
+              {
+                "name": "views",
+                "value": "",
+                "type": "query",
+                "description": "List views associated with each category in the response"
+              }
+            ]
+          },
+          "docs": "List view categories"
+        },
+        {
+          "info": {
+            "name": "Create category (Not implemented yet)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/categories",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create category (Not implemented yet)"
+        },
+        {
+          "info": {
+            "name": "Get category details (Not implemented yet)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/categories/:category_id",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path",
+                "description": "View category to use"
+              }
+            ]
+          },
+          "docs": "Get category details (Not implemented yet)"
+        },
+        {
+          "info": {
+            "name": "Delete category (Not implemented yet)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/categories/:category_id",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path",
+                "description": "View category to use"
+              }
+            ]
+          },
+          "docs": "Delete category (Not implemented yet)"
+        },
+        {
+          "info": {
+            "name": "Add view to selected category",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/categories/:category_id/views",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path",
+                "description": "View category to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add view to selected category"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

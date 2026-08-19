@@ -2,10 +2,9 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/overops-openapi-original.json
-notes: >-
-  No official OverOps MCP server was found (no registry entry, no @modelcontextprotocol
-  package, none advertised in the docs). This is a candidate tool surface derived from
-  a representative subset of the 137 OpenAPI operations, one tool per operation.
+notes: No official OverOps MCP server was found (no registry entry, no @modelcontextprotocol package,
+  none advertised in the docs). This is a candidate tool surface derived from a representative subset
+  of the 137 OpenAPI operations, one tool per operation.
 server:
   name: overops
   transport: http
@@ -40,3 +39,9 @@ tools:
 - name: list_alerts
   description: Fetch active alert settings for an environment.
   source_operation: openapi/overops-openapi-original.json#GET /services/{env_id}/alerts
+deployment:
+  mode: none
+  verified: derived
+  tools: 10
+  checked: '2026-08-12'
+  source: catalog MCP census

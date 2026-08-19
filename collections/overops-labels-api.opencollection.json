@@ -1,0 +1,254 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts Labels API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Move to Inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/events/:event_id/inbox",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "Event to use"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force adding labels, even if it exists"
+              },
+              {
+                "name": "handle_similar_events",
+                "value": "",
+                "type": "query",
+                "description": "Change the labels on all similar events"
+              }
+            ]
+          },
+          "docs": "Move the specified event into Inbox"
+        },
+        {
+          "info": {
+            "name": "Move to Trash",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/events/:event_id/delete",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "Event to use"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force adding labels, even if it exists"
+              },
+              {
+                "name": "handle_similar_events",
+                "value": "",
+                "type": "query",
+                "description": "Change the labels on all similar events"
+              }
+            ]
+          },
+          "docs": "Move the specified event into Trash"
+        },
+        {
+          "info": {
+            "name": "Mark as resolved",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/events/:event_id/resolve",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "Event to use"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force adding labels, even if it exists"
+              },
+              {
+                "name": "handle_similar_events",
+                "value": "",
+                "type": "query",
+                "description": "Change the labels on all similar events"
+              }
+            ]
+          },
+          "docs": "Marks the specified event as resolved"
+        },
+        {
+          "info": {
+            "name": "List labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/labels",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all existing labels"
+        },
+        {
+          "info": {
+            "name": "Create new label",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/labels",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new label. Labels are used to tag events with custom classifications. Labels help support use cases such as classifying an event as severe / regressed, assign it to a specific developer or team (e.g prod-team-A) or any other user defined categorization."
+        },
+        {
+          "info": {
+            "name": "Batch Add/Remove labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/events/labels",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force adding labels, even if it exists"
+              },
+              {
+                "name": "handle_similar_events",
+                "value": "",
+                "type": "query",
+                "description": "Change the labels on all similar events"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append/Detach labels to/from events"
+        },
+        {
+          "info": {
+            "name": "Add/Remove labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/events/:event_id/labels",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "Event to use"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force adding labels, even if it exists"
+              },
+              {
+                "name": "handle_similar_events",
+                "value": "",
+                "type": "query",
+                "description": "Change the labels on all similar events"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append and remove label(s) from an event"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

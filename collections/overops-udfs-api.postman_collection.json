@@ -1,0 +1,1328 @@
+{
+  "item": [
+    {
+      "id": "6a60ea52-9fea-42b3-9017-b7cee5988a69",
+      "name": "UDFs",
+      "description": {
+        "content": "Fetch and manipulate User Defined Functinos - OverOps extensions using Lambdas.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "12c9dbc2-dc7e-4a42-8b16-fab6bddea43e",
+          "name": "List available UDF libraries",
+          "request": {
+            "name": "List available UDF libraries",
+            "description": {
+              "content": "List available UDF (User Defined Functions) libraries",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "global-settings",
+                "udfs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb834fee-bb8d-4bd5-b48a-c0e555af4005",
+              "name": "UDF libraries list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-settings",
+                    "udfs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"L34\",\n    \"version\": \"string\",\n    \"backward_compatible\": \"string\",\n    \"functions\": [\n      {\n        \"function_type\": \"ANOMALY\",\n        \"short_description\": \"Relative Threshold\",\n        \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n        \"param_type\": \"TEXT\",\n        \"default_params\": [\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          },\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          }\n        ]\n      },\n      {\n        \"function_type\": \"ANOMALY\",\n        \"short_description\": \"Relative Threshold\",\n        \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n        \"param_type\": \"TEXT\",\n        \"default_params\": [\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          },\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": \"L34\",\n    \"version\": \"string\",\n    \"backward_compatible\": \"string\",\n    \"functions\": [\n      {\n        \"function_type\": \"ANOMALY\",\n        \"short_description\": \"Relative Threshold\",\n        \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n        \"param_type\": \"TEXT\",\n        \"default_params\": [\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          },\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          }\n        ]\n      },\n      {\n        \"function_type\": \"ANOMALY\",\n        \"short_description\": \"Relative Threshold\",\n        \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n        \"param_type\": \"TEXT\",\n        \"default_params\": [\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          },\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          }\n        ]\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fa66f1d-b291-4cb3-b193-b10cb6c0d5c3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-settings",
+                    "udfs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2de7a976-2e25-43d3-8c22-4e0830e72122",
+          "name": "Add a new UDF library",
+          "request": {
+            "name": "Add a new UDF library",
+            "description": {
+              "content": "Add a new UDF library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "global-settings",
+                "udfs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"udf\": \"<binary>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8219c955-166f-4b04-962e-6ad2c88759c2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-settings",
+                    "udfs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"udf\": \"<binary>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6d356940-bdec-460b-9bcf-bd24962ff8db",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-settings",
+                    "udfs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"udf\": \"<binary>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc8c14ed-cf46-4b8d-a8f2-15e8d7d996cd",
+          "name": "Get UDF library properties",
+          "request": {
+            "name": "Get UDF library properties",
+            "description": {
+              "content": "Get UDF (User Defined Function) library properties",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "global-settings",
+                "udfs",
+                ":library_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "library_id",
+                  "description": "(Required) UDF library ID to be used"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cfc2fd58-d4a1-4f0f-87b0-ddd30c987a0c",
+              "name": "UDF library properties",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-settings",
+                    "udfs",
+                    ":library_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "library_id",
+                      "description": "(Required) UDF library ID to be used"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"id\": \"L34\",\n  \"version\": \"string\",\n  \"backward_compatible\": \"string\",\n  \"functions\": [\n    {\n      \"function_type\": \"ANOMALY\",\n      \"short_description\": \"Relative Threshold\",\n      \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n      \"param_type\": \"TEXT\",\n      \"default_params\": [\n        {\n          \"name\": \"X\",\n          \"default_value\": \"string\"\n        },\n        {\n          \"name\": \"X\",\n          \"default_value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"function_type\": \"ANOMALY\",\n      \"short_description\": \"Relative Threshold\",\n      \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n      \"param_type\": \"TEXT\",\n      \"default_params\": [\n        {\n          \"name\": \"X\",\n          \"default_value\": \"string\"\n        },\n        {\n          \"name\": \"X\",\n          \"default_value\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "496632f6-715b-408a-b2b3-4e2609304554",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-settings",
+                    "udfs",
+                    ":library_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "library_id",
+                      "description": "(Required) UDF library ID to be used"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b7c41ba-3949-4fba-b28e-ca651054844b",
+          "name": "Remove UDF library (TBD - Not yet implemented)",
+          "request": {
+            "name": "Remove UDF library (TBD - Not yet implemented)",
+            "description": {
+              "content": "Remove UDF library (TBD - Not yet implemented)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "global-settings",
+                "udfs",
+                ":library_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "library_id",
+                  "description": "(Required) UDF library ID to be used"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09193115-7deb-4712-8eb2-7b44a57539e7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-settings",
+                    "udfs",
+                    ":library_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "library_id",
+                      "description": "(Required) UDF library ID to be used"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9b1b8807-cb46-4a07-abc7-f44656da4afb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-settings",
+                    "udfs",
+                    ":library_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "library_id",
+                      "description": "(Required) UDF library ID to be used"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8eb4351f-7470-4ae2-9258-91536cdb2248",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-settings",
+                    "udfs",
+                    ":library_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "library_id",
+                      "description": "(Required) UDF library ID to be used"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f95bcf5f-b21c-4e3a-8c58-92278fb011ec",
+          "name": "List available UDF libraries for the environment",
+          "request": {
+            "name": "List available UDF libraries for the environment",
+            "description": {
+              "content": "List all available UDFs (User Defined Functions) for selected environment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "udfs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment ID to use (e.g. S1234)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c1f3cea-2287-4cfa-961b-13f5bd775193",
+              "name": "UDF libraries list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "udfs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"L34\",\n    \"version\": \"string\",\n    \"backward_compatible\": \"string\",\n    \"functions\": [\n      {\n        \"function_type\": \"ANOMALY\",\n        \"short_description\": \"Relative Threshold\",\n        \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n        \"param_type\": \"TEXT\",\n        \"default_params\": [\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          },\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          }\n        ]\n      },\n      {\n        \"function_type\": \"ANOMALY\",\n        \"short_description\": \"Relative Threshold\",\n        \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n        \"param_type\": \"TEXT\",\n        \"default_params\": [\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          },\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": \"L34\",\n    \"version\": \"string\",\n    \"backward_compatible\": \"string\",\n    \"functions\": [\n      {\n        \"function_type\": \"ANOMALY\",\n        \"short_description\": \"Relative Threshold\",\n        \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n        \"param_type\": \"TEXT\",\n        \"default_params\": [\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          },\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          }\n        ]\n      },\n      {\n        \"function_type\": \"ANOMALY\",\n        \"short_description\": \"Relative Threshold\",\n        \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n        \"param_type\": \"TEXT\",\n        \"default_params\": [\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          },\n          {\n            \"name\": \"X\",\n            \"default_value\": \"string\"\n          }\n        ]\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a181f77e-460f-4f76-a814-bd11a2410922",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "udfs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88584496-b5e1-485c-9505-039a6f59e2ff",
+          "name": "Add a new UDF library",
+          "request": {
+            "name": "Add a new UDF library",
+            "description": {
+              "content": "Add a new UDF library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "udfs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment ID to use (e.g. S1234)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"udf\": \"<binary>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "881d977f-584f-45c9-9171-c97c5df186d1",
+              "name": "UDF library was successfully added",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "udfs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"udf\": \"<binary>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7f2d38c6-aafe-4b69-a5e2-8862ba984181",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "udfs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"udf\": \"<binary>\"\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffcc856e-9977-4d61-8ecf-373f53ef8829",
+          "name": "Get UDF library properties",
+          "request": {
+            "name": "Get UDF library properties",
+            "description": {
+              "content": "Get UDF (User Defined Function) library properties",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "udfs",
+                ":library_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment ID to use (e.g. S1234)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "library_id",
+                  "description": "(Required) UDF library ID to be used"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d4e88405-f757-42e0-97dc-6cff7710e66c",
+              "name": "UDF properties",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "udfs",
+                    ":library_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "library_id",
+                      "description": "(Required) UDF library ID to be used"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"id\": \"L34\",\n  \"version\": \"string\",\n  \"backward_compatible\": \"string\",\n  \"functions\": [\n    {\n      \"function_type\": \"ANOMALY\",\n      \"short_description\": \"Relative Threshold\",\n      \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n      \"param_type\": \"TEXT\",\n      \"default_params\": [\n        {\n          \"name\": \"X\",\n          \"default_value\": \"string\"\n        },\n        {\n          \"name\": \"X\",\n          \"default_value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"function_type\": \"ANOMALY\",\n      \"short_description\": \"Relative Threshold\",\n      \"long_description\": \"This function compares the volume of events against an absolute threshold\",\n      \"param_type\": \"TEXT\",\n      \"default_params\": [\n        {\n          \"name\": \"X\",\n          \"default_value\": \"string\"\n        },\n        {\n          \"name\": \"X\",\n          \"default_value\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7d4d670-2171-4eca-ad25-a6e68a906f9c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "udfs",
+                    ":library_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "library_id",
+                      "description": "(Required) UDF library ID to be used"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb600b2f-e5b4-4ffe-9265-2d9eaca365d6",
+          "name": "Remove UDF library from the environment",
+          "request": {
+            "name": "Remove UDF library from the environment",
+            "description": {
+              "content": "Remove UDF library from specified environment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "udfs",
+                ":library_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment ID to use (e.g. S1234)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "library_id",
+                  "description": "(Required) UDF library ID to be used"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b54d2863-c317-47b2-9f8f-718b98dd198e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "udfs",
+                    ":library_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "library_id",
+                      "description": "(Required) UDF library ID to be used"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8cd365de-6951-476c-b653-eae932795590",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "udfs",
+                    ":library_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "library_id",
+                      "description": "(Required) UDF library ID to be used"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7e66c3b1-8a05-4aa1-b2ed-c7d1bebbd41a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "udfs",
+                    ":library_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment ID to use (e.g. S1234)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "library_id",
+                      "description": "(Required) UDF library ID to be used"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.overops.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "af6c7084-7acd-4713-a371-dc4e3618b359",
+    "name": "Services Alerts UDFs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n\n\nContact Support:\n Email: hello@overops.com",
+      "type": "text/plain"
+    }
+  }
+}

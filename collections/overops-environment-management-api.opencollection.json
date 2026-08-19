@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts Environment Management API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Environment Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List agents and collectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/overops-status",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              },
+              {
+                "name": "connected",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve only processes with a connected OverOps collector/agent"
+              }
+            ]
+          },
+          "docs": "Fetch OverOps live processes report"
+        },
+        {
+          "info": {
+            "name": "List agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/overops-status/agents",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              },
+              {
+                "name": "connected",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve only processes with currently attached agents"
+              }
+            ]
+          },
+          "docs": "Fetch agents live processes report"
+        },
+        {
+          "info": {
+            "name": "Batch update for group of agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/overops-status/agents",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query",
+                "description": "Server(s) added to the filter. The update will apply to all existing and future agents in the selected server/s."
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "Application(s) added to the filter. The update will apply to all existing and future agents in the selected application/s. NOTE - The filter should contain **at least** one server, application or agent."
+              },
+              {
+                "name": "agent",
+                "value": "",
+                "type": "query",
+                "description": "Agent IDs added to the filter. The update will apply only to selected agent IDs. NOTE - The filter should contain **at least** one server, application or agent."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch update for group of agents. NOTE - The filter should contain **at least** one server, application or agent."
+        },
+        {
+          "info": {
+            "name": "List collectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/overops-status/collectors",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              },
+              {
+                "name": "connected",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve only processes of a connected OverOps collector"
+              }
+            ]
+          },
+          "docs": "Fetch collectors live processes report"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

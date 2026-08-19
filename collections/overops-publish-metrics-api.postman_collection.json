@@ -1,0 +1,678 @@
+{
+  "item": [
+    {
+      "id": "1d2a0855-175c-4714-aa52-3b5d15d4bf28",
+      "name": "Publish Metrics",
+      "description": {
+        "content": "Fetch and manipulate dynamic data exported to StatsD, which enables using a variety of third-party tools, providing control over application data from OverOps.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e476bd9e-5fc8-4464-a16d-75a1b638a4a3",
+          "name": "Fetch Publish Metrics settings",
+          "request": {
+            "name": "Fetch Publish Metrics settings",
+            "description": {
+              "content": "Use this call to fetch data about publish metrics settings, output format and the actual metrics which are currently beeing published",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "settings",
+                "publish-metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment to use"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37f34454-ea75-4312-b14f-381c68f33ae0",
+              "name": "Current settings for publish metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "publish-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"enabled\": true,\n  \"hostname\": \"127.0.0.1:8125\",\n  \"output_format\": \"Splunk\",\n  \"metrics\": [\n    {\n      \"name\": \"Views\",\n      \"pattern\": \"overops_views,${viewname},${serviceid},${application},${server},${deployment}\"\n    },\n    {\n      \"name\": \"Events\",\n      \"pattern\": \"overops_events,${serviceid},${application},${server},${deployment},${class},${method},${eventlink},${eventid},${labels},${eventtype},${eventname},${introducedby},${entrypointclass},${entrypointmethod},${firstseen},${infra},${jiraissuekey}\"\n    },\n    {\n      \"name\": \"Entry points\",\n      \"pattern\": \"overops_entrypoints,${serviceid},${application},${server},${deployment},${entrypointclass},${entrypointmetrics}\"\n    },\n    {\n      \"name\": \"Custom Metrics\",\n      \"pattern\": \"overops_metrics,${serviceid},${application},${server},${deployment},${metric}\"\n    },\n    {\n      \"name\": \"System\",\n      \"pattern\": \"overops_system,${serviceid},${application},${server},${systemmetrics}\"\n    },\n    {\n      \"name\": \"Diagnostics\",\n      \"pattern\": \"overops_jvms,${serviceid},${application},${server},${applicationpid}\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d40edd4-641e-45c0-808b-44f6e85d2738",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "publish-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b0711df0-dbaf-42a7-ac53-1bd53c9b8bf0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "publish-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c199606f-1583-4499-b9af-0582698e61ae",
+          "name": "Set Publish Metrics",
+          "request": {
+            "name": "Set Publish Metrics",
+            "description": {
+              "content": "Use this call to set and customize publish metrics. Use one of the presets, or customize you tokens by setting output_format to 'custom'.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "settings",
+                "publish-metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment to use"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"hostname\": \"<string>\",\n  \"output_format\": \"<string>\",\n  \"metrics\": [\n    {\n      \"name\": \"<string>\",\n      \"pattern\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"pattern\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0bc0c7ba-b411-4655-bd66-68dd64ec8050",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "publish-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"hostname\": \"127.0.0.1:8125\",\n  \"output_format\": \"Splunk\",\n  \"metrics\": [\n    {\n      \"name\": \"Views\",\n      \"pattern\": \"overops_views,${viewname},${serviceid},${application},${server},${deployment}\"\n    },\n    {\n      \"name\": \"Events\",\n      \"pattern\": \"overops_events,${serviceid},${application},${server},${deployment},${class},${method},${eventlink},${eventid},${labels},${eventtype},${eventname},${introducedby},${entrypointclass},${entrypointmethod},${firstseen},${infra},${jiraissuekey}\"\n    },\n    {\n      \"name\": \"Entry points\",\n      \"pattern\": \"overops_entrypoints,${serviceid},${application},${server},${deployment},${entrypointclass},${entrypointmetrics}\"\n    },\n    {\n      \"name\": \"Custom Metrics\",\n      \"pattern\": \"overops_metrics,${serviceid},${application},${server},${deployment},${metric}\"\n    },\n    {\n      \"name\": \"System\",\n      \"pattern\": \"overops_system,${serviceid},${application},${server},${systemmetrics}\"\n    },\n    {\n      \"name\": \"Diagnostics\",\n      \"pattern\": \"overops_jvms,${serviceid},${application},${server},${applicationpid}\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a9c791b3-0898-4975-a7ec-697cc911507a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "publish-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"hostname\": \"127.0.0.1:8125\",\n  \"output_format\": \"Splunk\",\n  \"metrics\": [\n    {\n      \"name\": \"Views\",\n      \"pattern\": \"overops_views,${viewname},${serviceid},${application},${server},${deployment}\"\n    },\n    {\n      \"name\": \"Events\",\n      \"pattern\": \"overops_events,${serviceid},${application},${server},${deployment},${class},${method},${eventlink},${eventid},${labels},${eventtype},${eventname},${introducedby},${entrypointclass},${entrypointmethod},${firstseen},${infra},${jiraissuekey}\"\n    },\n    {\n      \"name\": \"Entry points\",\n      \"pattern\": \"overops_entrypoints,${serviceid},${application},${server},${deployment},${entrypointclass},${entrypointmetrics}\"\n    },\n    {\n      \"name\": \"Custom Metrics\",\n      \"pattern\": \"overops_metrics,${serviceid},${application},${server},${deployment},${metric}\"\n    },\n    {\n      \"name\": \"System\",\n      \"pattern\": \"overops_system,${serviceid},${application},${server},${systemmetrics}\"\n    },\n    {\n      \"name\": \"Diagnostics\",\n      \"pattern\": \"overops_jvms,${serviceid},${application},${server},${applicationpid}\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "baead86e-bc08-4064-b027-0057aab6e5c7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "publish-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"hostname\": \"127.0.0.1:8125\",\n  \"output_format\": \"Splunk\",\n  \"metrics\": [\n    {\n      \"name\": \"Views\",\n      \"pattern\": \"overops_views,${viewname},${serviceid},${application},${server},${deployment}\"\n    },\n    {\n      \"name\": \"Events\",\n      \"pattern\": \"overops_events,${serviceid},${application},${server},${deployment},${class},${method},${eventlink},${eventid},${labels},${eventtype},${eventname},${introducedby},${entrypointclass},${entrypointmethod},${firstseen},${infra},${jiraissuekey}\"\n    },\n    {\n      \"name\": \"Entry points\",\n      \"pattern\": \"overops_entrypoints,${serviceid},${application},${server},${deployment},${entrypointclass},${entrypointmetrics}\"\n    },\n    {\n      \"name\": \"Custom Metrics\",\n      \"pattern\": \"overops_metrics,${serviceid},${application},${server},${deployment},${metric}\"\n    },\n    {\n      \"name\": \"System\",\n      \"pattern\": \"overops_system,${serviceid},${application},${server},${systemmetrics}\"\n    },\n    {\n      \"name\": \"Diagnostics\",\n      \"pattern\": \"overops_jvms,${serviceid},${application},${server},${applicationpid}\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62d2fee0-b1a9-4f80-9212-ecdc66d38755",
+          "name": "Fetch Available formats",
+          "request": {
+            "name": "Fetch Available formats",
+            "description": {
+              "content": "Use this call to fetch available formats / presets, their metrics and their tokens",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":env_id",
+                "settings",
+                "publish-metrics",
+                "available_formats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "env_id",
+                  "description": "(Required) Environment to use"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ba68a3e-72a3-478f-b8af-663950d85229",
+              "name": "List of Available formats and metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "publish-metrics",
+                    "available_formats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "[\n  {\n    \"output_format\": \"splunk\",\n    \"default_metrics\": [\n      {\n        \"name\": \"Views\",\n        \"pattern\": \"overops_views,${viewname},${serviceid},${application},${server},${deployment}\"\n      },\n      {\n        \"name\": \"Events\",\n        \"pattern\": \"overops_events,${serviceid},${application},${server},${deployment},${class},${method},${eventlink},${eventid},${labels},${eventtype},${eventname},${introducedby},${entrypointclass},${entrypointmethod},${firstseen},${infra},${jiraissuekey}\"\n      },\n      {\n        \"name\": \"Entry points\",\n        \"pattern\": \"overops_entrypoints,${serviceid},${application},${server},${deployment},${entrypointclass},${entrypointmetrics}\"\n      },\n      {\n        \"name\": \"Custom Metrics\",\n        \"pattern\": \"overops_metrics,${serviceid},${application},${server},${deployment},${metric}\"\n      },\n      {\n        \"name\": \"System\",\n        \"pattern\": \"overops_system,${serviceid},${application},${server},${systemmetrics}\"\n      },\n      {\n        \"name\": \"Diagnostics\",\n        \"pattern\": \"overops_jvms,${serviceid},${application},${server},${applicationpid}\"\n      }\n    ]\n  },\n  {\n    \"output_format\": \"splunk\",\n    \"default_metrics\": [\n      {\n        \"name\": \"Views\",\n        \"pattern\": \"overops_views,${viewname},${serviceid},${application},${server},${deployment}\"\n      },\n      {\n        \"name\": \"Events\",\n        \"pattern\": \"overops_events,${serviceid},${application},${server},${deployment},${class},${method},${eventlink},${eventid},${labels},${eventtype},${eventname},${introducedby},${entrypointclass},${entrypointmethod},${firstseen},${infra},${jiraissuekey}\"\n      },\n      {\n        \"name\": \"Entry points\",\n        \"pattern\": \"overops_entrypoints,${serviceid},${application},${server},${deployment},${entrypointclass},${entrypointmetrics}\"\n      },\n      {\n        \"name\": \"Custom Metrics\",\n        \"pattern\": \"overops_metrics,${serviceid},${application},${server},${deployment},${metric}\"\n      },\n      {\n        \"name\": \"System\",\n        \"pattern\": \"overops_system,${serviceid},${application},${server},${systemmetrics}\"\n      },\n      {\n        \"name\": \"Diagnostics\",\n        \"pattern\": \"overops_jvms,${serviceid},${application},${server},${applicationpid}\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edfd9e1d-8c3a-44e1-babd-88c561cdbf97",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "publish-metrics",
+                    "available_formats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7eee8119-cb4f-4d81-b425-7d18625d7956",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":env_id",
+                    "settings",
+                    "publish-metrics",
+                    "available_formats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "env_id",
+                      "description": "(Required) Environment to use"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.overops.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c0f86a60-cf2f-4c72-a66a-c7f8704ce2be",
+    "name": "Services Alerts Publish Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n\n\nContact Support:\n Email: hello@overops.com",
+      "type": "text/plain"
+    }
+  }
+}

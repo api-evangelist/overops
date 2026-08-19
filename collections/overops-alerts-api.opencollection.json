@@ -1,0 +1,275 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Alert on anomalies",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/views/:view_id/anomaly",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Alert on anomalies"
+        },
+        {
+          "info": {
+            "name": "Fetch Default Alert Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/alerts",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ]
+          },
+          "docs": "Use this call to fetch default alert settings for selected environment"
+        },
+        {
+          "info": {
+            "name": "Update Default Alert Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/alerts",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this call to update default alert settings for selected environment which will be used as initial settings for every new alert opened in this environment. "
+        },
+        {
+          "info": {
+            "name": "Fetch ServiceNow Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/alerts/servicenow/tables",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this call to Load ServiceNow tables associated with specific credentials"
+        },
+        {
+          "info": {
+            "name": "Fetch Alert settings for a View",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/views/:view_id/alerts",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View ID to use (e.g. P283)"
+              }
+            ]
+          },
+          "docs": "Fetch Alert settings for a View (Slack, Email, UDF, etc)"
+        },
+        {
+          "info": {
+            "name": "Edit Alert settings of a View",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/views/:view_id/alerts",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View ID to use (e.g. P283)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Alert settings of a View"
+        },
+        {
+          "info": {
+            "name": "Remove Alert settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/views/:view_id/alerts",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View ID to use (e.g. P283)"
+              }
+            ]
+          },
+          "docs": "Disables all Alert settings for a View"
+        },
+        {
+          "info": {
+            "name": "Test Alert settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/alerts/test",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint allows to test alerts settings before applying them to a particular view"
+        },
+        {
+          "info": {
+            "name": "Send custom alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/views/:view_id/custom-alert",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View ID to use (e.g. P283)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send custom alert"
+        },
+        {
+          "info": {
+            "name": "Fetch Active Alerts for an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/alerts",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Team member email. When this parameter is used, the alerts will be fetched for the selected user."
+              }
+            ]
+          },
+          "docs": "Use this call to fetch all active alerts on current environment. admins can use the query parameter to fetch alerts which were set by other member/admin"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

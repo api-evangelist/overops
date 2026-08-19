@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts System Metrics API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/metrics/system",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "Get a list of all available system metrics"
+        },
+        {
+          "info": {
+            "name": "Get a specific metric's metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/metrics/system/:metric_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "metric_name",
+                "value": "",
+                "type": "path",
+                "description": "Metric name to fetch"
+              }
+            ]
+          },
+          "docs": "Fetch info about a specific metric"
+        },
+        {
+          "info": {
+            "name": "Fetch metric graph/data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/metrics/system/:metric_name/graph",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "metric_name",
+                "value": "",
+                "type": "path",
+                "description": "Metric name to fetch"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End time of requested graph. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "points",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points to return within the interval. **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence."
+              },
+              {
+                "name": "resolution",
+                "value": "",
+                "type": "query",
+                "description": "Select graph resolution (use M1/M5 for 1 point per 1/5 minutes; use H1/H8 for 1 point per 1/8 hours). **IMPORTANT:** either 'points' or 'resolution' parameters have to be passed. When both are passed, resolution takes precedence."
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query",
+                "description": "Server(s) added to the filter"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "Application(s) added to the filter"
+              },
+              {
+                "name": "deployment",
+                "value": "",
+                "type": "query",
+                "description": "Deployment(s) added to the filter"
+              }
+            ]
+          },
+          "docs": "Fetch data for a specific system metric within a target timeframe, application / server / deployment set."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

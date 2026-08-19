@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts UDFs API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "UDFs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available UDF libraries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/global-settings/udfs"
+          },
+          "docs": "List available UDF (User Defined Functions) libraries"
+        },
+        {
+          "info": {
+            "name": "Add a new UDF library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/global-settings/udfs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new UDF library"
+        },
+        {
+          "info": {
+            "name": "Get UDF library properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/global-settings/udfs/:library_id",
+            "params": [
+              {
+                "name": "library_id",
+                "value": "",
+                "type": "path",
+                "description": "UDF library ID to be used"
+              }
+            ]
+          },
+          "docs": "Get UDF (User Defined Function) library properties"
+        },
+        {
+          "info": {
+            "name": "Remove UDF library (TBD - Not yet implemented)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/global-settings/udfs/:library_id",
+            "params": [
+              {
+                "name": "library_id",
+                "value": "",
+                "type": "path",
+                "description": "UDF library ID to be used"
+              }
+            ]
+          },
+          "docs": "Remove UDF library (TBD - Not yet implemented)"
+        },
+        {
+          "info": {
+            "name": "List available UDF libraries for the environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/udfs",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all available UDFs (User Defined Functions) for selected environment"
+        },
+        {
+          "info": {
+            "name": "Add a new UDF library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/udfs",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "Add a new UDF library"
+        },
+        {
+          "info": {
+            "name": "Get UDF library properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/udfs/:library_id",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "library_id",
+                "value": "",
+                "type": "path",
+                "description": "UDF library ID to be used"
+              }
+            ]
+          },
+          "docs": "Get UDF (User Defined Function) library properties"
+        },
+        {
+          "info": {
+            "name": "Remove UDF library from the environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/udfs/:library_id",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "library_id",
+                "value": "",
+                "type": "path",
+                "description": "UDF library ID to be used"
+              }
+            ]
+          },
+          "docs": "Remove UDF library from specified environment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

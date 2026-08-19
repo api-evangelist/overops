@@ -1,0 +1,420 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts Entry Points API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entry Points",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all prioritized and deprioritized entry  points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all packages and classes that should be handled as prioritized or deprioritized entry points"
+        },
+        {
+          "info": {
+            "name": "List all deprioritized entry points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/deprioritized",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all classes and packages that should be set as lowest priority entry points (i.e. will be set as entry points only if no other entry points were found in the event call stack)"
+        },
+        {
+          "info": {
+            "name": "Add a bulk of deprioritized entry points",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/deprioritized",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a bulk of deprioritized entry points"
+        },
+        {
+          "info": {
+            "name": "List all prioritized entry points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/prioritized",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all packages and classes that will be set as entry points in highest priority"
+        },
+        {
+          "info": {
+            "name": "Add a bulk of prioritized entry points",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/prioritized",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a bulk of classes and packages that should bet set as entry points in highest priority"
+        },
+        {
+          "info": {
+            "name": "List all classes associated with deprioritized entry points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/deprioritized/classes",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all classes that should be set as lowest priority entry points (i.e. will be set as entry points only if no other entry points were found in the event call stack)"
+        },
+        {
+          "info": {
+            "name": "Add a class to the exclusion list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/deprioritized/classes/:class_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "class_name",
+                "value": "",
+                "type": "path",
+                "description": "Fully qualified Java class name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a class to the exclusion list. The body class name must match the resource identifier"
+        },
+        {
+          "info": {
+            "name": "Remove a class from exclusion",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/deprioritized/classes/:class_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "class_name",
+                "value": "",
+                "type": "path",
+                "description": "Fully qualified Java class name"
+              }
+            ]
+          },
+          "docs": "Remove a class from the exclusion list"
+        },
+        {
+          "info": {
+            "name": "List all packages associated with deprioritized entry points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/deprioritized/packages",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all packages that should be set as lowest priority entry points (i.e. will be set as entry points only if no other entry points were found in the event call stack)"
+        },
+        {
+          "info": {
+            "name": "Add a package to the exclusion list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/deprioritized/packages/:package_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "Fully qualified Java package name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a package to the exclusion list. The body package name must match the resource identifier"
+        },
+        {
+          "info": {
+            "name": "Remove a package from the exclusion list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/deprioritized/packages/:package_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "Fully qualified Java package name"
+              }
+            ]
+          },
+          "docs": "Remove a package from the exclusion list"
+        },
+        {
+          "info": {
+            "name": "List all prioritized entry point classes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/prioritized/classes",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all prioritized entry point classes"
+        },
+        {
+          "info": {
+            "name": "Add a class to the prioritized entry points list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/prioritized/classes/:class_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "class_name",
+                "value": "",
+                "type": "path",
+                "description": "Fully qualified Java class name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a class to the prioritized entry points list. The body class name must match the resource identifier"
+        },
+        {
+          "info": {
+            "name": "Remove a class from the prioritized entry points list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/prioritized/classes/:class_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "class_name",
+                "value": "",
+                "type": "path",
+                "description": "Fully qualified Java class name"
+              }
+            ]
+          },
+          "docs": "Remove a class from the prioritized entry points list"
+        },
+        {
+          "info": {
+            "name": "List all prioritized entry point packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/prioritized/packages",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ]
+          },
+          "docs": "List all prioritized entry point packages"
+        },
+        {
+          "info": {
+            "name": "Add a package to the prioritized entry points list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/prioritized/packages/:package_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "Fully qualified Java package name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a package to the prioritized entry points list. The body package name must match the resource identifier"
+        },
+        {
+          "info": {
+            "name": "Remove a package from the prioritized entry points list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/entrypoints/prioritized/packages/:package_name",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "Fully qualified Java package name"
+              }
+            ]
+          },
+          "docs": "Remove a package from the prioritized entry points list"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

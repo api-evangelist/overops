@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts Publish Metrics API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Publish Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Publish Metrics settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/publish-metrics",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ]
+          },
+          "docs": "Use this call to fetch data about publish metrics settings, output format and the actual metrics which are currently beeing published"
+        },
+        {
+          "info": {
+            "name": "Set Publish Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/publish-metrics",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this call to set and customize publish metrics. Use one of the presets, or customize you tokens by setting output_format to 'custom'."
+        },
+        {
+          "info": {
+            "name": "Fetch Available formats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/settings/publish-metrics/available_formats",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment to use"
+              }
+            ]
+          },
+          "docs": "Use this call to fetch available formats / presets, their metrics and their tokens"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,392 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Services Alerts Events API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Batch Force events snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/events/force-snapshots",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Force next snapshot for multiple events"
+        },
+        {
+          "info": {
+            "name": "Fetch event data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/events/:event_id",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "Event to use"
+              }
+            ]
+          },
+          "docs": "Fetch event data"
+        },
+        {
+          "info": {
+            "name": "Fetch event snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/events/:event_id/snapshot",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "Event to use"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query",
+                "description": "Server(s) added to the filter"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "Application(s) added to the filter"
+              },
+              {
+                "name": "deployment",
+                "value": "",
+                "type": "query",
+                "description": "Deployment(s) added to the filter"
+              },
+              {
+                "name": "similar_event_id",
+                "value": "",
+                "type": "query",
+                "description": "Event(s) added to the filter"
+              }
+            ]
+          },
+          "docs": "Fetch event snapshot. Fetches the last relevant snapshot for the specific filters provided. All filters are optional."
+        },
+        {
+          "info": {
+            "name": "Delete all event snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.overops.com/api/v1/services/:env_id/events/:event_id/snapshots",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "Event to use"
+              }
+            ]
+          },
+          "docs": "Removes all existing snapshots for an event. All snapshots will be permanently deleted. Event statistics will be kept."
+        },
+        {
+          "info": {
+            "name": "Force Event Snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.overops.com/api/v1/services/:env_id/events/:event_id/force-snapshot",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "Event to use"
+              }
+            ]
+          },
+          "docs": "Force snapshot for the next time the event occurs"
+        },
+        {
+          "info": {
+            "name": "Fetch event actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/events/:event_id/actions",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "Event to use"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific type"
+              }
+            ]
+          },
+          "docs": "Fetch event actions"
+        },
+        {
+          "info": {
+            "name": "Fetch events details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/views/:view_id/events",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View to use"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query",
+                "description": "Server(s) added to the filter"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "Application(s) added to the filter"
+              },
+              {
+                "name": "deployment",
+                "value": "",
+                "type": "query",
+                "description": "Deployment(s) added to the filter"
+              },
+              {
+                "name": "stats",
+                "value": "",
+                "type": "query",
+                "description": "Include event volumes (e.g. number of event instances and calls into the method containing the event) in the response"
+              }
+            ]
+          },
+          "docs": "Fetch events data for a target timeframe, application / server / deployment set."
+        },
+        {
+          "info": {
+            "name": "Fetch stats for all events in the specified view",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/views/:view_id/events/stats",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View to use"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query",
+                "description": "Server(s) added to the filter"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "Application(s) added to the filter"
+              },
+              {
+                "name": "deployment",
+                "value": "",
+                "type": "query",
+                "description": "Deployment(s) added to the filter"
+              },
+              {
+                "name": "stats",
+                "value": "",
+                "type": "query",
+                "description": "return only selected stats. 'all' is default."
+              }
+            ]
+          },
+          "docs": "Fetch stats for a target timeframe, application / server / deployment set."
+        },
+        {
+          "info": {
+            "name": "Fetch entry points details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.overops.com/api/v1/services/:env_id/views/:view_id/entrypoints",
+            "params": [
+              {
+                "name": "env_id",
+                "value": "",
+                "type": "path",
+                "description": "Environment ID to use (e.g. S1234)"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View to use"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Start time of requested events. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)"
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query",
+                "description": "Server(s) added to the filter"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "Application(s) added to the filter"
+              },
+              {
+                "name": "deployment",
+                "value": "",
+                "type": "query",
+                "description": "Deployment(s) added to the filter"
+              }
+            ]
+          },
+          "docs": "Fetch entry points data in a selected timeframe"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
