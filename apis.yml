@@ -97,6 +97,8 @@ apis:
   humanURL: https://doc.overops.com/reference
   baseURL: https://api.overops.com/api/v1
   tags:
+  - Entrypoints
+  tags_raw:
   - Entry Points
   properties:
   - type: OpenAPI
@@ -117,6 +119,8 @@ apis:
   humanURL: https://doc.overops.com/reference
   baseURL: https://api.overops.com/api/v1
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -126,7 +130,8 @@ apis:
   description: Fetch general information about provisioned OverOps enviroments
   humanURL: https://doc.overops.com/reference
   baseURL: https://api.overops.com/api/v1
-  tags:
+  tags: []
+  tags_raw:
   - General
   properties:
   - type: OpenAPI
