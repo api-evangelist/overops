@@ -11,6 +11,18 @@ description: >-
   users automate every action available in the OverOps UI. OverOps was acquired by
   Harness; overops.com now redirects to harness.io, while the developer API,
   documentation, and application hosts remain live.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
