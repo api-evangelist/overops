@@ -109,7 +109,7 @@ apis:
   humanURL: https://doc.overops.com/reference
   baseURL: https://api.overops.com/api/v1
   tags:
-  - Entry Points
+  - Entrypoints
   tags_raw:
   - Entry Points
   properties:
