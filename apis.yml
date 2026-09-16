@@ -1,16 +1,13 @@
 aid: overops
 name: Overops
-description: >-
-  OverOps (formerly Takipi) is a continuous reliability platform that helps teams
-  who ship software ensure rapid code changes do not degrade the customer
-  experience. It runs in the cloud or on-premises, instruments Java and .NET
-  applications with a micro-agent, and automatically identifies, prevents, and
-  resolves critical software issues across CI/CD, testing, and production. OverOps
-  captures true root-cause code snapshots (stack, source, and variable state) at the
-  moment of failure and exposes everything through a REST API that lets admins and
-  users automate every action available in the OverOps UI. OverOps was acquired by
-  Harness; overops.com now redirects to harness.io, while the developer API,
-  documentation, and application hosts remain live.
+description: OverOps (formerly Takipi) is a continuous reliability platform that helps teams who ship
+  software ensure rapid code changes do not degrade the customer experience. It runs in the cloud or on-premises,
+  instruments Java and .NET applications with a micro-agent, and automatically identifies, prevents, and
+  resolves critical software issues across CI/CD, testing, and production. OverOps captures true root-cause
+  code snapshots (stack, source, and variable state) at the moment of failure and exposes everything through
+  a REST API that lets admins and users automate every action available in the OverOps UI. OverOps was
+  acquired by Harness; overops.com now redirects to harness.io, while the developer API, documentation,
+  and application hosts remain live.
 deliveryModel:
   model: saas
   open_source: false
@@ -47,7 +44,7 @@ x-tier-reason: portfolio-lead
 x-parent-company: harness
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-09-16'
 tags:
 - Company
 - Observability
@@ -60,8 +57,7 @@ tags:
 apis:
 - aid: overops:overops-alerts-api
   name: Overops Alerts API
-  description: >-
-    Fetch and manipulate alerting rules for detecting and disseminating anomalies such as introduction
+  description: Fetch and manipulate alerting rules for detecting and disseminating anomalies such as introduction
     of new events and regressions to different communication channels (e.g. Email, Jira, Slack, Uder defined
     Functions).
   humanURL: https://doc.overops.com/reference
@@ -73,8 +69,7 @@ apis:
     url: openapi/overops-alerts-api-openapi.yml
 - aid: overops:overops-categories-api
   name: Overops Categories API
-  description: >-
-    Fetch and manipulate grouping of views into logical categories (e.g "CI/CD", "Favorites")
+  description: Fetch and manipulate grouping of views into logical categories (e.g "CI/CD", "Favorites")
   humanURL: https://doc.overops.com/reference
   baseURL: https://api.overops.com/api/v1
   tags:
@@ -84,9 +79,8 @@ apis:
     url: openapi/overops-categories-api-openapi.yml
 - aid: overops:overops-code-redaction-api
   name: Overops Code Redaction API
-  description: >-
-    Fetch and manipulate code filters to include / exclude 3rd party and utility classes  from OverOps
-    analysis and data capture.
+  description: Fetch and manipulate code filters to include / exclude 3rd party and utility classes  from
+    OverOps analysis and data capture.
   humanURL: https://doc.overops.com/reference
   baseURL: https://api.overops.com/api/v1
   tags:
@@ -161,9 +155,8 @@ apis:
     url: openapi/overops-labels-api-openapi.yml
 - aid: overops:overops-publish-metrics-api
   name: Overops Publish Metrics API
-  description: >-
-    Fetch and manipulate dynamic data exported to StatsD, which enables using a variety of third-party
-    tools, providing control over application data from OverOps.
+  description: Fetch and manipulate dynamic data exported to StatsD, which enables using a variety of
+    third-party tools, providing control over application data from OverOps.
   humanURL: https://doc.overops.com/reference
   baseURL: https://api.overops.com/api/v1
   tags:
@@ -213,8 +206,7 @@ apis:
     url: openapi/overops-udfs-api-openapi.yml
 - aid: overops:overops-view-metrics-api
   name: Overops View Metrics API
-  description: >-
-    Fetch volumetric time series data about observed code events within OverOps monitored applications
+  description: Fetch volumetric time series data about observed code events within OverOps monitored applications
     filtered by server cluster, application and deployments.
   humanURL: https://doc.overops.com/reference
   baseURL: https://api.overops.com/api/v1
@@ -225,9 +217,8 @@ apis:
     url: openapi/overops-view-metrics-api-openapi.yml
 - aid: overops:overops-views-api
   name: Overops Views API
-  description: >-
-    Fetch and manipulate grouping of events (i.e. Views) according to attribute sets (e.g. "uncaught exceptions",
-    "errors from package com.acme")
+  description: Fetch and manipulate grouping of events (i.e. Views) according to attribute sets (e.g.
+    "uncaught exceptions", "errors from package com.acme")
   humanURL: https://doc.overops.com/reference
   baseURL: https://api.overops.com/api/v1
   tags:
@@ -246,6 +237,8 @@ x-enrichment:
   artifacts_added: 18
   pass: local-v1
 common:
+- type: Website
+  url: https://overops.com
 - type: Overlay
   url: overlays/overops-services-overlay.yaml
 - type: AgenticAccess
@@ -262,7 +255,10 @@ common:
   url: well-known/overops-well-known.yml
 - type: X-MCPServerCandidate
   url: mcp/overops-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: LLMsTxt
   url: llms/overops-llms.txt
 - type: Conformance
