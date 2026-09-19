@@ -237,6 +237,11 @@ x-enrichment:
   artifacts_added: 18
   pass: local-v1
 common:
+- type: ParentCompany
+  url: https://apis.io/providers/harness/
+  name: Harness
+  x-relationship: acquired
+  x-evidence: "description names Harness and https://overops.com now redirects to harness.io (roadmap#390, corroborate-dead.py)"
 - type: Website
   url: https://overops.com
 - type: Overlay
