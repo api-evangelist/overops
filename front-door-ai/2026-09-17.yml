@@ -1,0 +1,32 @@
+# Front Door AI Index — overops — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: overops
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: overops.com
+  final_host: www.harness.io:443
+  ownership: own
+  owner: overops
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 30
+  host_score: 30
+  density: 25.19
+  words: 1191
+  tiers:
+    agentic: 0
+    core: 30
+    model: 0
+  ambiguous: 10
+  top_terms:
+    AI: 27
+    automation: 6
+    machine learning: 2
+    agent: 1
+    artificial intelligence: 1
+    intelligence: 1
+    predictive: 1
+    smart: 1

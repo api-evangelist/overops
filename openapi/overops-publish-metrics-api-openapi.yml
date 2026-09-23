@@ -1,10 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: v1
-  title: Services Alerts Publish Metrics API
+  title: Services Publish Metrics API
   contact:
     email: hello@overops.com
-  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+  description: Main OverOps API.
 servers:
 - url: https://api.overops.com/api/v1
 security:
@@ -38,6 +38,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: getServicesByEnvIdSettingsPublishMetrics
+      x-operation-id-source: derived
     post:
       tags:
       - Publish Metrics
@@ -63,6 +65,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: postServicesByEnvIdSettingsPublishMetrics
+      x-operation-id-source: derived
   /services/{env_id}/settings/publish-metrics/available_formats:
     get:
       tags:
@@ -87,19 +91,17 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: getServicesByEnvIdSettingsPublishMetricsAvailableFormats
+      x-operation-id-source: derived
 components:
+  responses:
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    UnauthorizedError:
+      description: Unauthorized
   schemas:
-    PublishMetricFormats:
-      type: array
-      items:
-        type: object
-        properties:
-          output_format:
-            type: string
-            description: For customized metrics (which are different than the format defaults), use "custom" format
-            example: splunk
-          default_metrics:
-            $ref: '#/components/schemas/Metrics'
     Metrics:
       type: array
       items:
@@ -124,6 +126,17 @@ components:
         pattern: overops_system,${serviceid},${application},${server},${systemmetrics}
       - name: Diagnostics
         pattern: overops_jvms,${serviceid},${application},${server},${applicationpid}
+    PublishMetricFormats:
+      type: array
+      items:
+        type: object
+        properties:
+          output_format:
+            type: string
+            description: For customized metrics (which are different than the format defaults), use "custom" format
+            example: splunk
+          default_metrics:
+            $ref: '#/components/schemas/Metrics'
     PublishMetricsSettings:
       type: object
       properties:
@@ -139,13 +152,6 @@ components:
           example: Splunk
         metrics:
           $ref: '#/components/schemas/Metrics'
-  responses:
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    UnauthorizedError:
-      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http

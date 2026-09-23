@@ -1,10 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: v1
-  title: Services Alerts Code Redaction API
+  title: Services Code Redaction API
   contact:
     email: hello@overops.com
-  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+  description: Main OverOps API.
 servers:
 - url: https://api.overops.com/api/v1
 security:
@@ -12,7 +12,7 @@ security:
 - ApiKeyAuth: []
 tags:
 - name: Code Redaction
-  description: Fetch and manipulate code filters to include / exclude 3rd party and utility classes  from OverOps analysis and data capture.
+  description: Fetch and manipulate code filters to include / exclude 3rd party and utility classes from OverOps analysis and data capture.
 paths:
   /services/{env_id}/settings/code-redaction:
     get:
@@ -59,12 +59,13 @@ paths:
                           $ref: '#/components/schemas/PackageName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsCodeRedaction
+      x-operation-id-source: derived
   /services/{env_id}/settings/code-redaction/exclude:
     get:
       tags:
       - Code Redaction
       summary: List all code exclusions
-      description: List all code exclusions
       parameters:
       - in: path
         name: env_id
@@ -90,11 +91,12 @@ paths:
                       $ref: '#/components/schemas/PackageName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsCodeRedactionExclude
+      x-operation-id-source: derived
     post:
       tags:
       - Code Redaction
       summary: Add a bulk of code exclusions
-      description: Add a bulk of code exclusions
       parameters:
       - in: path
         name: env_id
@@ -123,12 +125,13 @@ paths:
           $ref: '#/components/responses/OK'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: postServicesByEnvIdSettingsCodeRedactionExclude
+      x-operation-id-source: derived
   /services/{env_id}/settings/code-redaction/exclude/classes:
     get:
       tags:
       - Code Redaction
       summary: List all excluded classes
-      description: List all excluded classes
       parameters:
       - in: path
         name: env_id
@@ -150,12 +153,13 @@ paths:
                       $ref: '#/components/schemas/ClassName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsCodeRedactionExcludeClasses
+      x-operation-id-source: derived
   /services/{env_id}/settings/code-redaction/exclude/classes/{class_name}:
     get:
       tags:
       - Code Redaction
       summary: Retrieve an excluded class
-      description: Retrieve an excluded class
       parameters:
       - in: path
         name: env_id
@@ -183,6 +187,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: getServicesByEnvIdSettingsCodeRedactionExcludeClassesByClassName
+      x-operation-id-source: derived
     put:
       tags:
       - Code Redaction
@@ -210,6 +216,8 @@ paths:
           $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: putServicesByEnvIdSettingsCodeRedactionExcludeClassesByClassName
+      x-operation-id-source: derived
     delete:
       tags:
       - Code Redaction
@@ -235,12 +243,13 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: deleteServicesByEnvIdSettingsCodeRedactionExcludeClassesByClassName
+      x-operation-id-source: derived
   /services/{env_id}/settings/code-redaction/exclude/packages:
     get:
       tags:
       - Code Redaction
       summary: List all excluded packages
-      description: List all excluded packages
       parameters:
       - in: path
         name: env_id
@@ -262,12 +271,13 @@ paths:
                       $ref: '#/components/schemas/PackageName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsCodeRedactionExcludePackages
+      x-operation-id-source: derived
   /services/{env_id}/settings/code-redaction/exclude/packages/{package_name}:
     get:
       tags:
       - Code Redaction
       summary: Retrieve an excluded package
-      description: Retrieve an excluded package
       parameters:
       - in: path
         name: env_id
@@ -295,6 +305,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: getServicesByEnvIdSettingsCodeRedactionExcludePackagesByPackageName
+      x-operation-id-source: derived
     put:
       tags:
       - Code Redaction
@@ -322,11 +334,12 @@ paths:
           $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: putServicesByEnvIdSettingsCodeRedactionExcludePackagesByPackageName
+      x-operation-id-source: derived
     delete:
       tags:
       - Code Redaction
       summary: Remove a package from the exclusion list
-      description: Remove a package from the exclusion list
       parameters:
       - in: path
         name: env_id
@@ -347,12 +360,13 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: deleteServicesByEnvIdSettingsCodeRedactionExcludePackagesByPackageName
+      x-operation-id-source: derived
   /services/{env_id}/settings/code-redaction/include:
     get:
       tags:
       - Code Redaction
       summary: List all code inclusions
-      description: List all code inclusions
       parameters:
       - in: path
         name: env_id
@@ -378,11 +392,12 @@ paths:
                       $ref: '#/components/schemas/PackageName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsCodeRedactionInclude
+      x-operation-id-source: derived
     post:
       tags:
       - Code Redaction
       summary: Add a bulk of code inclusions
-      description: Add a bulk of code inclusions
       parameters:
       - in: path
         name: env_id
@@ -411,12 +426,13 @@ paths:
           $ref: '#/components/responses/OK'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: postServicesByEnvIdSettingsCodeRedactionInclude
+      x-operation-id-source: derived
   /services/{env_id}/settings/code-redaction/include/classes:
     get:
       tags:
       - Code Redaction
       summary: List all included classes
-      description: List all included classes
       parameters:
       - in: path
         name: env_id
@@ -438,12 +454,13 @@ paths:
                       $ref: '#/components/schemas/ClassName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsCodeRedactionIncludeClasses
+      x-operation-id-source: derived
   /services/{env_id}/settings/code-redaction/include/classes/{class_name}:
     get:
       tags:
       - Code Redaction
       summary: Retrieve an included class
-      description: Retrieve an included class
       parameters:
       - in: path
         name: env_id
@@ -471,6 +488,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: getServicesByEnvIdSettingsCodeRedactionIncludeClassesByClassName
+      x-operation-id-source: derived
     put:
       tags:
       - Code Redaction
@@ -498,11 +517,12 @@ paths:
           $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: putServicesByEnvIdSettingsCodeRedactionIncludeClassesByClassName
+      x-operation-id-source: derived
     delete:
       tags:
       - Code Redaction
       summary: Remove a class from the inclusion list
-      description: Remove a class from the inclusion list
       parameters:
       - in: path
         name: env_id
@@ -523,12 +543,13 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: deleteServicesByEnvIdSettingsCodeRedactionIncludeClassesByClassName
+      x-operation-id-source: derived
   /services/{env_id}/settings/code-redaction/include/packages:
     get:
       tags:
       - Code Redaction
       summary: List all included packages
-      description: List all included packages
       parameters:
       - in: path
         name: env_id
@@ -549,12 +570,13 @@ paths:
                       $ref: '#/components/schemas/PackageName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsCodeRedactionIncludePackages
+      x-operation-id-source: derived
   /services/{env_id}/settings/code-redaction/include/packages/{package_name}:
     get:
       tags:
       - Code Redaction
       summary: Retrieve an included package
-      description: Retrieve an included package
       parameters:
       - in: path
         name: env_id
@@ -575,6 +597,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: getServicesByEnvIdSettingsCodeRedactionIncludePackagesByPackageName
+      x-operation-id-source: derived
     put:
       tags:
       - Code Redaction
@@ -602,11 +626,12 @@ paths:
           $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: putServicesByEnvIdSettingsCodeRedactionIncludePackagesByPackageName
+      x-operation-id-source: derived
     delete:
       tags:
       - Code Redaction
       summary: Remove a package from the inclusion list
-      description: Remove a package from the inclusion list
       parameters:
       - in: path
         name: env_id
@@ -627,15 +652,18 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: deleteServicesByEnvIdSettingsCodeRedactionIncludePackagesByPackageName
+      x-operation-id-source: derived
 components:
-  schemas:
-    PackageName:
-      type: string
-      example: com.company.package.name
-    ClassName:
-      type: string
-      example: com.company.ClassName
   requestBodies:
+    Package:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                $ref: '#/components/schemas/PackageName'
     Class:
       content:
         application/json:
@@ -651,23 +679,22 @@ components:
             properties:
               name:
                 $ref: '#/components/schemas/PackageName'
-    Package:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                $ref: '#/components/schemas/PackageName'
   responses:
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    UnauthorizedError:
-      description: Unauthorized
     BadRequestError:
       description: Bad Request
+    OK:
+      description: OK
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
+  schemas:
+    ClassName:
+      type: string
+      example: com.company.ClassName
+    PackageName:
+      type: string
+      example: com.company.package.name
   securitySchemes:
     basicAuth:
       type: http

@@ -1,22 +1,7 @@
 {
   "provider": "overops",
   "sources": [
-    "overops-alerts-api-openapi.yml",
-    "overops-categories-api-openapi.yml",
-    "overops-code-redaction-api-openapi.yml",
-    "overops-data-redaction-api-openapi.yml",
-    "overops-entry-points-api-openapi.yml",
-    "overops-environment-management-api-openapi.yml",
-    "overops-events-api-openapi.yml",
-    "overops-general-api-openapi.yml",
-    "overops-labels-api-openapi.yml",
-    "overops-publish-metrics-api-openapi.yml",
-    "overops-system-metrics-api-openapi.yml",
-    "overops-team-management-api-openapi.yml",
-    "overops-timers-api-openapi.yml",
-    "overops-udfs-api-openapi.yml",
-    "overops-view-metrics-api-openapi.yml",
-    "overops-views-api-openapi.yml"
+    "_original/overops-openapi-original.json"
   ],
   "outputs": [
     "overops-alerts-api-openapi.yml",
@@ -39,6 +24,28 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "overops-openapi-original.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "overops-openapi-original.json: declared missing tag: Entry Points",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "overops-alerts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-code-redaction-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-data-redaction-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-entry-points-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-environment-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-general-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-labels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-publish-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-system-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-team-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-timers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-udfs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-view-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "overops-views-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

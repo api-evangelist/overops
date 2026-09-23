@@ -1,10 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: v1
-  title: Services Alerts Entry Points API
+  title: Services Entry Points API
   contact:
     email: hello@overops.com
-  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+  description: Main OverOps API.
 servers:
 - url: https://api.overops.com/api/v1
 security:
@@ -17,7 +17,7 @@ paths:
     get:
       tags:
       - Entry Points
-      summary: List all prioritized and deprioritized entry  points
+      summary: List all prioritized and deprioritized entry points
       description: List all packages and classes that should be handled as prioritized or deprioritized entry points
       parameters:
       - in: path
@@ -58,6 +58,8 @@ paths:
                           $ref: '#/components/schemas/PackageName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsEntrypoints
+      x-operation-id-source: derived
   /services/{env_id}/settings/entrypoints/deprioritized:
     get:
       tags:
@@ -89,11 +91,12 @@ paths:
                       $ref: '#/components/schemas/PackageName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsEntrypointsDeprioritized
+      x-operation-id-source: derived
     post:
       tags:
       - Entry Points
       summary: Add a bulk of deprioritized entry points
-      description: Add a bulk of deprioritized entry points
       parameters:
       - in: path
         name: env_id
@@ -122,6 +125,8 @@ paths:
           $ref: '#/components/responses/OK'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: postServicesByEnvIdSettingsEntrypointsDeprioritized
+      x-operation-id-source: derived
   /services/{env_id}/settings/entrypoints/prioritized:
     get:
       tags:
@@ -153,6 +158,8 @@ paths:
                       $ref: '#/components/schemas/PackageName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsEntrypointsPrioritized
+      x-operation-id-source: derived
     post:
       tags:
       - Entry Points
@@ -186,6 +193,8 @@ paths:
           $ref: '#/components/responses/OK'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: postServicesByEnvIdSettingsEntrypointsPrioritized
+      x-operation-id-source: derived
   /services/{env_id}/settings/entrypoints/deprioritized/classes:
     get:
       tags:
@@ -213,6 +222,8 @@ paths:
                       $ref: '#/components/schemas/ClassName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsEntrypointsDeprioritizedClasses
+      x-operation-id-source: derived
   /services/{env_id}/settings/entrypoints/deprioritized/classes/{class_name}:
     put:
       tags:
@@ -241,6 +252,8 @@ paths:
           $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: putServicesByEnvIdSettingsEntrypointsDeprioritizedClassesByClassName
+      x-operation-id-source: derived
     delete:
       tags:
       - Entry Points
@@ -266,6 +279,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: deleteServicesByEnvIdSettingsEntrypointsDeprioritizedClassesByClassName
+      x-operation-id-source: derived
   /services/{env_id}/settings/entrypoints/deprioritized/packages:
     get:
       tags:
@@ -293,6 +308,8 @@ paths:
                       $ref: '#/components/schemas/PackageName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsEntrypointsDeprioritizedPackages
+      x-operation-id-source: derived
   /services/{env_id}/settings/entrypoints/deprioritized/packages/{package_name}:
     put:
       tags:
@@ -321,11 +338,12 @@ paths:
           $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: putServicesByEnvIdSettingsEntrypointsDeprioritizedPackagesByPackageName
+      x-operation-id-source: derived
     delete:
       tags:
       - Entry Points
       summary: Remove a package from the exclusion list
-      description: Remove a package from the exclusion list
       parameters:
       - in: path
         name: env_id
@@ -346,12 +364,13 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: deleteServicesByEnvIdSettingsEntrypointsDeprioritizedPackagesByPackageName
+      x-operation-id-source: derived
   /services/{env_id}/settings/entrypoints/prioritized/classes:
     get:
       tags:
       - Entry Points
       summary: List all prioritized entry point classes
-      description: List all prioritized entry point classes
       parameters:
       - in: path
         name: env_id
@@ -373,6 +392,8 @@ paths:
                       $ref: '#/components/schemas/ClassName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsEntrypointsPrioritizedClasses
+      x-operation-id-source: derived
   /services/{env_id}/settings/entrypoints/prioritized/classes/{class_name}:
     put:
       tags:
@@ -401,11 +422,12 @@ paths:
           $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: putServicesByEnvIdSettingsEntrypointsPrioritizedClassesByClassName
+      x-operation-id-source: derived
     delete:
       tags:
       - Entry Points
       summary: Remove a class from the prioritized entry points list
-      description: Remove a class from the prioritized entry points list
       parameters:
       - in: path
         name: env_id
@@ -426,12 +448,13 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: deleteServicesByEnvIdSettingsEntrypointsPrioritizedClassesByClassName
+      x-operation-id-source: derived
   /services/{env_id}/settings/entrypoints/prioritized/packages:
     get:
       tags:
       - Entry Points
       summary: List all prioritized entry point packages
-      description: List all prioritized entry point packages
       parameters:
       - in: path
         name: env_id
@@ -452,6 +475,8 @@ paths:
                       $ref: '#/components/schemas/PackageName'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettingsEntrypointsPrioritizedPackages
+      x-operation-id-source: derived
   /services/{env_id}/settings/entrypoints/prioritized/packages/{package_name}:
     put:
       tags:
@@ -480,11 +505,12 @@ paths:
           $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: putServicesByEnvIdSettingsEntrypointsPrioritizedPackagesByPackageName
+      x-operation-id-source: derived
     delete:
       tags:
       - Entry Points
       summary: Remove a package from the prioritized entry points list
-      description: Remove a package from the prioritized entry points list
       parameters:
       - in: path
         name: env_id
@@ -505,15 +531,18 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: deleteServicesByEnvIdSettingsEntrypointsPrioritizedPackagesByPackageName
+      x-operation-id-source: derived
 components:
-  schemas:
-    PackageName:
-      type: string
-      example: com.company.package.name
-    ClassName:
-      type: string
-      example: com.company.ClassName
   requestBodies:
+    Package:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                $ref: '#/components/schemas/PackageName'
     Class:
       content:
         application/json:
@@ -529,23 +558,22 @@ components:
             properties:
               name:
                 $ref: '#/components/schemas/PackageName'
-    Package:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                $ref: '#/components/schemas/PackageName'
   responses:
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    UnauthorizedError:
-      description: Unauthorized
     BadRequestError:
       description: Bad Request
+    OK:
+      description: OK
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
+  schemas:
+    ClassName:
+      type: string
+      example: com.company.ClassName
+    PackageName:
+      type: string
+      example: com.company.package.name
   securitySchemes:
     basicAuth:
       type: http

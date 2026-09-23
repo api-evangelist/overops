@@ -1,10 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: v1
-  title: Services Alerts Timers API
+  title: Services Timers API
   contact:
     email: hello@overops.com
-  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+  description: Main OverOps API.
 servers:
 - url: https://api.overops.com/api/v1
 security:
@@ -41,11 +41,12 @@ paths:
                       $ref: '#/components/schemas/Timer'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdTimers
+      x-operation-id-source: derived
     post:
       tags:
       - Timers
       summary: Create new timer
-      description: Create new timer
       parameters:
       - in: path
         name: env_id
@@ -68,12 +69,13 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '409':
           $ref: '#/components/responses/Conflict'
+      operationId: postServicesByEnvIdTimers
+      x-operation-id-source: derived
   /services/{env_id}/timers/{timer_id}:
     get:
       tags:
       - Timers
       summary: Get timer properties
-      description: Get timer properties
       parameters:
       - in: path
         name: env_id
@@ -96,11 +98,12 @@ paths:
                 $ref: '#/components/schemas/Timer'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdTimersByTimerId
+      x-operation-id-source: derived
     post:
       tags:
       - Timers
       summary: Edit timer data
-      description: Edit timer data
       parameters:
       - in: path
         name: env_id
@@ -129,11 +132,12 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: postServicesByEnvIdTimersByTimerId
+      x-operation-id-source: derived
     delete:
       tags:
       - Timers
       summary: Delete timer
-      description: Delete timer
       parameters:
       - in: path
         name: env_id
@@ -154,20 +158,22 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbiddenError'
+      operationId: deleteServicesByEnvIdTimersByTimerId
+      x-operation-id-source: derived
 components:
   responses:
-    ForbiddenError:
-      description: Forbidden
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    Conflict:
-      description: Conflict
-    UnauthorizedError:
-      description: Unauthorized
     BadRequestError:
       description: Bad Request
+    Conflict:
+      description: Conflict
+    OK:
+      description: OK
+    NotFoundError:
+      description: Not Found
+    ForbiddenError:
+      description: Forbidden
+    UnauthorizedError:
+      description: Unauthorized
   schemas:
     Timer:
       description: Timer properties

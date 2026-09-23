@@ -1,10 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: v1
-  title: Services Alerts General API
+  title: Services General API
   contact:
     email: hello@overops.com
-  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+  description: Main OverOps API.
 servers:
 - url: https://api.overops.com/api/v1
 security:
@@ -41,6 +41,8 @@ paths:
                       $ref: '#/components/schemas/EnvironmentWithRole'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServices
+      x-operation-id-source: derived
     put:
       tags:
       - General
@@ -63,12 +65,13 @@ paths:
                 $ref: '#/components/schemas/EnvironmentBasic'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: putServices
+      x-operation-id-source: derived
   /services/{env_id}:
     get:
       tags:
       - General
       summary: Get information about an environment
-      description: Get information about an environment
       parameters:
       - in: path
         name: env_id
@@ -89,6 +92,8 @@ paths:
                     description: Data for a single environment
                     items:
                       $ref: '#/components/schemas/EnvironmentBasic'
+      operationId: getServicesByEnvId
+      x-operation-id-source: derived
     post:
       tags:
       - General
@@ -117,12 +122,13 @@ paths:
                 $ref: '#/components/schemas/EnvironmentBasic'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: postServicesByEnvId
+      x-operation-id-source: derived
   /services/{env_id}/settings:
     get:
       tags:
       - General
       summary: Get environment settings
-      description: Get environment settings
       parameters:
       - in: path
         name: env_id
@@ -135,12 +141,14 @@ paths:
           $ref: '#/components/responses/TBD'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdSettings
+      x-operation-id-source: derived
   /services/{env_id}/servers:
     get:
       tags:
       - General
       summary: List servers
-      description: List all (or just active) servers that were used to monitor applications. These can be either the IP/Hostname of a host or a cluster identifier. [How to name your Server](https://doc.overops.com/docs/naming-your-application-server-deployment)
+      description: List all (or just active) servers that were used to monitor applications. These can be either the IP/Hostname of a host or a cluster identifier. How to name your Server
       parameters:
       - in: path
         name: env_id
@@ -166,12 +174,14 @@ paths:
                       $ref: '#/components/schemas/Server'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdServers
+      x-operation-id-source: derived
   /services/{env_id}/applications:
     get:
       tags:
       - General
       summary: List applications
-      description: List all (or just active) applications that were used to monitor applications. These can be either an application name, an integration suite name or a specific instance. [How to name your Application](https://doc.overops.com/docs/naming-your-application-server-deployment)
+      description: List all (or just active) applications that were used to monitor applications. These can be either an application name, an integration suite name or a specific instance. How to name your Application
       parameters:
       - in: path
         name: env_id
@@ -197,12 +207,14 @@ paths:
                       $ref: '#/components/schemas/Application'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdApplications
+      x-operation-id-source: derived
   /services/{env_id}/deployments:
     get:
       tags:
       - General
       summary: List deployments
-      description: List all (or just active) deployments that were monitoring in the environment. These can be either the Jenkins build number, Git commit, Maven version, etc. [How to tag your deployment](https://doc.overops.com/docs/naming-your-application-server-deployment)
+      description: List all (or just active) deployments that were monitoring in the environment. These can be either the Jenkins build number, Git commit, Maven version, etc. How to tag your deployment
       parameters:
       - in: path
         name: env_id
@@ -228,12 +240,14 @@ paths:
                       $ref: '#/components/schemas/Deployment'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdDeployments
+      x-operation-id-source: derived
   /services/{env_id}/settings/storage-settings:
     get:
       tags:
       - General
       summary: Get storage settings of an environment
-      description: In Hybrid OverOps installation, data collected from your JVMs is locally redacted for PII and encrypted using your private encryption key before it is stored in a server that resides behind your firewall. Use this API call to fetch the current settings of your storage server. Visit OverOps [On-Premises Data Installation](https://doc.overops.com/docs/hybrid-installation) for full information
+      description: In Hybrid OverOps installation, data collected from your JVMs is locally redacted for PII and encrypted using your private encryption key before it is stored in a server that resides behind your firewall. Use this API call to fetch the current settings of your storage server. Visit OverOps On-Premises Data Installation for full information
       parameters:
       - in: path
         name: env_id
@@ -252,11 +266,13 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: getServicesByEnvIdSettingsStorageSettings
+      x-operation-id-source: derived
     post:
       tags:
       - General
       summary: Set storage settings for a service
-      description: In Hybrid OverOps installation, data collected from your JVMs is locally redacted for PII and encrypted using your private encryption key before it is stored in a server that resides behind your firewall. This API call allows you to configure your storage server as part of your Hybrid OverOps setup. Visit OverOps [On-Premises Data Installation](https://doc.overops.com/docs/hybrid-installation) for full information
+      description: In Hybrid OverOps installation, data collected from your JVMs is locally redacted for PII and encrypted using your private encryption key before it is stored in a server that resides behind your firewall. This API call allows you to configure your storage server as part of your Hybrid OverOps setup. Visit OverOps On-Premises Data Installation for full information
       parameters:
       - in: path
         name: env_id
@@ -279,12 +295,13 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: postServicesByEnvIdSettingsStorageSettings
+      x-operation-id-source: derived
   /services/{env_id}/settings/advanced-settings:
     get:
       tags:
       - General
       summary: Get advanced settings for an environment
-      description: Get advanced settings for an environment
       parameters:
       - in: path
         name: env_id
@@ -303,11 +320,12 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: getServicesByEnvIdSettingsAdvancedSettings
+      x-operation-id-source: derived
     post:
       tags:
       - General
       summary: Set advanced settings for an environment
-      description: Set advanced settings for an environment
       parameters:
       - in: path
         name: env_id
@@ -330,6 +348,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: postServicesByEnvIdSettingsAdvancedSettings
+      x-operation-id-source: derived
   /services/{env_id}/settings/reliability-settings:
     get:
       tags:
@@ -358,6 +378,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: getServicesByEnvIdSettingsReliabilitySettings
+      x-operation-id-source: derived
     post:
       tags:
       - General
@@ -389,21 +411,10 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: postServicesByEnvIdSettingsReliabilitySettings
+      x-operation-id-source: derived
 components:
   schemas:
-    EnvironmentBasic:
-      type: object
-      description: Basic information about a environment
-      properties:
-        id:
-          type: string
-          example: S100
-        name:
-          type: string
-          example: Pre-prod
-        full_key:
-          type: string
-          example: S35817XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     Deployment:
       type: object
       properties:
@@ -421,6 +432,23 @@ components:
           type: string
           description: The last time when the deployment was seen by OverOps
           example: '2018-03-01T08:08:08.001Z'
+    EnvironmentWithRole:
+      type: object
+      description: Environment data including user's role
+      properties:
+        id:
+          type: string
+          example: S100
+        name:
+          type: string
+          example: Pre-prod
+        full_key:
+          type: string
+          example: S35817XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        role:
+          type: string
+          description: user's role in the environment
+          example: admin
     EnvironmentAdvancedSettings:
       type: object
       description: Advanced settings for an environment
@@ -481,9 +509,9 @@ components:
           type: string
           description: The last time when the application was seen by OverOps
           example: '2018-03-01T08:08:08.001Z'
-    EnvironmentWithRole:
+    EnvironmentBasic:
       type: object
-      description: Environment data including user's role
+      description: Basic information about a environment
       properties:
         id:
           type: string
@@ -494,10 +522,6 @@ components:
         full_key:
           type: string
           example: S35817XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        role:
-          type: string
-          description: user's role in the environment
-          example: admin
     Server:
       type: object
       properties:
@@ -516,16 +540,16 @@ components:
           description: The last time when the server was seen by OverOps
           example: '2018-03-01T08:08:08.001Z'
   responses:
-    TBD:
-      description: TBD
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    UnauthorizedError:
-      description: Unauthorized
     BadRequestError:
       description: Bad Request
+    TBD:
+      description: TBD
+    OK:
+      description: OK
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http

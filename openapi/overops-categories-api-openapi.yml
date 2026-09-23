@@ -1,10 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: v1
-  title: Services Alerts Categories API
+  title: Services Categories API
   contact:
     email: hello@overops.com
-  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+  description: Main OverOps API.
 servers:
 - url: https://api.overops.com/api/v1
 security:
@@ -51,11 +51,12 @@ paths:
                       $ref: '#/components/schemas/Category'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdCategories
+      x-operation-id-source: derived
     post:
       tags:
       - Categories
       summary: Create category (Not implemented yet)
-      description: Create category (Not implemented yet)
       parameters:
       - in: path
         name: env_id
@@ -78,12 +79,13 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '409':
           $ref: '#/components/responses/Conflict'
+      operationId: postServicesByEnvIdCategories
+      x-operation-id-source: derived
   /services/{env_id}/categories/{category_id}:
     get:
       tags:
       - Categories
       summary: Get category details (Not implemented yet)
-      description: Get category details (Not implemented yet)
       parameters:
       - in: path
         name: env_id
@@ -108,11 +110,12 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbiddenError'
+      operationId: getServicesByEnvIdCategoriesByCategoryId
+      x-operation-id-source: derived
     delete:
       tags:
       - Categories
       summary: Delete category (Not implemented yet)
-      description: Delete category (Not implemented yet)
       parameters:
       - in: path
         name: env_id
@@ -133,12 +136,13 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbiddenError'
+      operationId: deleteServicesByEnvIdCategoriesByCategoryId
+      x-operation-id-source: derived
   /services/{env_id}/categories/{category_id}/views:
     post:
       tags:
       - Categories
       summary: Add view to selected category
-      description: Add view to selected category
       parameters:
       - in: path
         name: env_id
@@ -169,24 +173,25 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: postServicesByEnvIdCategoriesByCategoryIdViews
+      x-operation-id-source: derived
 components:
+  responses:
+    BadRequestError:
+      description: Bad Request
+    Conflict:
+      description: Conflict
+    TBD:
+      description: TBD
+    OK:
+      description: OK
+    NotFoundError:
+      description: Not Found
+    ForbiddenError:
+      description: Forbidden
+    UnauthorizedError:
+      description: Unauthorized
   schemas:
-    ViewBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          example: P12
-        name:
-          type: string
-          example: DB Errors
-        shared:
-          type: boolean
-          example: false
-        admin:
-          type: boolean
-          description: Indicates that this view can be created and accessed by environment admins only.
-          example: true
     Category:
       type: object
       description: Single category properties
@@ -213,21 +218,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ViewBasic'
-  responses:
-    ForbiddenError:
-      description: Forbidden
-    TBD:
-      description: TBD
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    Conflict:
-      description: Conflict
-    UnauthorizedError:
-      description: Unauthorized
-    BadRequestError:
-      description: Bad Request
+    ViewBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          example: P12
+        name:
+          type: string
+          example: DB Errors
+        shared:
+          type: boolean
+          example: false
+        admin:
+          type: boolean
+          description: Indicates that this view can be created and accessed by environment admins only.
+          example: true
   securitySchemes:
     basicAuth:
       type: http

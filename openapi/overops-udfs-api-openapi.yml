@@ -1,10 +1,10 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: v1
-  title: Services Alerts UDFs API
+  title: Services UD Fs API
   contact:
     email: hello@overops.com
-  description: "Main OverOps API.\nThe REST API layer enables OverOps admins and users to perform and automate all actions\nprovided by the OverOps UI available at https://app.overops.com (or On-premises equivalent URL) via a platform independent programmatic interface.\nA wrapper Java client API library that leverages these APIs for convenience by\nJava and Scala developers is available at https://github.com/takipi/api-client and on Maven Central.\n\nAll calls must be authenticated using one of the following methods:\n  1. Using `x-api-key` header (To generate the token, go to `Settings` --> `Account Settings` in the OverOps App). This is the recommended method.\n  2. Using Basic auth with `username:password` combo.\n"
+  description: Main OverOps API.
 servers:
 - url: https://api.overops.com/api/v1
 security:
@@ -31,11 +31,12 @@ paths:
                   $ref: '#/components/schemas/UDFLibrary'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getGlobalSettingsUdfs
+      x-operation-id-source: derived
     post:
       tags:
       - UDFs
       summary: Add a new UDF library
-      description: Add a new UDF library
       requestBody:
         content:
           application/json:
@@ -50,6 +51,8 @@ paths:
           $ref: '#/components/responses/OK'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: postGlobalSettingsUdfs
+      x-operation-id-source: derived
   /global-settings/udfs/{library_id}:
     get:
       tags:
@@ -72,11 +75,12 @@ paths:
                 $ref: '#/components/schemas/UDFLibrary'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getGlobalSettingsUdfsByLibraryId
+      x-operation-id-source: derived
     delete:
       tags:
       - UDFs
       summary: Remove UDF library (TBD - Not yet implemented)
-      description: Remove UDF library (TBD - Not yet implemented)
       parameters:
       - in: path
         name: library_id
@@ -91,6 +95,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: deleteGlobalSettingsUdfsByLibraryId
+      x-operation-id-source: derived
   /services/{env_id}/udfs:
     get:
       tags:
@@ -115,11 +121,12 @@ paths:
                   $ref: '#/components/schemas/UDFLibrary'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdUdfs
+      x-operation-id-source: derived
     post:
       tags:
       - UDFs
       summary: Add a new UDF library
-      description: Add a new UDF library
       parameters:
       - in: path
         name: env_id
@@ -141,6 +148,8 @@ paths:
           description: UDF library was successfully added
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: postServicesByEnvIdUdfs
+      x-operation-id-source: derived
   /services/{env_id}/udfs/{library_id}:
     get:
       tags:
@@ -169,6 +178,8 @@ paths:
                 $ref: '#/components/schemas/UDFLibrary'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+      operationId: getServicesByEnvIdUdfsByLibraryId
+      x-operation-id-source: derived
     delete:
       tags:
       - UDFs
@@ -194,8 +205,27 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFoundError'
+      operationId: deleteServicesByEnvIdUdfsByLibraryId
+      x-operation-id-source: derived
 components:
   schemas:
+    UDFLibrary:
+      description: UDF Properties
+      type: object
+      properties:
+        id:
+          type: string
+          example: L34
+        version:
+          type: string
+          example: 1
+        backward_compatible:
+          type: string
+          example: true
+        functions:
+          type: array
+          items:
+            $ref: '#/components/schemas/UDF'
     UDF:
       type: object
       properties:
@@ -222,30 +252,13 @@ components:
               default_value:
                 type: string
                 example: 100
-    UDFLibrary:
-      description: UDF Properties
-      type: object
-      properties:
-        id:
-          type: string
-          example: L34
-        version:
-          type: string
-          example: 1
-        backward_compatible:
-          type: string
-          example: true
-        functions:
-          type: array
-          items:
-            $ref: '#/components/schemas/UDF'
   responses:
+    UnauthorizedError:
+      description: Unauthorized
     NotFoundError:
       description: Not Found
     OK:
       description: OK
-    UnauthorizedError:
-      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http
