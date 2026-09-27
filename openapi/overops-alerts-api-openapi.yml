@@ -387,54 +387,147 @@ paths:
       operationId: getServicesByEnvIdAlerts
       x-operation-id-source: derived
 components:
+  requestBodies:
+    Alert:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Alert'
+      description: Alerts settings
+  responses:
+    UnauthorizedError:
+      description: Unauthorized
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    ForbiddenError:
+      description: Forbidden
   schemas:
-    UDFBasic:
+    ViewAlertsSummary:
+      description: basic alerts info for a single view
       type: object
       properties:
-        library_id:
+        view_id:
           type: string
-          example: L8
-        function_id:
+          description: View ID
+          example: P12
+        view:
           type: string
-          example: Tier Routing
-        summary:
-          type: string
-          example: Anomaly(last 1d vs. prev 7d, Δ > 100%)"
-        args:
-          type: string
-          example: '# Category name where tiers views will be created.
-
-            category_name=tiers
-
-
-            # Link to the full tiers list: https://git.io/fpPT0
-
-            # Enhance it with a delimited list: A=B;C=D;E=F, where the first item is a package (e.g com.mongo), and the second is a tier (e.g MongoDB).
-
-            namespaces=com.sparktale.bugtale.server.common.distribute.redis=Redis;org.redisson=Redisson;com.sparktale.bugtale.server.common.distribute.guava=Guava-Cache;com.sparktale.bugtale.util.cache=Cache;com.sparktale.bugtale.server.app.dashboard.cache=Cache;com.sparktale.bugtale.server.common.stats=SQL-Stats;com.sparktale.bugtale.server.common.pds=SQL-Pds;com.sparktale.bugtale.qsql=SQL-Queue;com.sparktale.bugtale.server.services.queue.qsql=SQL-Queue;com.sparktale.bugtale.shared.backend.rdbms=SQL-Common;com.sparktale.bugtale.server.common.queue=Local-Queue;com.sparktale.bugtale.server.common.alerts=Alerts-Engine;com.sparktale.bugtale.decoding=Snapshot-Analysis;com.sparktale.bugtale.server.common.hits=Snapshot-Analysis;com.sparktale.bugtale.server.common.tailor=Snapshot-Analysis;com.sparktale.bugtale.server.analysis=Code-Analysis;com.sparktale.bugtale.server.worker.analysis=Code-Analysis;com.sparktale.bugtale.server.common.source=Code-Analysis;com.sparktale.bugtale.analyzer=Code-Analysis;com.sparktale.bugtale.decompiler=Decompiler;com.takipi.integrations.grafana=OverOps-Influx-Backend;com.sparktale.common.util=Utils;com.sparktale.bugtale.shared.backend.util=Utils'
-    CustomAlert:
-      description: Custom Alert
-      type: object
-      properties:
-        title:
-          type: string
-          example: Logged Warning in Some.File
-        body:
-          type: string
-          example: A new logged warning has been detected in Staging2! (alert added by 4 members)
-        links:
+          description: View Name
+          example: API
+        categories:
           type: array
+          description: Categories Names
           items:
-            type: object
-            properties:
-              pre_link_text:
+            type: string
+          example: Applications
+        alerts:
+          type: object
+          properties:
+            global:
+              type: boolean
+              description: Indicates alerts which are global, i.e. will affect all users that share this view.
+              example: false
+            alert_on_new:
+              type: boolean
+              description: Indicates alerts which are sent on new events
+              example: true
+            alert_on_every_entrypoint:
+              type: boolean
+              description: Indicates alerts which are sent for every new event regardless of it's entry point
+            anomaly_alert:
+              type: object
+              properties:
+                alert_on_anomaly:
+                  type: boolean
+                  example: true
+                anomaly_function:
+                  $ref: '#/components/schemas/UDFBasic'
+                period:
+                  type: integer
+                  description: The interval (in minutes) between periodic/anomaly udf invocations
+                  example: 3
+            channels:
+              type: array
+              items:
                 type: string
-              link_text:
+                enum:
+                - EMAIL
+                - SLACK
+                - HIPCHAT
+                - PAGERDUTY
+                - JIRA
+                - WEBHOOK
+                - SERVICENOW
+                - UDF
+                example: SLACK
+            channel_function:
+              $ref: '#/components/schemas/UDFBasic'
+    AlertDefaults:
+      description: Default alert settings for an environment
+      type: object
+      properties:
+        email:
+          type: object
+          properties:
+            alert_me:
+              type: boolean
+              example: true
+            alert_all_team_members:
+              type: boolean
+              example: false
+            alert_additional_emails:
+              type: boolean
+              example: false
+            additional_emails_to_alert:
+              type: array
+              items:
                 type: string
-              post_link_text:
-                type: string
-              link:
-                type: string
+                example: user1@company.com
+        slack:
+          type: object
+          properties:
+            inhook_url:
+              type: string
+              example: https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j
+        pager_duty:
+          type: object
+          properties:
+            service_integration_key:
+              type: string
+              example: sflk234lkdjflsj12o8312
+        service_now:
+          type: object
+          properties:
+            url:
+              type: string
+              example: http://servicenow.company.com/hooks
+            user_id:
+              type: string
+              example: admin
+            password:
+              type: string
+              example: pa$$1
+            table:
+              description: the name (internal name) of a servicenow table to be used
+              type: string
+              example: sys_report_layer
+        hip_chat:
+          type: object
+          properties:
+            token:
+              type: string
+              example: dfgdk2342kljsldfjslk2342fsdfkjslkj
+            room:
+              type: string
+              example: Takipi
+        webhook:
+          type: object
+          properties:
+            webhook_url:
+              type: string
+              example: http://hooks.company.com/overops1/P1/hook
     Alert:
       description: All alert settings of a view
       type: object
@@ -584,146 +677,53 @@ components:
               type: string
               example: label=sample_label_name
           type: object
-    ViewAlertsSummary:
-      description: basic alerts info for a single view
+    CustomAlert:
+      description: Custom Alert
       type: object
       properties:
-        view_id:
+        title:
           type: string
-          description: View ID
-          example: P12
-        view:
+          example: Logged Warning in Some.File
+        body:
           type: string
-          description: View Name
-          example: API
-        categories:
+          example: A new logged warning has been detected in Staging2! (alert added by 4 members)
+        links:
           type: array
-          description: Categories Names
           items:
-            type: string
-          example: Applications
-        alerts:
-          type: object
-          properties:
-            global:
-              type: boolean
-              description: Indicates alerts which are global, i.e. will affect all users that share this view.
-              example: false
-            alert_on_new:
-              type: boolean
-              description: Indicates alerts which are sent on new events
-              example: true
-            alert_on_every_entrypoint:
-              type: boolean
-              description: Indicates alerts which are sent for every new event regardless of it's entry point
-            anomaly_alert:
-              type: object
-              properties:
-                alert_on_anomaly:
-                  type: boolean
-                  example: true
-                anomaly_function:
-                  $ref: '#/components/schemas/UDFBasic'
-                period:
-                  type: integer
-                  description: The interval (in minutes) between periodic/anomaly udf invocations
-                  example: 3
-            channels:
-              type: array
-              items:
+            type: object
+            properties:
+              pre_link_text:
                 type: string
-                enum:
-                - EMAIL
-                - SLACK
-                - HIPCHAT
-                - PAGERDUTY
-                - JIRA
-                - WEBHOOK
-                - SERVICENOW
-                - UDF
-                example: SLACK
-            channel_function:
-              $ref: '#/components/schemas/UDFBasic'
-    AlertDefaults:
-      description: Default alert settings for an environment
+              link_text:
+                type: string
+              post_link_text:
+                type: string
+              link:
+                type: string
+    UDFBasic:
       type: object
       properties:
-        email:
-          type: object
-          properties:
-            alert_me:
-              type: boolean
-              example: true
-            alert_all_team_members:
-              type: boolean
-              example: false
-            alert_additional_emails:
-              type: boolean
-              example: false
-            additional_emails_to_alert:
-              type: array
-              items:
-                type: string
-                example: user1@company.com
-        slack:
-          type: object
-          properties:
-            inhook_url:
-              type: string
-              example: https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j
-        pager_duty:
-          type: object
-          properties:
-            service_integration_key:
-              type: string
-              example: sflk234lkdjflsj12o8312
-        service_now:
-          type: object
-          properties:
-            url:
-              type: string
-              example: http://servicenow.company.com/hooks
-            user_id:
-              type: string
-              example: admin
-            password:
-              type: string
-              example: pa$$1
-            table:
-              description: the name (internal name) of a servicenow table to be used
-              type: string
-              example: sys_report_layer
-        hip_chat:
-          type: object
-          properties:
-            token:
-              type: string
-              example: dfgdk2342kljsldfjslk2342fsdfkjslkj
-            room:
-              type: string
-              example: Takipi
-        webhook:
-          type: object
-          properties:
-            webhook_url:
-              type: string
-              example: http://hooks.company.com/overops1/P1/hook
-  responses:
-    OK:
-      description: OK
-    NotFoundError:
-      description: Not Found
-    ForbiddenError:
-      description: Forbidden
-    UnauthorizedError:
-      description: Unauthorized
-  requestBodies:
-    Alert:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Alert'
-      description: Alerts settings
+        library_id:
+          type: string
+          example: L8
+        function_id:
+          type: string
+          example: Tier Routing
+        summary:
+          type: string
+          example: Anomaly(last 1d vs. prev 7d, Δ > 100%)"
+        args:
+          type: string
+          example: '# Category name where tiers views will be created.
+
+            category_name=tiers
+
+
+            # Link to the full tiers list: https://git.io/fpPT0
+
+            # Enhance it with a delimited list: A=B;C=D;E=F, where the first item is a package (e.g com.mongo), and the second is a tier (e.g MongoDB).
+
+            namespaces=com.sparktale.bugtale.server.common.distribute.redis=Redis;org.redisson=Redisson;com.sparktale.bugtale.server.common.distribute.guava=Guava-Cache;com.sparktale.bugtale.util.cache=Cache;com.sparktale.bugtale.server.app.dashboard.cache=Cache;com.sparktale.bugtale.server.common.stats=SQL-Stats;com.sparktale.bugtale.server.common.pds=SQL-Pds;com.sparktale.bugtale.qsql=SQL-Queue;com.sparktale.bugtale.server.services.queue.qsql=SQL-Queue;com.sparktale.bugtale.shared.backend.rdbms=SQL-Common;com.sparktale.bugtale.server.common.queue=Local-Queue;com.sparktale.bugtale.server.common.alerts=Alerts-Engine;com.sparktale.bugtale.decoding=Snapshot-Analysis;com.sparktale.bugtale.server.common.hits=Snapshot-Analysis;com.sparktale.bugtale.server.common.tailor=Snapshot-Analysis;com.sparktale.bugtale.server.analysis=Code-Analysis;com.sparktale.bugtale.server.worker.analysis=Code-Analysis;com.sparktale.bugtale.server.common.source=Code-Analysis;com.sparktale.bugtale.analyzer=Code-Analysis;com.sparktale.bugtale.decompiler=Decompiler;com.takipi.integrations.grafana=OverOps-Influx-Backend;com.sparktale.common.util=Utils;com.sparktale.bugtale.shared.backend.util=Utils'
   securitySchemes:
     basicAuth:
       type: http

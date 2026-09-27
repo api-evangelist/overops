@@ -177,20 +177,20 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    BadRequestError:
-      description: Bad Request
     Conflict:
       description: Conflict
-    TBD:
-      description: TBD
-    OK:
-      description: OK
-    NotFoundError:
-      description: Not Found
-    ForbiddenError:
-      description: Forbidden
+    BadRequestError:
+      description: Bad Request
     UnauthorizedError:
       description: Unauthorized
+    TBD:
+      description: TBD
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    ForbiddenError:
+      description: Forbidden
   schemas:
     Category:
       type: object

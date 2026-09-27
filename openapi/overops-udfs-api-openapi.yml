@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   version: v1
-  title: Services UD Fs API
+  title: Services UDFs API
   contact:
     email: hello@overops.com
   description: Main OverOps API.
@@ -208,6 +208,13 @@ paths:
       operationId: deleteServicesByEnvIdUdfsByLibraryId
       x-operation-id-source: derived
 components:
+  responses:
+    UnauthorizedError:
+      description: Unauthorized
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
   schemas:
     UDFLibrary:
       description: UDF Properties
@@ -252,13 +259,6 @@ components:
               default_value:
                 type: string
                 example: 100
-  responses:
-    UnauthorizedError:
-      description: Unauthorized
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
   securitySchemes:
     basicAuth:
       type: http

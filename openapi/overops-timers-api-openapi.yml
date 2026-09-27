@@ -162,18 +162,18 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    BadRequestError:
-      description: Bad Request
     Conflict:
       description: Conflict
-    OK:
-      description: OK
-    NotFoundError:
-      description: Not Found
-    ForbiddenError:
-      description: Forbidden
+    BadRequestError:
+      description: Bad Request
     UnauthorizedError:
       description: Unauthorized
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    ForbiddenError:
+      description: Forbidden
   schemas:
     Timer:
       description: Timer properties

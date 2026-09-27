@@ -463,62 +463,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    EntryPointStats:
+    EventStats:
       type: object
       properties:
-        invocations:
+        hits:
           type: integer
           example: 42
-        avg_time:
-          type: number
-          description: Average entry point running time (in ms)
-          example: 925.7
-        total_time:
-          type: number
-          description: Entry point running time (in ms)
-          example: 9345
-        avg_time_std_deviation:
-          type: number
-          description: Standard deviation of entry point running time (in ms)
-          example: 130
-    EventAction:
-      properties:
-        type:
-          type: string
-          example: Label
-        action:
-          type: string
-          example: Add Label
-        data:
-          type: string
-          example: Critical
-        timestamp:
-          type: string
-          description: Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
-          example: '2018-02-28T22:47:09.038Z'
-        initiator:
-          type: string
-          example: joe@example.com
-        initiator_type:
-          type: string
-          example: User
-    EntryPoint:
-      type: object
-      properties:
-        name:
-          type: string
-          example: com/company/Main#main#([Ljava/lang/String;)V
-        class_name:
-          type: string
-          example: com/company/Main
-        method_name:
-          type: string
-          example: main
-        method_desc:
-          type: string
-          example: ([Ljava/lang/String;)V
-        stats:
-          $ref: '#/components/schemas/EntryPointStats'
+        invocations:
+          type: integer
+          example: 51929
     Event:
       description: An exception, logged error and more
       type: object
@@ -569,15 +522,41 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CodeLocation'
-    EventStats:
+    EntryPoint:
       type: object
       properties:
-        hits:
-          type: integer
-          example: 42
+        name:
+          type: string
+          example: com/company/Main#main#([Ljava/lang/String;)V
+        class_name:
+          type: string
+          example: com/company/Main
+        method_name:
+          type: string
+          example: main
+        method_desc:
+          type: string
+          example: ([Ljava/lang/String;)V
+        stats:
+          $ref: '#/components/schemas/EntryPointStats'
+    EntryPointStats:
+      type: object
+      properties:
         invocations:
           type: integer
-          example: 51929
+          example: 42
+        avg_time:
+          type: number
+          description: Average entry point running time (in ms)
+          example: 925.7
+        total_time:
+          type: number
+          description: Entry point running time (in ms)
+          example: 9345
+        avg_time_std_deviation:
+          type: number
+          description: Standard deviation of entry point running time (in ms)
+          example: 130
     CodeLocation:
       description: A code location, for error location, etc
       type: object
@@ -594,15 +573,36 @@ components:
         method_desc:
           type: string
           example: ([Ljava/lang/String;)V
+    EventAction:
+      properties:
+        type:
+          type: string
+          example: Label
+        action:
+          type: string
+          example: Add Label
+        data:
+          type: string
+          example: Critical
+        timestamp:
+          type: string
+          description: Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+          example: '2018-02-28T22:47:09.038Z'
+        initiator:
+          type: string
+          example: joe@example.com
+        initiator_type:
+          type: string
+          example: User
   responses:
-    BadRequestError:
-      description: Bad Request
-    OK:
-      description: OK
-    NotFoundError:
-      description: Not Found
     UnauthorizedError:
       description: Unauthorized
+    BadRequestError:
+      description: Bad Request
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
   securitySchemes:
     basicAuth:
       type: http

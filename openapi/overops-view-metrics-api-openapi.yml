@@ -356,7 +356,21 @@ paths:
       operationId: getServicesByEnvIdViewsByViewIdMetricsEventGraph
       x-operation-id-source: derived
 components:
+  responses:
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
   schemas:
+    EventStats:
+      type: object
+      properties:
+        hits:
+          type: integer
+          example: 42
+        invocations:
+          type: integer
+          example: 51929
     EntryPointStats:
       type: object
       properties:
@@ -375,20 +389,6 @@ components:
           type: number
           description: Standard deviation of entry point running time (in ms)
           example: 130
-    EventStats:
-      type: object
-      properties:
-        hits:
-          type: integer
-          example: 42
-        invocations:
-          type: integer
-          example: 51929
-  responses:
-    NotFoundError:
-      description: Not Found
-    UnauthorizedError:
-      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http

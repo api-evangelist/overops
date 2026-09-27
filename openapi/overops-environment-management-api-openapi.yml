@@ -163,10 +163,10 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    OK:
-      description: OK
     UnauthorizedError:
       description: Unauthorized
+    OK:
+      description: OK
   schemas:
     Collector:
       description: Collector properties

@@ -813,130 +813,29 @@ paths:
       operationId: postServicesByEnvIdCategoriesByCategoryIdViews
       x-operation-id-source: derived
 components:
+  responses:
+    Conflict:
+      description: Conflict
+    UnauthorizedError:
+      description: Unauthorized
+    BadRequestError:
+      description: Bad Request
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    ForbiddenError:
+      description: Forbidden
   schemas:
-    EntryPointStats:
+    EventStats:
       type: object
       properties:
-        invocations:
+        hits:
           type: integer
           example: 42
-        avg_time:
-          type: number
-          description: Average entry point running time (in ms)
-          example: 925.7
-        total_time:
-          type: number
-          description: Entry point running time (in ms)
-          example: 9345
-        avg_time_std_deviation:
-          type: number
-          description: Standard deviation of entry point running time (in ms)
-          example: 130
-    ViewHistory:
-      type: object
-      properties:
-        created_on:
-          type: string
-          description: View creation time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
-          example: '2018-02-28T22:47:09.038+02:00'
-        creation_method:
-          type: string
-          enum:
-          - manual
-          - api
-          description: View creation method
-          example: manual
-        created_by:
-          type: string
-          description: View creator
-          example: John Doe
-        updated_on:
-          type: string
-          description: View update time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
-          example: '2018-05-01T10:00:00.020+03:00'
-        update_method:
-          type: string
-          enum:
-          - manual
-          - api
-          description: View update method
-          example: manual
-        updated_by:
-          type: string
-          description: updated by
-          example: John Doe
-    ViewFull:
-      type: object
-      description: Single view full properties
-      properties:
-        name:
-          type: string
-          example: DB Errors
-        description:
-          type: string
-          example: This is a DB Errors View
-        shared:
-          type: boolean
-          example: false
-        admin:
-          type: boolean
-          description: Indicates that this view is accessible to environment admins only.
-          example: true
-        default:
-          type: boolean
-          description: TBD - NOT YET IMPLEMENTED
-          example: false
-        filters:
-          $ref: '#/components/schemas/Filter'
-    CodeLocation:
-      description: A code location, for error location, etc
-      type: object
-      properties:
-        prettified_name:
-          type: string
-          example: Main.main
-        class_name:
-          type: string
-          example: com.company.Main
-        method_name:
-          type: string
-          example: main
-        method_desc:
-          type: string
-          example: ([Ljava/lang/String;)V
-    ViewBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          example: P12
-        name:
-          type: string
-          example: DB Errors
-        shared:
-          type: boolean
-          example: false
-        admin:
-          type: boolean
-          description: Indicates that this view can be created and accessed by environment admins only.
-          example: true
-    EntryPoint:
-      type: object
-      properties:
-        name:
-          type: string
-          example: com/company/Main#main#([Ljava/lang/String;)V
-        class_name:
-          type: string
-          example: com/company/Main
-        method_name:
-          type: string
-          example: main
-        method_desc:
-          type: string
-          example: ([Ljava/lang/String;)V
-        stats:
-          $ref: '#/components/schemas/EntryPointStats'
+        invocations:
+          type: integer
+          example: 51929
     Event:
       description: An exception, logged error and more
       type: object
@@ -987,15 +886,39 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CodeLocation'
-    EventStats:
+    ViewHistory:
       type: object
       properties:
-        hits:
-          type: integer
-          example: 42
-        invocations:
-          type: integer
-          example: 51929
+        created_on:
+          type: string
+          description: View creation time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+          example: '2018-02-28T22:47:09.038+02:00'
+        creation_method:
+          type: string
+          enum:
+          - manual
+          - api
+          description: View creation method
+          example: manual
+        created_by:
+          type: string
+          description: View creator
+          example: John Doe
+        updated_on:
+          type: string
+          description: View update time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+          example: '2018-05-01T10:00:00.020+03:00'
+        update_method:
+          type: string
+          enum:
+          - manual
+          - api
+          description: View update method
+          example: manual
+        updated_by:
+          type: string
+          description: updated by
+          example: John Doe
     Filter:
       description: Filter properties
       type: object
@@ -1098,19 +1021,96 @@ components:
         search:
           type: string
           description: Free text search
-  responses:
-    BadRequestError:
-      description: Bad Request
-    Conflict:
-      description: Conflict
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    ForbiddenError:
-      description: Forbidden
-    UnauthorizedError:
-      description: Unauthorized
+    ViewBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          example: P12
+        name:
+          type: string
+          example: DB Errors
+        shared:
+          type: boolean
+          example: false
+        admin:
+          type: boolean
+          description: Indicates that this view can be created and accessed by environment admins only.
+          example: true
+    EntryPoint:
+      type: object
+      properties:
+        name:
+          type: string
+          example: com/company/Main#main#([Ljava/lang/String;)V
+        class_name:
+          type: string
+          example: com/company/Main
+        method_name:
+          type: string
+          example: main
+        method_desc:
+          type: string
+          example: ([Ljava/lang/String;)V
+        stats:
+          $ref: '#/components/schemas/EntryPointStats'
+    EntryPointStats:
+      type: object
+      properties:
+        invocations:
+          type: integer
+          example: 42
+        avg_time:
+          type: number
+          description: Average entry point running time (in ms)
+          example: 925.7
+        total_time:
+          type: number
+          description: Entry point running time (in ms)
+          example: 9345
+        avg_time_std_deviation:
+          type: number
+          description: Standard deviation of entry point running time (in ms)
+          example: 130
+    CodeLocation:
+      description: A code location, for error location, etc
+      type: object
+      properties:
+        prettified_name:
+          type: string
+          example: Main.main
+        class_name:
+          type: string
+          example: com.company.Main
+        method_name:
+          type: string
+          example: main
+        method_desc:
+          type: string
+          example: ([Ljava/lang/String;)V
+    ViewFull:
+      type: object
+      description: Single view full properties
+      properties:
+        name:
+          type: string
+          example: DB Errors
+        description:
+          type: string
+          example: This is a DB Errors View
+        shared:
+          type: boolean
+          example: false
+        admin:
+          type: boolean
+          description: Indicates that this view is accessible to environment admins only.
+          example: true
+        default:
+          type: boolean
+          description: TBD - NOT YET IMPLEMENTED
+          example: false
+        filters:
+          $ref: '#/components/schemas/Filter'
   requestBodies:
     ViewFull:
       content:

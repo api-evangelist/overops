@@ -129,6 +129,11 @@ paths:
       operationId: postServicesByEnvIdTeamChangeRole
       x-operation-id-source: derived
 components:
+  responses:
+    UnauthorizedError:
+      description: Unauthorized
+    OK:
+      description: OK
   schemas:
     TeamMembersBasic:
       description: List of environment team members
@@ -167,11 +172,6 @@ components:
             type: string
             description: Invitation link for newly invited members (pending invitation status)
             example: https://app.overops.com/app/cst?token=abcda12345678
-  responses:
-    OK:
-      description: OK
-    UnauthorizedError:
-      description: Unauthorized
   requestBodies:
     TeamMembersBasic:
       content:

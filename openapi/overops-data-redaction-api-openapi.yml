@@ -600,6 +600,15 @@ paths:
       operationId: deleteServicesByEnvIdSettingsDataRedactionPackagesByPackageName
       x-operation-id-source: derived
 components:
+  responses:
+    BadRequestError:
+      description: Bad Request
+    UnauthorizedError:
+      description: Unauthorized
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
   schemas:
     Pattern:
       description: A data redaction pattern used to define PII RegEx
@@ -617,15 +626,6 @@ components:
         is_active:
           type: boolean
           example: true
-  responses:
-    BadRequestError:
-      description: Bad Request
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    UnauthorizedError:
-      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http
