@@ -162,11 +162,6 @@ paths:
       operationId: getServicesByEnvIdOveropsStatusCollectors
       x-operation-id-source: derived
 components:
-  responses:
-    UnauthorizedError:
-      description: Unauthorized
-    OK:
-      description: OK
   schemas:
     Collector:
       description: Collector properties
@@ -234,6 +229,11 @@ components:
           type: boolean
           description: marks if the monitoring of this particular agent enabled/disabled
           example: true
+  responses:
+    UnauthorizedError:
+      description: Unauthorized
+    OK:
+      description: OK
   securitySchemes:
     basicAuth:
       type: http

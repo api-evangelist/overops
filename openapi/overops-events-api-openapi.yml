@@ -463,15 +463,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    EventStats:
-      type: object
-      properties:
-        hits:
-          type: integer
-          example: 42
-        invocations:
-          type: integer
-          example: 51929
     Event:
       description: An exception, logged error and more
       type: object
@@ -522,23 +513,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CodeLocation'
-    EntryPoint:
+    CodeLocation:
+      description: A code location, for error location, etc
       type: object
       properties:
-        name:
+        prettified_name:
           type: string
-          example: com/company/Main#main#([Ljava/lang/String;)V
+          example: Main.main
         class_name:
           type: string
-          example: com/company/Main
+          example: com.company.Main
         method_name:
           type: string
           example: main
         method_desc:
           type: string
           example: ([Ljava/lang/String;)V
-        stats:
-          $ref: '#/components/schemas/EntryPointStats'
     EntryPointStats:
       type: object
       properties:
@@ -557,22 +547,23 @@ components:
           type: number
           description: Standard deviation of entry point running time (in ms)
           example: 130
-    CodeLocation:
-      description: A code location, for error location, etc
+    EntryPoint:
       type: object
       properties:
-        prettified_name:
+        name:
           type: string
-          example: Main.main
+          example: com/company/Main#main#([Ljava/lang/String;)V
         class_name:
           type: string
-          example: com.company.Main
+          example: com/company/Main
         method_name:
           type: string
           example: main
         method_desc:
           type: string
           example: ([Ljava/lang/String;)V
+        stats:
+          $ref: '#/components/schemas/EntryPointStats'
     EventAction:
       properties:
         type:
@@ -594,15 +585,24 @@ components:
         initiator_type:
           type: string
           example: User
+    EventStats:
+      type: object
+      properties:
+        hits:
+          type: integer
+          example: 42
+        invocations:
+          type: integer
+          example: 51929
   responses:
-    UnauthorizedError:
-      description: Unauthorized
-    BadRequestError:
-      description: Bad Request
-    NotFoundError:
-      description: Not Found
     OK:
       description: OK
+    NotFoundError:
+      description: Not Found
+    BadRequestError:
+      description: Bad Request
+    UnauthorizedError:
+      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http

@@ -129,25 +129,14 @@ paths:
       operationId: postServicesByEnvIdTeamChangeRole
       x-operation-id-source: derived
 components:
-  responses:
-    UnauthorizedError:
-      description: Unauthorized
-    OK:
-      description: OK
-  schemas:
+  requestBodies:
     TeamMembersBasic:
-      description: List of environment team members
-      type: array
-      items:
-        type: object
-        properties:
-          email:
-            type: string
-            example: jane.doe@company.com
-          role:
-            type: string
-            description: owner / admin / member / viewer
-            example: admin
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TeamMembersBasic'
+      description: list of team members
+  schemas:
     TeamMembersFull:
       description: List of environment team members
       type: array
@@ -172,13 +161,24 @@ components:
             type: string
             description: Invitation link for newly invited members (pending invitation status)
             example: https://app.overops.com/app/cst?token=abcda12345678
-  requestBodies:
     TeamMembersBasic:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TeamMembersBasic'
-      description: list of team members
+      description: List of environment team members
+      type: array
+      items:
+        type: object
+        properties:
+          email:
+            type: string
+            example: jane.doe@company.com
+          role:
+            type: string
+            description: owner / admin / member / viewer
+            example: admin
+  responses:
+    OK:
+      description: OK
+    UnauthorizedError:
+      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http

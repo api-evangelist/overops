@@ -95,39 +95,13 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    UnauthorizedError:
-      description: Unauthorized
     NotFoundError:
       description: Not Found
     OK:
       description: OK
+    UnauthorizedError:
+      description: Unauthorized
   schemas:
-    PublishMetricsSettings:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          example: true
-        hostname:
-          type: string
-          description: The hostname and (optional) port of your StatsD server.
-          example: 127.0.0.1:8125
-        output_format:
-          type: string
-          example: Splunk
-        metrics:
-          $ref: '#/components/schemas/Metrics'
-    PublishMetricFormats:
-      type: array
-      items:
-        type: object
-        properties:
-          output_format:
-            type: string
-            description: For customized metrics (which are different than the format defaults), use "custom" format
-            example: splunk
-          default_metrics:
-            $ref: '#/components/schemas/Metrics'
     Metrics:
       type: array
       items:
@@ -152,6 +126,32 @@ components:
         pattern: overops_system,${serviceid},${application},${server},${systemmetrics}
       - name: Diagnostics
         pattern: overops_jvms,${serviceid},${application},${server},${applicationpid}
+    PublishMetricFormats:
+      type: array
+      items:
+        type: object
+        properties:
+          output_format:
+            type: string
+            description: For customized metrics (which are different than the format defaults), use "custom" format
+            example: splunk
+          default_metrics:
+            $ref: '#/components/schemas/Metrics'
+    PublishMetricsSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        hostname:
+          type: string
+          description: The hostname and (optional) port of your StatsD server.
+          example: 127.0.0.1:8125
+        output_format:
+          type: string
+          example: Splunk
+        metrics:
+          $ref: '#/components/schemas/Metrics'
   securitySchemes:
     basicAuth:
       type: http

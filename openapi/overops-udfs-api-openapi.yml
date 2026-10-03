@@ -208,13 +208,6 @@ paths:
       operationId: deleteServicesByEnvIdUdfsByLibraryId
       x-operation-id-source: derived
 components:
-  responses:
-    UnauthorizedError:
-      description: Unauthorized
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
   schemas:
     UDFLibrary:
       description: UDF Properties
@@ -259,6 +252,13 @@ components:
               default_value:
                 type: string
                 example: 100
+  responses:
+    OK:
+      description: OK
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http

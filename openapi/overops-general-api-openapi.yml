@@ -414,18 +414,37 @@ paths:
       operationId: postServicesByEnvIdSettingsReliabilitySettings
       x-operation-id-source: derived
 components:
-  responses:
-    BadRequestError:
-      description: Bad Request
-    UnauthorizedError:
-      description: Unauthorized
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    TBD:
-      description: TBD
   schemas:
+    EnvironmentBasic:
+      type: object
+      description: Basic information about a environment
+      properties:
+        id:
+          type: string
+          example: S100
+        name:
+          type: string
+          example: Pre-prod
+        full_key:
+          type: string
+          example: S35817XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    Server:
+      type: object
+      properties:
+        name:
+          type: string
+          example: ip57-110-0-18
+        active:
+          type: boolean
+          example: true
+        first_seen:
+          type: string
+          description: Indicates the time when the server was first detected by OverOps
+          example: '2018-02-28T22:47:09.038Z'
+        last_seen:
+          type: string
+          description: The last time when the server was seen by OverOps
+          example: '2018-03-01T08:08:08.001Z'
     Application:
       type: object
       properties:
@@ -443,23 +462,6 @@ components:
           type: string
           description: The last time when the application was seen by OverOps
           example: '2018-03-01T08:08:08.001Z'
-    StorageSettings:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - HYBRID
-          - HOSTED
-          example: HYBRID
-        hostname:
-          description: Relevant for hybrid storage only. Both hostname and ip may be used. For cloud storage, NA value will be returned
-          type: string
-          example: storage.company.com
-        frontend_hostname:
-          description: OPTIONAL Relevant for hybrid storage only. Both hostname and ip may be used. For cloud storage, NA value will be returned
-          type: string
-          example: 123.91.12.100
     EnvironmentAdvancedSettings:
       type: object
       description: Advanced settings for an environment
@@ -486,19 +488,23 @@ components:
           type: boolean
           description: Enable enhanced decompilation (This will use raw bytecode but won't store it)
           example: true
-    EnvironmentBasic:
+    StorageSettings:
       type: object
-      description: Basic information about a environment
       properties:
-        id:
+        type:
           type: string
-          example: S100
-        name:
+          enum:
+          - HYBRID
+          - HOSTED
+          example: HYBRID
+        hostname:
+          description: Relevant for hybrid storage only. Both hostname and ip may be used. For cloud storage, NA value will be returned
           type: string
-          example: Pre-prod
-        full_key:
+          example: storage.company.com
+        frontend_hostname:
+          description: OPTIONAL Relevant for hybrid storage only. Both hostname and ip may be used. For cloud storage, NA value will be returned
           type: string
-          example: S35817XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          example: 123.91.12.100
     EnvironmentWithRole:
       type: object
       description: Environment data including user's role
@@ -533,23 +539,17 @@ components:
           type: string
           description: The last time when the deployment was seen by OverOps
           example: '2018-03-01T08:08:08.001Z'
-    Server:
-      type: object
-      properties:
-        name:
-          type: string
-          example: ip57-110-0-18
-        active:
-          type: boolean
-          example: true
-        first_seen:
-          type: string
-          description: Indicates the time when the server was first detected by OverOps
-          example: '2018-02-28T22:47:09.038Z'
-        last_seen:
-          type: string
-          description: The last time when the server was seen by OverOps
-          example: '2018-03-01T08:08:08.001Z'
+  responses:
+    OK:
+      description: OK
+    NotFoundError:
+      description: Not Found
+    TBD:
+      description: TBD
+    BadRequestError:
+      description: Bad Request
+    UnauthorizedError:
+      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http

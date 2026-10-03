@@ -161,19 +161,6 @@ paths:
       operationId: deleteServicesByEnvIdTimersByTimerId
       x-operation-id-source: derived
 components:
-  responses:
-    Conflict:
-      description: Conflict
-    BadRequestError:
-      description: Bad Request
-    UnauthorizedError:
-      description: Unauthorized
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    ForbiddenError:
-      description: Forbidden
   schemas:
     Timer:
       description: Timer properties
@@ -203,6 +190,19 @@ components:
           items:
             type: string
             example: MyApp
+  responses:
+    ForbiddenError:
+      description: Forbidden
+    NotFoundError:
+      description: Not Found
+    OK:
+      description: OK
+    BadRequestError:
+      description: Bad Request
+    Conflict:
+      description: Conflict
+    UnauthorizedError:
+      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http

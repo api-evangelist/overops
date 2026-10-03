@@ -166,12 +166,20 @@ paths:
       operationId: getServicesByEnvIdMetricsSystemByMetricNameGraph
       x-operation-id-source: derived
 components:
-  responses:
-    NotFoundError:
-      description: Not Found
-    UnauthorizedError:
-      description: Unauthorized
   schemas:
+    SystemMetrics:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Metric name
+          example: memory-metaspace-used
+        display_name:
+          type: string
+          description: Displayed names
+          example: Used Metaspace Size
+        unit:
+          $ref: '#/components/schemas/SystemMetadataUnit'
     SystemMetadataUnit:
       type: object
       properties:
@@ -200,19 +208,11 @@ components:
         plural_suffix:
           type: string
           description: plural suffix/descriptor for custom units
-    SystemMetrics:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Metric name
-          example: memory-metaspace-used
-        display_name:
-          type: string
-          description: Displayed names
-          example: Used Metaspace Size
-        unit:
-          $ref: '#/components/schemas/SystemMetadataUnit'
+  responses:
+    UnauthorizedError:
+      description: Unauthorized
+    NotFoundError:
+      description: Not Found
   securitySchemes:
     basicAuth:
       type: http

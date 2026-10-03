@@ -387,22 +387,6 @@ paths:
       operationId: getServicesByEnvIdAlerts
       x-operation-id-source: derived
 components:
-  requestBodies:
-    Alert:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Alert'
-      description: Alerts settings
-  responses:
-    UnauthorizedError:
-      description: Unauthorized
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    ForbiddenError:
-      description: Forbidden
   schemas:
     ViewAlertsSummary:
       description: basic alerts info for a single view
@@ -464,70 +448,29 @@ components:
                 example: SLACK
             channel_function:
               $ref: '#/components/schemas/UDFBasic'
-    AlertDefaults:
-      description: Default alert settings for an environment
+    CustomAlert:
+      description: Custom Alert
       type: object
       properties:
-        email:
-          type: object
-          properties:
-            alert_me:
-              type: boolean
-              example: true
-            alert_all_team_members:
-              type: boolean
-              example: false
-            alert_additional_emails:
-              type: boolean
-              example: false
-            additional_emails_to_alert:
-              type: array
-              items:
+        title:
+          type: string
+          example: Logged Warning in Some.File
+        body:
+          type: string
+          example: A new logged warning has been detected in Staging2! (alert added by 4 members)
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              pre_link_text:
                 type: string
-                example: user1@company.com
-        slack:
-          type: object
-          properties:
-            inhook_url:
-              type: string
-              example: https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j
-        pager_duty:
-          type: object
-          properties:
-            service_integration_key:
-              type: string
-              example: sflk234lkdjflsj12o8312
-        service_now:
-          type: object
-          properties:
-            url:
-              type: string
-              example: http://servicenow.company.com/hooks
-            user_id:
-              type: string
-              example: admin
-            password:
-              type: string
-              example: pa$$1
-            table:
-              description: the name (internal name) of a servicenow table to be used
-              type: string
-              example: sys_report_layer
-        hip_chat:
-          type: object
-          properties:
-            token:
-              type: string
-              example: dfgdk2342kljsldfjslk2342fsdfkjslkj
-            room:
-              type: string
-              example: Takipi
-        webhook:
-          type: object
-          properties:
-            webhook_url:
-              type: string
-              example: http://hooks.company.com/overops1/P1/hook
+              link_text:
+                type: string
+              post_link_text:
+                type: string
+              link:
+                type: string
     Alert:
       description: All alert settings of a view
       type: object
@@ -677,29 +620,70 @@ components:
               type: string
               example: label=sample_label_name
           type: object
-    CustomAlert:
-      description: Custom Alert
+    AlertDefaults:
+      description: Default alert settings for an environment
       type: object
       properties:
-        title:
-          type: string
-          example: Logged Warning in Some.File
-        body:
-          type: string
-          example: A new logged warning has been detected in Staging2! (alert added by 4 members)
-        links:
-          type: array
-          items:
-            type: object
-            properties:
-              pre_link_text:
+        email:
+          type: object
+          properties:
+            alert_me:
+              type: boolean
+              example: true
+            alert_all_team_members:
+              type: boolean
+              example: false
+            alert_additional_emails:
+              type: boolean
+              example: false
+            additional_emails_to_alert:
+              type: array
+              items:
                 type: string
-              link_text:
-                type: string
-              post_link_text:
-                type: string
-              link:
-                type: string
+                example: user1@company.com
+        slack:
+          type: object
+          properties:
+            inhook_url:
+              type: string
+              example: https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j
+        pager_duty:
+          type: object
+          properties:
+            service_integration_key:
+              type: string
+              example: sflk234lkdjflsj12o8312
+        service_now:
+          type: object
+          properties:
+            url:
+              type: string
+              example: http://servicenow.company.com/hooks
+            user_id:
+              type: string
+              example: admin
+            password:
+              type: string
+              example: pa$$1
+            table:
+              description: the name (internal name) of a servicenow table to be used
+              type: string
+              example: sys_report_layer
+        hip_chat:
+          type: object
+          properties:
+            token:
+              type: string
+              example: dfgdk2342kljsldfjslk2342fsdfkjslkj
+            room:
+              type: string
+              example: Takipi
+        webhook:
+          type: object
+          properties:
+            webhook_url:
+              type: string
+              example: http://hooks.company.com/overops1/P1/hook
     UDFBasic:
       type: object
       properties:
@@ -724,6 +708,22 @@ components:
             # Enhance it with a delimited list: A=B;C=D;E=F, where the first item is a package (e.g com.mongo), and the second is a tier (e.g MongoDB).
 
             namespaces=com.sparktale.bugtale.server.common.distribute.redis=Redis;org.redisson=Redisson;com.sparktale.bugtale.server.common.distribute.guava=Guava-Cache;com.sparktale.bugtale.util.cache=Cache;com.sparktale.bugtale.server.app.dashboard.cache=Cache;com.sparktale.bugtale.server.common.stats=SQL-Stats;com.sparktale.bugtale.server.common.pds=SQL-Pds;com.sparktale.bugtale.qsql=SQL-Queue;com.sparktale.bugtale.server.services.queue.qsql=SQL-Queue;com.sparktale.bugtale.shared.backend.rdbms=SQL-Common;com.sparktale.bugtale.server.common.queue=Local-Queue;com.sparktale.bugtale.server.common.alerts=Alerts-Engine;com.sparktale.bugtale.decoding=Snapshot-Analysis;com.sparktale.bugtale.server.common.hits=Snapshot-Analysis;com.sparktale.bugtale.server.common.tailor=Snapshot-Analysis;com.sparktale.bugtale.server.analysis=Code-Analysis;com.sparktale.bugtale.server.worker.analysis=Code-Analysis;com.sparktale.bugtale.server.common.source=Code-Analysis;com.sparktale.bugtale.analyzer=Code-Analysis;com.sparktale.bugtale.decompiler=Decompiler;com.takipi.integrations.grafana=OverOps-Influx-Backend;com.sparktale.common.util=Utils;com.sparktale.bugtale.shared.backend.util=Utils'
+  requestBodies:
+    Alert:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Alert'
+      description: Alerts settings
+  responses:
+    ForbiddenError:
+      description: Forbidden
+    OK:
+      description: OK
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http

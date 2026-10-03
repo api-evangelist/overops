@@ -601,14 +601,14 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    BadRequestError:
-      description: Bad Request
-    UnauthorizedError:
-      description: Unauthorized
     NotFoundError:
       description: Not Found
     OK:
       description: OK
+    BadRequestError:
+      description: Bad Request
+    UnauthorizedError:
+      description: Unauthorized
   schemas:
     Pattern:
       description: A data redaction pattern used to define PII RegEx

@@ -314,16 +314,16 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    Conflict:
-      description: Conflict
-    BadRequestError:
-      description: Bad Request
-    UnauthorizedError:
-      description: Unauthorized
-    NotFoundError:
-      description: Not Found
     OK:
       description: OK
+    NotFoundError:
+      description: Not Found
+    BadRequestError:
+      description: Bad Request
+    Conflict:
+      description: Conflict
+    UnauthorizedError:
+      description: Unauthorized
   schemas:
     Label:
       type: object
