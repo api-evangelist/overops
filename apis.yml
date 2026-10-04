@@ -237,6 +237,9 @@ x-enrichment:
   artifacts_added: 18
   pass: local-v1
 common:
+- type: CapabilityMap
+  url: capabilities/overops-capability-edges.yml
+  name: Overops Business Capability Map
 - type: ParentCompany
   url: https://apis.io/providers/harness/
   name: Harness
