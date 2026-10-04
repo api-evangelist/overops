@@ -162,29 +162,12 @@ paths:
       operationId: getServicesByEnvIdOveropsStatusCollectors
       x-operation-id-source: derived
 components:
+  responses:
+    OK:
+      description: OK
+    UnauthorizedError:
+      description: Unauthorized
   schemas:
-    Collector:
-      description: Collector properties
-      type: object
-      properties:
-        id:
-          type: string
-          description: Collector unique identifier
-          example: 12121
-        pid:
-          type: string
-          description: PID
-          example: 20187
-        name:
-          type: string
-        version:
-          type: string
-          description: Collector version
-          example: 4.18.1
-        start_time:
-          type: string
-          description: Start time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
-          example: '2018-02-28T22:47:09.038Z'
     Agent:
       description: Agent properties
       type: object
@@ -229,11 +212,28 @@ components:
           type: boolean
           description: marks if the monitoring of this particular agent enabled/disabled
           example: true
-  responses:
-    UnauthorizedError:
-      description: Unauthorized
-    OK:
-      description: OK
+    Collector:
+      description: Collector properties
+      type: object
+      properties:
+        id:
+          type: string
+          description: Collector unique identifier
+          example: 12121
+        pid:
+          type: string
+          description: PID
+          example: 20187
+        name:
+          type: string
+        version:
+          type: string
+          description: Collector version
+          example: 4.18.1
+        start_time:
+          type: string
+          description: Start time. Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+          example: '2018-02-28T22:47:09.038Z'
   securitySchemes:
     basicAuth:
       type: http

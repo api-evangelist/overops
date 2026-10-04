@@ -316,12 +316,12 @@ components:
   responses:
     OK:
       description: OK
-    NotFoundError:
-      description: Not Found
-    BadRequestError:
-      description: Bad Request
     Conflict:
       description: Conflict
+    BadRequestError:
+      description: Bad Request
+    NotFoundError:
+      description: Not Found
     UnauthorizedError:
       description: Unauthorized
   schemas:

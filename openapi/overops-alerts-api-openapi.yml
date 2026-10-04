@@ -387,7 +387,103 @@ paths:
       operationId: getServicesByEnvIdAlerts
       x-operation-id-source: derived
 components:
+  responses:
+    OK:
+      description: OK
+    ForbiddenError:
+      description: Forbidden
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
   schemas:
+    AlertDefaults:
+      description: Default alert settings for an environment
+      type: object
+      properties:
+        email:
+          type: object
+          properties:
+            alert_me:
+              type: boolean
+              example: true
+            alert_all_team_members:
+              type: boolean
+              example: false
+            alert_additional_emails:
+              type: boolean
+              example: false
+            additional_emails_to_alert:
+              type: array
+              items:
+                type: string
+                example: user1@company.com
+        slack:
+          type: object
+          properties:
+            inhook_url:
+              type: string
+              example: https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j
+        pager_duty:
+          type: object
+          properties:
+            service_integration_key:
+              type: string
+              example: sflk234lkdjflsj12o8312
+        service_now:
+          type: object
+          properties:
+            url:
+              type: string
+              example: http://servicenow.company.com/hooks
+            user_id:
+              type: string
+              example: admin
+            password:
+              type: string
+              example: pa$$1
+            table:
+              description: the name (internal name) of a servicenow table to be used
+              type: string
+              example: sys_report_layer
+        hip_chat:
+          type: object
+          properties:
+            token:
+              type: string
+              example: dfgdk2342kljsldfjslk2342fsdfkjslkj
+            room:
+              type: string
+              example: Takipi
+        webhook:
+          type: object
+          properties:
+            webhook_url:
+              type: string
+              example: http://hooks.company.com/overops1/P1/hook
+    CustomAlert:
+      description: Custom Alert
+      type: object
+      properties:
+        title:
+          type: string
+          example: Logged Warning in Some.File
+        body:
+          type: string
+          example: A new logged warning has been detected in Staging2! (alert added by 4 members)
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              pre_link_text:
+                type: string
+              link_text:
+                type: string
+              post_link_text:
+                type: string
+              link:
+                type: string
     ViewAlertsSummary:
       description: basic alerts info for a single view
       type: object
@@ -448,29 +544,6 @@ components:
                 example: SLACK
             channel_function:
               $ref: '#/components/schemas/UDFBasic'
-    CustomAlert:
-      description: Custom Alert
-      type: object
-      properties:
-        title:
-          type: string
-          example: Logged Warning in Some.File
-        body:
-          type: string
-          example: A new logged warning has been detected in Staging2! (alert added by 4 members)
-        links:
-          type: array
-          items:
-            type: object
-            properties:
-              pre_link_text:
-                type: string
-              link_text:
-                type: string
-              post_link_text:
-                type: string
-              link:
-                type: string
     Alert:
       description: All alert settings of a view
       type: object
@@ -620,70 +693,6 @@ components:
               type: string
               example: label=sample_label_name
           type: object
-    AlertDefaults:
-      description: Default alert settings for an environment
-      type: object
-      properties:
-        email:
-          type: object
-          properties:
-            alert_me:
-              type: boolean
-              example: true
-            alert_all_team_members:
-              type: boolean
-              example: false
-            alert_additional_emails:
-              type: boolean
-              example: false
-            additional_emails_to_alert:
-              type: array
-              items:
-                type: string
-                example: user1@company.com
-        slack:
-          type: object
-          properties:
-            inhook_url:
-              type: string
-              example: https://hooks.slack.com/services/xxxxyyyyy/xxxx/sdf123rskfsdf1j
-        pager_duty:
-          type: object
-          properties:
-            service_integration_key:
-              type: string
-              example: sflk234lkdjflsj12o8312
-        service_now:
-          type: object
-          properties:
-            url:
-              type: string
-              example: http://servicenow.company.com/hooks
-            user_id:
-              type: string
-              example: admin
-            password:
-              type: string
-              example: pa$$1
-            table:
-              description: the name (internal name) of a servicenow table to be used
-              type: string
-              example: sys_report_layer
-        hip_chat:
-          type: object
-          properties:
-            token:
-              type: string
-              example: dfgdk2342kljsldfjslk2342fsdfkjslkj
-            room:
-              type: string
-              example: Takipi
-        webhook:
-          type: object
-          properties:
-            webhook_url:
-              type: string
-              example: http://hooks.company.com/overops1/P1/hook
     UDFBasic:
       type: object
       properties:
@@ -715,15 +724,6 @@ components:
           schema:
             $ref: '#/components/schemas/Alert'
       description: Alerts settings
-  responses:
-    ForbiddenError:
-      description: Forbidden
-    OK:
-      description: OK
-    NotFoundError:
-      description: Not Found
-    UnauthorizedError:
-      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http

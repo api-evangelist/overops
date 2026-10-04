@@ -462,6 +462,15 @@ paths:
       operationId: getServicesByEnvIdViewsByViewIdEntrypoints
       x-operation-id-source: derived
 components:
+  responses:
+    OK:
+      description: OK
+    BadRequestError:
+      description: Bad Request
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
   schemas:
     Event:
       description: An exception, logged error and more
@@ -513,6 +522,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CodeLocation'
+    EventStats:
+      type: object
+      properties:
+        hits:
+          type: integer
+          example: 42
+        invocations:
+          type: integer
+          example: 51929
+    EventAction:
+      properties:
+        type:
+          type: string
+          example: Label
+        action:
+          type: string
+          example: Add Label
+        data:
+          type: string
+          example: Critical
+        timestamp:
+          type: string
+          description: Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
+          example: '2018-02-28T22:47:09.038Z'
+        initiator:
+          type: string
+          example: joe@example.com
+        initiator_type:
+          type: string
+          example: User
     CodeLocation:
       description: A code location, for error location, etc
       type: object
@@ -564,45 +603,6 @@ components:
           example: ([Ljava/lang/String;)V
         stats:
           $ref: '#/components/schemas/EntryPointStats'
-    EventAction:
-      properties:
-        type:
-          type: string
-          example: Label
-        action:
-          type: string
-          example: Add Label
-        data:
-          type: string
-          example: Critical
-        timestamp:
-          type: string
-          description: Date in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZ)
-          example: '2018-02-28T22:47:09.038Z'
-        initiator:
-          type: string
-          example: joe@example.com
-        initiator_type:
-          type: string
-          example: User
-    EventStats:
-      type: object
-      properties:
-        hits:
-          type: integer
-          example: 42
-        invocations:
-          type: integer
-          example: 51929
-  responses:
-    OK:
-      description: OK
-    NotFoundError:
-      description: Not Found
-    BadRequestError:
-      description: Bad Request
-    UnauthorizedError:
-      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http

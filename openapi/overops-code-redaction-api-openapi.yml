@@ -655,12 +655,27 @@ paths:
       operationId: deleteServicesByEnvIdSettingsCodeRedactionIncludePackagesByPackageName
       x-operation-id-source: derived
 components:
+  schemas:
+    PackageName:
+      type: string
+      example: com.company.package.name
+    ClassName:
+      type: string
+      example: com.company.ClassName
+  responses:
+    OK:
+      description: OK
+    BadRequestError:
+      description: Bad Request
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
   requestBodies:
-    Package:
+    Package2:
       content:
         application/json:
           schema:
-            type: object
             properties:
               name:
                 $ref: '#/components/schemas/PackageName'
@@ -672,29 +687,14 @@ components:
             properties:
               name:
                 $ref: '#/components/schemas/ClassName'
-    Package2:
+    Package:
       content:
         application/json:
           schema:
+            type: object
             properties:
               name:
                 $ref: '#/components/schemas/PackageName'
-  responses:
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    BadRequestError:
-      description: Bad Request
-    UnauthorizedError:
-      description: Unauthorized
-  schemas:
-    PackageName:
-      type: string
-      example: com.company.package.name
-    ClassName:
-      type: string
-      example: com.company.ClassName
   securitySchemes:
     basicAuth:
       type: http

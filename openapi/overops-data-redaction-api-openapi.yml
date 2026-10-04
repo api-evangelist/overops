@@ -601,12 +601,12 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    NotFoundError:
-      description: Not Found
     OK:
       description: OK
     BadRequestError:
       description: Bad Request
+    NotFoundError:
+      description: Not Found
     UnauthorizedError:
       description: Unauthorized
   schemas:

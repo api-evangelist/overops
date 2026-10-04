@@ -176,6 +176,21 @@ paths:
       operationId: postServicesByEnvIdCategoriesByCategoryIdViews
       x-operation-id-source: derived
 components:
+  responses:
+    OK:
+      description: OK
+    Conflict:
+      description: Conflict
+    ForbiddenError:
+      description: Forbidden
+    BadRequestError:
+      description: Bad Request
+    NotFoundError:
+      description: Not Found
+    UnauthorizedError:
+      description: Unauthorized
+    TBD:
+      description: TBD
   schemas:
     Category:
       type: object
@@ -219,21 +234,6 @@ components:
           type: boolean
           description: Indicates that this view can be created and accessed by environment admins only.
           example: true
-  responses:
-    ForbiddenError:
-      description: Forbidden
-    NotFoundError:
-      description: Not Found
-    OK:
-      description: OK
-    TBD:
-      description: TBD
-    BadRequestError:
-      description: Bad Request
-    Conflict:
-      description: Conflict
-    UnauthorizedError:
-      description: Unauthorized
   securitySchemes:
     basicAuth:
       type: http
