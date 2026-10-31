@@ -64,6 +64,143 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Overops is a company surfaced as a portfolio company of lightspeed-venture-partners and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+OverOps (formerly Takipi) is a continuous reliability platform that helps teams who ship software ensure rapid code changes do not degrade the customer experience. It runs in the cloud or on-premises, instruments Java and .NET applications with a micro-agent, and automatically identifies, prevents, and resolves critical software issues across CI/CD, testing, and production. OverOps captures true root-cause code snapshots (stack, source, and variable state) at the moment of failure and exposes everything through a REST API that lets admins and users automate every action available in the OverOps UI. OverOps was acquired by Harness; overops.com now redirects to harness.io, while the developer API, documentation, and application hosts remain live.
 
-Backed by: lightspeed-venture-partners
+**Areas:** Company · Observability · Reliability · Error Monitoring · Application Performance · Java · DevOps · Code Quality
+
+## Overops on APIs.io
+
+Everything profiled for Overops is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/overops/](https://apis.io/providers/overops/)** — or go straight to one of the APIs or properties below.
+
+### APIs (16)
+
+- [Overops Alerts API](https://apis.io/apis/overops/overops-alerts-api/) — Fetch and manipulate alerting rules for detecting and disseminating anomalies such as introduction of new events and regressions to different communication…
+- [Overops Categories API](https://apis.io/apis/overops/overops-categories-api/) — Fetch and manipulate grouping of views into logical categories (e.g "CI/CD", "Favorites")
+- [Overops Code Redaction API](https://apis.io/apis/overops/overops-code-redaction-api/) — Fetch and manipulate code filters to include / exclude 3rd party and utility classes from OverOps analysis and data capture.
+- [Overops Data Redaction API](https://apis.io/apis/overops/overops-data-redaction-api/) — Fetch and manipulate data redaction of PII with target environments.
+- [Overops Entry Points API](https://apis.io/apis/overops/overops-entry-points-api/) — The Entry Points API from Overops — 11 operation(s) for entry points.
+- [Overops Environment Management API](https://apis.io/apis/overops/overops-environment-management-api/) — Fetch monitoring status and control OverOps Agents and Collectors
+- [Overops Events API](https://apis.io/apis/overops/overops-events-api/) — Fetch and manipulate OverOps Automated Root Cause Events and Snapshots
+- [Overops General API](https://apis.io/apis/overops/overops-general-api/) — Fetch general information about provisioned OverOps enviroments
+- [Overops Labels API](https://apis.io/apis/overops/overops-labels-api/) — Fetch and manipulate events labels
+- [Overops Publish Metrics API](https://apis.io/apis/overops/overops-publish-metrics-api/) — Fetch and manipulate dynamic data exported to StatsD, which enables using a variety of third-party tools, providing control over application data from OverOps.
+- [Overops System Metrics API](https://apis.io/apis/overops/overops-system-metrics-api/) — Fetch system metrics
+- [Overops Team Management API](https://apis.io/apis/overops/overops-team-management-api/) — APIs related to team management of a service
+- [Overops Timers API](https://apis.io/apis/overops/overops-timers-api/) — Fetch and manipulate OverOps Timers - bottleneck detection and performance diagnosis
+- [Overops UDFs API](https://apis.io/apis/overops/overops-udfs-api/) — Fetch and manipulate User Defined Functinos - OverOps extensions using Lambdas.
+- [Overops View Metrics API](https://apis.io/apis/overops/overops-view-metrics-api/) — Fetch volumetric time series data about observed code events within OverOps monitored applications filtered by server cluster, application and deployments.
+- [Overops Views API](https://apis.io/apis/overops/overops-views-api/) — Fetch and manipulate grouping of events (i.e. Views) according to attribute sets (e.g. "uncaught exceptions", "errors from package com.acme")
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [overops](https://apis.io/servers/overops/overops/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Overops Agentic Access](https://apis.io/agentic-access/overops/overops-agentic-access/)
+
+#### Collections (16)
+
+Postman and Open Collection request collections.
+
+- [Services Alerts API](https://apis.io/collections/overops/open-overops-alerts-api/)
+- [Services Alerts Categories API](https://apis.io/collections/overops/open-overops-categories-api/)
+- [Services Alerts Code Redaction API](https://apis.io/collections/overops/open-overops-code-redaction-api/)
+- [Services Alerts Data Redaction API](https://apis.io/collections/overops/open-overops-data-redaction-api/)
+- [Services Alerts Entry Points API](https://apis.io/collections/overops/open-overops-entry-points-api/)
+- [Services Alerts Environment Management API](https://apis.io/collections/overops/open-overops-environment-management-api/)
+- [Services Alerts Events API](https://apis.io/collections/overops/open-overops-events-api/)
+- [Services Alerts General API](https://apis.io/collections/overops/open-overops-general-api/)
+- [Services Alerts Labels API](https://apis.io/collections/overops/open-overops-labels-api/)
+- [Services Alerts Publish Metrics API](https://apis.io/collections/overops/open-overops-publish-metrics-api/)
+- [Services Alerts System Metrics API](https://apis.io/collections/overops/open-overops-system-metrics-api/)
+- [Services Alerts Team Management API](https://apis.io/collections/overops/open-overops-team-management-api/)
+- [Services Alerts Timers API](https://apis.io/collections/overops/open-overops-timers-api/)
+- [Services Alerts UDFs API](https://apis.io/collections/overops/open-overops-udfs-api/)
+- [Services Alerts View Metrics API](https://apis.io/collections/overops/open-overops-view-metrics-api/)
+- [Services Alerts Views API](https://apis.io/collections/overops/open-overops-views-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Overops Services Overlay](https://apis.io/overlays/overops/overops-services-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Overops Authentication](https://apis.io/security/overops/overops-authentication/)
+- [Overops Domain Security](https://apis.io/security/overops/overops-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://overops.com)
+- [Documentation](https://doc.overops.com/docs)
+- [API reference](https://doc.overops.com/reference)
+- [Support](https://support.overops.com/hc/en-us)
+- [Changelog](https://doc.overops.com/docs/whats-new)
+- [GitHub](https://github.com/overops)
+
+## API Evangelist rating
+
+**Kin Score 29.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 46.1 |
+| Contract governance | 4.5 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 33.9 |
+| Access clarity | 6.6 |
+
+**Agent readiness 21.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/overops/](https://apis.io/providers/overops/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Overops: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/overops/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
